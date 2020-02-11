@@ -48,6 +48,7 @@ public class RequirementTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
+        // This gets the value from the model and puts it in the GUI. :O
         Object returnValue = null;
         Requirement requirement = listRequirement.get(rowIndex);
 
@@ -71,16 +72,17 @@ public class RequirementTableModel extends AbstractTableModel {
 
     @Override
     public void setValueAt(Object value, int rowIndex, int columnIndex) {
+        // This is used to set the value of the model item from the GUI. Sweet.
         Requirement requirement = listRequirement.get(rowIndex);
 
         switch (columnIndex) {
-            case 1:
+            case QUALIFICATION_COLUMN:
                 requirement.setQualificationName((String) value);
                 break;
-            case 2:
+            case TEACHER_COLUMN:
                 requirement.setTeacherName((String) value);
                 break;
-            case 3:
+            case APPROVED_COLUMN:
                 requirement.setApproved((boolean) value);
                 break;
         }
@@ -91,8 +93,23 @@ public class RequirementTableModel extends AbstractTableModel {
         // This can be overridden in subclasses, for example, if we want a particular user to
         // not be able to edit 'Approved' (as only the Administrator can do this).
 
-        // In this case, teachers are not editable.
+        // In this case, teachers are not editable, nor is the ID.
+        return columnIndex != TEACHER_COLUMN || columnIndex != ID_COLUMN;
+    }
 
-        return columnIndex != TEACHER_COLUMN;
+    public void addRow(Requirement requirement) {
+        // Add to our list
+        listRequirement.add(requirement);
+        // Set the index to be the 'last' row
+        int rowIndex = getRowCount();
+        // Update the view by letting it know we've added a table row.
+        fireTableRowsInserted(rowIndex, rowIndex);
+    }
+
+    public void removeRow(int rowIndex) {
+        // Remove the requirement with the row index
+        listRequirement.remove(rowIndex);
+        // Update the view by letting it know we've nuked a table row.
+        fireTableRowsDeleted(rowIndex, rowIndex);
     }
 }
