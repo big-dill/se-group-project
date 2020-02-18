@@ -2,12 +2,12 @@ package se.uog.swing;
 
 public class Requirement {
     private String qualificationName;
-    private Teacher teacher;
+    private String teacherName;
     private boolean isApproved;
 
-    public Requirement(String qualificationName, Teacher teacher, boolean isApproved) {
+    public Requirement(String qualificationName, String teacherName, boolean isApproved) {
         this.qualificationName = qualificationName;
-        this.teacher = teacher;
+        this.teacherName = teacherName;
         this.isApproved = isApproved;
     }
 
@@ -19,12 +19,12 @@ public class Requirement {
         this.qualificationName = qualificationName;
     }
 
-    public Teacher getTeacher() {
-        return teacher;
+    public String getTeacherName() {
+        return teacherName;
     }
 
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
     }
 
     public boolean isApproved() {
