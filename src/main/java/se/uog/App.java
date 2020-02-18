@@ -1,21 +1,7 @@
 package se.uog;
 
-<<<<<<< HEAD
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
-=======
-import java.awt.Dimension;
-import java.awt.BorderLayout;
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import se.uog.swing.Requirement;
-import se.uog.swing.RequirementTableModel;
->>>>>>> parent of 3c32ae9... Add adder and remover
 
 /**
  * Hello world!
@@ -41,7 +27,6 @@ public class App extends JFrame {
         Teacher t2 = new Teacher("Mark");
         t2.addQualification("Art");
 
-<<<<<<< HEAD
         listTeacher.add(t1);
         listTeacher.add(t2);
 
@@ -64,20 +49,6 @@ public class App extends JFrame {
 
         App mainWindow = new App();
         mainWindow.add()
-=======
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        pack();
-        setLocationRelativeTo(null);
-        setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
->>>>>>> parent of 3c32ae9... Add adder and remover
 
         SwingUtilities.invokeLater(new Runnable() {
 

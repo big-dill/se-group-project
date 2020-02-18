@@ -30,21 +30,7 @@ public class RequirementTableModel extends TableModel<Requirement> {
     }
 
     @Override
-<<<<<<< HEAD
     public Object getColumnValue(Requirement element, int columnIndex) {
-=======
-    public Class<?> getColumnClass(int columnIndex) {
-        // Return the class to swing, so it can generate appropriate controls for different
-        // primitive types.
-        return getValueAt(0, columnIndex).getClass();
-    }
-
-    @Override
-    public Object getValueAt(int rowIndex, int columnIndex) {
-        Object returnValue = null;
-        Requirement requirement = listRequirement.get(rowIndex);
-
->>>>>>> parent of 3c32ae9... Add adder and remover
         switch (columnIndex) {
             case QUALIFICATION_COLUMN:
                 return element.getQualificationName();
@@ -58,7 +44,6 @@ public class RequirementTableModel extends TableModel<Requirement> {
     }
 
     @Override
-<<<<<<< HEAD
     public void setColumnValue(Object value, Requirement element, int columnIndex) {
         switch (columnIndex) {
             case QUALIFICATION_COLUMN:
@@ -69,20 +54,6 @@ public class RequirementTableModel extends TableModel<Requirement> {
                 break;
             case APPROVED_COLUMN:
                 element.setApproved((boolean) value);
-=======
-    public void setValueAt(Object value, int rowIndex, int columnIndex) {
-        Requirement requirement = listRequirement.get(rowIndex);
-
-        switch (columnIndex) {
-            case 1:
-                requirement.setQualificationName((String) value);
-                break;
-            case 2:
-                requirement.setTeacherName((String) value);
-                break;
-            case 3:
-                requirement.setApproved((boolean) value);
->>>>>>> parent of 3c32ae9... Add adder and remover
                 break;
         }
     }
@@ -92,14 +63,8 @@ public class RequirementTableModel extends TableModel<Requirement> {
         // This can be overridden in subclasses, for example, if we want a particular user to
         // not be able to edit 'Approved' (as only the Administrator can do this).
 
-<<<<<<< HEAD
         // In this case, teachers are not editable, nor is the ID.
         // return columnIndex != ID_COLUMN;
         return true;
-=======
-        // In this case, teachers are not editable.
-
-        return columnIndex != TEACHER_COLUMN;
->>>>>>> parent of 3c32ae9... Add adder and remover
     }
 }
