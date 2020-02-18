@@ -1,74 +1,15 @@
 package se.uog;
 
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.BorderLayout;
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.JButton;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import se.uog.swing.Requirement;
-import se.uog.swing.RequirementTableModel;
 
 /**
  * Hello world!
  */
 public class App extends JFrame {
 
-    private JTable table = new JTable();
-    private RequirementTableModel tableModel;
-
     public App() {
-        super("Displaying list editors in Swing");
-
-        List<Requirement> listRequirement = new ArrayList<>();
-        listRequirement.add(new Requirement("pizza", "Julia", true));
-        listRequirement.add(new Requirement("spaghetti", "Hugh", false));
-        listRequirement.add(new Requirement("pasta", "Mark", false));
-
-
-        tableModel = new RequirementTableModel(listRequirement);
-        table.setModel(tableModel);
-        table.setRowHeight(25);
-
-        JScrollPane scrollpane = new JScrollPane(table);
-        scrollpane.setPreferredSize(new Dimension(400, 200));
-        add(scrollpane, BorderLayout.CENTER);
-
-        JButton addButton = new JButton("Add");
-        addButton.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                tableModel.addRow(new Requirement("___", "____", false));
-            }
-
-        });
-
-        JButton removeButton = new JButton("Delete Selected");
-        removeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int[] selectedRows = table.getSelectedRows();
-                for (int rowIndex : selectedRows) {
-                    tableModel.removeRow(rowIndex);
-                }
-            }
-        });
-
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.add(addButton);
-        buttonPanel.add(removeButton);
-
-        add(buttonPanel, BorderLayout.SOUTH);
-
-
+        super("Application View");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
         setLocationRelativeTo(null);
@@ -76,11 +17,38 @@ public class App extends JFrame {
     }
 
     public static void main(String[] args) {
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+
+        List<Teacher> listTeacher = new ArrayList<Teacher>();
+
+        Teacher t1 = new Teacher("Julia");
+        t1.addQualification("Maths");
+        t1.addQualification("Science");
+
+        Teacher t2 = new Teacher("Mark");
+        t2.addQualification("Art");
+
+        listTeacher.add(t1);
+        listTeacher.add(t2);
+
+        List<Requirement> listRequirement = new ArrayList<Requirement>();
+        listRequirement.add(new Requirement("pizza", t1, true));
+        listRequirement.add(new Requirement("spaghetti", t2, false));
+        listRequirement.add(new Requirement("pasta", t2, false));
+
+        Requirement[] requirements = listRequirement.toArray(new Requirement[listRequirement.size()]);
+        Teacher[] teachers = listTeacher.toArray(new Teacher[listTeacher.size()]);
+
+        DefaultComboBoxModel<Teacher> teacherModel =
+            new DefaultComboBoxModel<Teacher>(teachers);
+
+        DefaultComboBoxModel<Requirement> requirementModel =
+            new DefaultComboBoxModel<Requirement>(requirements);
+
+        RequirementTableModel requirementModel = new RequirementTableModel(listRequirement);
+        RequirementTableView requirementView = new RequirementTableView(requirementModel, listTeacher);
+
+        App mainWindow = new App();
+        mainWindow.add()
 
         SwingUtilities.invokeLater(new Runnable() {
 
