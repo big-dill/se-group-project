@@ -2,28 +2,28 @@ package se.uog.swing;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.swing.table.AbstractTableModel;
 
 
-public class RequirementTableModel extends AbstractTableModel {
+public class TeacherTableModel extends AbstractTableModel {
     private static final long serialVersionUID = 1L;
 
-    private String[] columnNames = {"#", "Qualification", "Teacher Name", "Approved"};
+    private String[] columnNames = {"#", "Teacher Name", "Qualifications"};
     public static final int ID_COLUMN = 0;
-    public static final int QUALIFICATION_COLUMN = 1;
-    public static final int TEACHER_COLUMN = 2;
-    public static final int APPROVED_COLUMN = 3;
+    public static final int NAME_COLUMN = 1;
+    public static final int QUALIFICATION_COLUMN = 2;
 
-    private List<Requirement> listRequirement = new ArrayList<Requirement>();
+    private List<Teacher> listTeacher = new ArrayList<Teacher>();
 
-    public RequirementTableModel(List<Requirement> listRequirement) {
-        this.listRequirement.addAll(listRequirement);
+    public TeacherTableModel(List<Teacher> listTeacher) {
+        this.listTeacher.addAll(listTeacher);
     }
 
     @Override
     public int getRowCount() {
         // Return the size of the array list
-        return listRequirement.size();
+        return listTeacher.size();
     }
 
     @Override
@@ -50,20 +50,18 @@ public class RequirementTableModel extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         // This gets the value from the model and puts it in the GUI. :O
         Object returnValue = null;
-        Requirement requirement = listRequirement.get(rowIndex);
+        Teacher teacher = listTeacher.get(rowIndex);
 
         switch (columnIndex) {
             case ID_COLUMN:
                 returnValue = rowIndex + 1;
                 break;
+            case NAME_COLUMN:
+                returnValue = teacher.getName();
+                break;
             case QUALIFICATION_COLUMN:
-                returnValue = requirement.getQualificationName();
-                break;
-            case TEACHER_COLUMN:
-                returnValue = requirement.getTeacherName();
-                break;
-            case APPROVED_COLUMN:
-                returnValue = requirement.isApproved();
+                // Create comma seperated list by joining each qualification with a comma
+                returnValue = teacher.getQualifications().stream().collect(Collectors.joining(","));
                 break;
         }
 
@@ -73,17 +71,15 @@ public class RequirementTableModel extends AbstractTableModel {
     @Override
     public void setValueAt(Object value, int rowIndex, int columnIndex) {
         // This is used to set the value of the model item from the GUI. Sweet.
-        Requirement requirement = listRequirement.get(rowIndex);
+        Teacher teacher = listTeacher.get(rowIndex);
 
         switch (columnIndex) {
+            case NAME_COLUMN:
+                teacher.setName((String) value);
+                break;
             case QUALIFICATION_COLUMN:
-                requirement.setQualificationName((String) value);
-                break;
-            case TEACHER_COLUMN:
-                requirement.setTeacherName((String) value);
-                break;
-            case APPROVED_COLUMN:
-                requirement.setApproved((boolean) value);
+                String commaSeparatedList = (String) value
+                teacher.();
                 break;
         }
     }
@@ -97,9 +93,9 @@ public class RequirementTableModel extends AbstractTableModel {
         return columnIndex != TEACHER_COLUMN || columnIndex != ID_COLUMN;
     }
 
-    public void addRow(Requirement requirement) {
+    public void addRow(Teacher teacher) {
         // Add to our list
-        listRequirement.add(requirement);
+        listTeacher.add(teacher);
         // Set the index to be the 'last' row
         int rowIndex = getRowCount();
         // Update the view by letting it know we've added a table row.
@@ -108,7 +104,7 @@ public class RequirementTableModel extends AbstractTableModel {
 
     public void removeRow(int rowIndex) {
         // Remove the requirement with the row index
-        listRequirement.remove(rowIndex);
+        listTeacher.remove(rowIndex);
         // Update the view by letting it know we've nuked a table row.
         fireTableRowsDeleted(rowIndex, rowIndex);
     }

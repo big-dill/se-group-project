@@ -1,18 +1,23 @@
 package se.uog;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultCellEditor;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import javax.swing.table.TableCellEditor;
 import se.uog.swing.Requirement;
 import se.uog.swing.RequirementTableModel;
 
@@ -21,7 +26,25 @@ import se.uog.swing.RequirementTableModel;
  */
 public class App extends JFrame {
 
-    private JTable table = new JTable();
+
+    // Create a table which gets the teachers from a model...
+    private JTable table = new JTable() {
+        @Override
+        public TableCellEditor getCellEditor(int row, int column) {
+            if (column == RequirementTableModel.TEACHER_COLUMN) {
+                String qualification =
+                        (String) this.getValueAt(row, RequirementTableModel.QUALIFICATION_COLUMN);
+
+                JComboBox<Teacher> dropdown = new JComboBox<Teacher>(teacherList);
+                return new DefaultCellEditor(dropdown);
+            }
+
+            return super.getCellEditor(row, column);
+        }
+    };
+
+
+
     private RequirementTableModel tableModel;
 
     public App() {
@@ -46,7 +69,7 @@ public class App extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                tableModel.addRow(new Requirement("___", "____", false));
+                tableModel.addRow(new Requirement("", "", false));
             }
 
         });
