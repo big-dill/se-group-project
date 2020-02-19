@@ -9,10 +9,10 @@ public class RequirementTableModel extends AbstractTableModel {
     private static final long serialVersionUID = 1L;
 
     private String[] columnNames = {"#", "Qualification", "Teacher Name", "Approved"};
-    public static final int ID_COLUMN = 0;
-    public static final int QUALIFICATION_COLUMN = 1;
-    public static final int TEACHER_COLUMN = 2;
-    public static final int APPROVED_COLUMN = 3;
+    private final int ID_COLUMN = 0;
+    private final int QUALIFICATION_COLUMN = 1;
+    private final int TEACHER_COLUMN = 2;
+    private final int APPROVED_COLUMN = 3;
 
     private List<Requirement> listRequirement = new ArrayList<Requirement>();
 
@@ -112,6 +112,4 @@ public class RequirementTableModel extends AbstractTableModel {
         // Update the view by letting it know we've nuked a table row.
         fireTableRowsDeleted(rowIndex, rowIndex);
     }
-
-
 }
