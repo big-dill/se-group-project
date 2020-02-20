@@ -42,7 +42,10 @@ public class App extends JFrame {
                         new EditableTableView(model.getRequirementTableModel());
 
                 requirementTableView.getTable().getColumnModel().getColumn(1).setCellEditor(
-                        new TableListEditor(model.getTeacherListModel(), "Select Teachers:"));
+                        new TableListSelector<Requirement, Qualification>(model.getRequirementListModel(), model.getTeacherListModel(),  "Select Teachers:", (model, rowElement)->{
+                            List<Qualification> qualifications = rowElement.getQualifications();
+                            model.getTeacherListModel() // Some kind of filter operation in here...
+                        }));
 
                 new App().add(requirementTableView);
 
