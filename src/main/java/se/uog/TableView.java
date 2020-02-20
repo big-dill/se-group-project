@@ -1,11 +1,9 @@
 package se.uog;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.BorderLayout;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -13,27 +11,20 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import se.uog.swing.AppModel;
 import se.uog.swing.Requirement;
-import se.uog.swing.RequirementTableModel;
+import se.uog.swing.TableModel;
+import se.uog.swing.Teacher;
 
 /**
  * Hello world!
  */
-public class App extends JFrame {
+public class TableView extends JFrame {
 
     private JTable table = new JTable();
-    private RequirementTableModel tableModel;
 
-    public App() {
-        super("Displaying list editors in Swing");
+    public TableView(TableModel<?> tableModel) {
 
-        List<Requirement> listRequirement = new ArrayList<>();
-        listRequirement.add(new Requirement("pizza", "Julia", true));
-        listRequirement.add(new Requirement("spaghetti", "Hugh", false));
-        listRequirement.add(new Requirement("pasta", "Mark", false));
-
-
-        tableModel = new RequirementTableModel(listRequirement);
         table.setModel(tableModel);
         table.setRowHeight(25);
 
@@ -46,7 +37,7 @@ public class App extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                tableModel.addRow(new Requirement("___", "____", false));
+                tableModel.addDefaultRow();
             }
 
         });
@@ -86,7 +77,17 @@ public class App extends JFrame {
 
             @Override
             public void run() {
-                new App();
+
+                AppModel model = new AppModel();
+
+                model.setAdministrator();
+
+                TableModel<Teacher> teacherModel = model.getTeacherTableModel();
+                TableModel<Requirement> requirementModel = model.getRequirementTableModel();
+
+                new TableView(requirementModel);
+
+                new TableView(teacherModel);
             }
         });
     }
