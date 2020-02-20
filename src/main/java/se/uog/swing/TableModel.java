@@ -1,5 +1,6 @@
 package se.uog.swing;
 
+import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
@@ -10,17 +11,26 @@ public class TableModel<E> extends AbstractTableModel implements ListDataListene
     private static final long serialVersionUID = 1L;
 
     private DefaultListModel<E> listModel;
-    private TableModelHeaderConfiguration<E> tableConfiguration;
+    private E defaultElement;
+    private ArrayList<TableModelColumn<E>> listTableColumn = new ArrayList<>();
 
-    public TableModel(DefaultListModel<E> listModel,
-            TableModelHeaderConfiguration<E> tableConfiguration) {
-
+    public TableModel(DefaultListModel<E> listModel, E defaultElement) {
         this.listModel = listModel;
-        this.tableConfiguration = tableConfiguration;
 
         // Add listener to the listModel which will update.
         listModel.addListDataListener(this);
-        // fireTableStructureChanged();
+    }
+
+    // Add or remove columns for this model.
+
+    public void addTableColumn(TableModelColumn<E> tableColumn) {
+        listTableColumn.add(tableColumn);
+        fireTableStructureChanged();
+    }
+
+    public void removeTableColumn(TableModelColumn<E> tableColumn) {
+        listTableColumn.remove(tableColumn);
+        fireTableStructureChanged();
     }
 
     // Abstract Table Model Overrides
@@ -34,13 +44,13 @@ public class TableModel<E> extends AbstractTableModel implements ListDataListene
     @Override
     public int getColumnCount() {
         // Return length of the names
-        return tableConfiguration.getColumnCount();
+        return listTableColumn.size();
     }
 
     @Override
     public String getColumnName(int columnIndex) {
         // Reference columnNames
-        return tableConfiguration.getColumnNames()[columnIndex];
+        return listTableColumn.get(columnIndex).getColumnName();
     }
 
 
@@ -48,53 +58,39 @@ public class TableModel<E> extends AbstractTableModel implements ListDataListene
     public Class<?> getColumnClass(int columnIndex) {
         // Return the class to swing, so it can generate appropriate controls for different
         // primitive types.
-        Class<?> x = tableConfiguration.getColumnClasses()[columnIndex];
-        // Need to reimplement this so it sets the actual classes we want?
-        return x;
+        return listTableColumn.get(columnIndex).getColumnClass();
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         // This gets the value from the model and puts it in the GUI. :O
         E element = listModel.get(rowIndex);
-        return tableConfiguration.columnGetter(element, columnIndex);
+        return listTableColumn.get(columnIndex).getColumnGetter().apply(element);
     }
 
     @Override
     public void setValueAt(Object value, int rowIndex, int columnIndex) {
         // This is used to set the value of the model item from the GUI. Sweet.
         E element = listModel.get(rowIndex);
-        tableConfiguration.columnSetter(element, value, columnIndex);
+        listTableColumn.get(columnIndex).getColumnSetter().accept(element, value);
     }
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return tableConfiguration.isColumnEditable(columnIndex);
+        return listTableColumn.get(columnIndex).isEditable();
     }
 
     // Additional Model Methods
 
-    public void addRow(E element) {
-        // Add to our list
-        listModel.addElement(element);
-        // The listeners for this swing event are implemented below as THIS is a listDataListener
-    }
-
     public void addDefaultRow() {
         // Add the default element
-        addRow(tableConfiguration.getDefaultElement());
+        listModel.addElement(defaultElement);
     }
 
     public void removeRow(int rowIndex) {
         // Remove the requirement with the row index
         listModel.remove(rowIndex);
         // The listeners for this swing event are implemented below as THIS is a listDataListener
-    }
-
-    // Can change the headers, may be useful for changing the display depending on the current user
-    public void setHeaderConfiguration(TableModelHeaderConfiguration<E> tableConfiguration) {
-        this.tableConfiguration = tableConfiguration;
-        fireTableStructureChanged();
     }
 
     // ListDataListener Overrides

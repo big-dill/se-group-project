@@ -10,26 +10,20 @@ public class AppModel {
     private DefaultListModel<Teacher> teacherListModel;
     private TableModel<Teacher> teacherTableModel;
 
-    private DefaultListModel<Requirement> requirementListModel;
-    private RequirementTableHeaders courseDirectorRequirementHeaders;
-    private RequirementTableHeaders adminRequirementHeaders;
-    private TableModel<Requirement> requirementTableModel;
-
     public AppModel() {
         setupRequirementModels();
         setupTeacherModels();
     }
 
     private void setupRequirementModels() {
-        requirementListModel = new DefaultListModel<Requirement>();
-        courseDirectorRequirementHeaders = new CDRequirementTableHeaders();
-        adminRequirementHeaders = new AdminRequirementTableHeaders();
-        requirementTableModel = new TableModel<Requirement>(requirementListModel, null);
+
+
     }
 
     private void setupTeacherModels() {
         teacherListModel = new DefaultListModel<Teacher>();
-        teacherTableModel = new TableModel<Teacher>(teacherListModel, new TeacherTableHeaders());
+        teacherTableModel =
+                new TableModel<Teacher>(teacherListModel, new TeacherTableConfiguration());
     }
 
     public TableModel<Teacher> getTeacherTableModel() {
@@ -46,14 +40,6 @@ public class AppModel {
 
     public DefaultListModel<Requirement> getRequirementListModel() {
         return requirementListModel;
-    }
-
-    public void setAdministrator() {
-        requirementTableModel.setHeaderConfiguration(adminRequirementHeaders);
-    }
-
-    public void setCourseDirector() {
-        requirementTableModel.setHeaderConfiguration(courseDirectorRequirementHeaders);
     }
 
 }

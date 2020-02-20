@@ -80,8 +80,6 @@ public class TableView extends JFrame {
 
                 AppModel model = new AppModel();
 
-                model.setAdministrator();
-
                 TableModel<Teacher> teacherModel = model.getTeacherTableModel();
                 TableModel<Requirement> requirementModel = model.getRequirementTableModel();
 

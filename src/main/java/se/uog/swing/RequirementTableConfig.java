@@ -1,6 +1,6 @@
 package se.uog.swing;
 
-public class RequirementTableHeaders implements TableModelHeaderConfiguration<Requirement> {
+public class RequirementTableConfig implements TableModelConfiguration<Requirement> {
 
     final static int QUALIFICATION_COLUMN = 0;
     final static int TEACHER_COLUMN = 1;
