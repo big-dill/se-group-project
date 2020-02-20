@@ -1,6 +1,8 @@
-package se.uog.swing;
+package se.uog.swing.table;
 
-public class TeacherTableHeaders implements TableModelHeaderConfiguration<Teacher> {
+import se.uog.swing.Teacher;
+
+public class TeacherTableConfiguration implements TableModelConfiguration<Teacher> {
 
     final static int NAME_COLUMN = 0;
     final static int ISCOOL_COLUMN = 1;

@@ -1,13 +1,16 @@
 package se.uog.swing;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Requirement {
     private String qualificationName;
-    private Teacher teacher;
+    private List<Teacher> teacherList = new ArrayList<>();
     private boolean isApproved;
 
-    public Requirement(String qualificationName, Teacher teacher, boolean isApproved) {
+    public Requirement(String qualificationName, List<Teacher> teacherList, boolean isApproved) {
         this.qualificationName = qualificationName;
-        this.teacher = teacher;
+        this.teacherList = teacherList;
         this.isApproved = isApproved;
     }
 
@@ -19,12 +22,12 @@ public class Requirement {
         this.qualificationName = qualificationName;
     }
 
-    public Teacher getTeacher() {
-        return teacher;
+    public List<Teacher> getTeachers() {
+        return teacherList;
     }
 
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
+    public void setTeachers(List<Teacher> teacherList) {
+        this.teacherList = teacherList;
     }
 
     public boolean isApproved() {

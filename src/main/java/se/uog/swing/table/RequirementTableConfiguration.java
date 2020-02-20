@@ -1,13 +1,18 @@
-package se.uog.swing;
+package se.uog.swing.table;
 
-public class RequirementTableHeaders implements TableModelHeaderConfiguration<Requirement> {
+import java.util.ArrayList;
+import java.util.List;
+import se.uog.swing.Requirement;
+import se.uog.swing.Teacher;
+
+public class RequirementTableConfiguration implements TableModelConfiguration<Requirement> {
 
     final static int QUALIFICATION_COLUMN = 0;
     final static int TEACHER_COLUMN = 1;
     final static int APPROVED_COLUMN = 2;
 
-    String[] columnNames = new String[] {"Qualification", "Teacher Name", "Approved"};
-    Class<?>[] columnClasses = new Class<?>[] {String.class, Teacher.class, Boolean.class};
+    String[] columnNames = new String[] {"Qualification", "Teachers", "Approved"};
+    Class<?>[] columnClasses = new Class<?>[] {String.class, List.class, Boolean.class};
 
     @Override
     public int getColumnCount() {
@@ -16,7 +21,7 @@ public class RequirementTableHeaders implements TableModelHeaderConfiguration<Re
 
     @Override
     public Requirement getDefaultElement() {
-        return new Requirement("", null, false);
+        return new Requirement("", new ArrayList<Teacher>(), false);
     }
 
     @Override
@@ -41,7 +46,7 @@ public class RequirementTableHeaders implements TableModelHeaderConfiguration<Re
                 return element.getQualificationName();
 
             case TEACHER_COLUMN:
-                return element.getTeacher();
+                return element.getTeachers();
 
             case APPROVED_COLUMN:
                 return element.isApproved();
@@ -59,11 +64,14 @@ public class RequirementTableHeaders implements TableModelHeaderConfiguration<Re
                 return;
 
             case TEACHER_COLUMN:
-                element.setTeacher((Teacher) value);
+                element.setTeachers((List<Teacher>) value);
                 return;
 
             case APPROVED_COLUMN:
                 element.setApproved((boolean) value);
+                return;
+
+            default:
                 return;
         }
     }

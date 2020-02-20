@@ -1,6 +1,6 @@
-package se.uog.swing;
+package se.uog.swing.table;
 
-public interface TableModelHeaderConfiguration<E> {
+public interface TableModelConfiguration<E> {
     public int getColumnCount();
 
     public String[] getColumnNames();

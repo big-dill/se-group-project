@@ -1,4 +1,4 @@
-package se.uog.swing;
+package se.uog.swing.table;
 
 import javax.swing.DefaultListModel;
 import javax.swing.event.ListDataEvent;
@@ -10,10 +10,10 @@ public class TableModel<E> extends AbstractTableModel implements ListDataListene
     private static final long serialVersionUID = 1L;
 
     private DefaultListModel<E> listModel;
-    private TableModelHeaderConfiguration<E> tableConfiguration;
+    private TableModelConfiguration<E> tableConfiguration;
 
     public TableModel(DefaultListModel<E> listModel,
-            TableModelHeaderConfiguration<E> tableConfiguration) {
+            TableModelConfiguration<E> tableConfiguration) {
 
         this.listModel = listModel;
         this.tableConfiguration = tableConfiguration;
@@ -74,15 +74,16 @@ public class TableModel<E> extends AbstractTableModel implements ListDataListene
 
     // Additional Model Methods
 
-    public void addRow(E element) {
+    public int addRow(E element) {
         // Add to our list
         listModel.addElement(element);
+        return listModel.getSize() - 1;
         // The listeners for this swing event are implemented below as THIS is a listDataListener
     }
 
-    public void addDefaultRow() {
+    public int addDefaultRow() {
         // Add the default element
-        addRow(tableConfiguration.getDefaultElement());
+        return addRow(tableConfiguration.getDefaultElement());
     }
 
     public void removeRow(int rowIndex) {
@@ -92,7 +93,7 @@ public class TableModel<E> extends AbstractTableModel implements ListDataListene
     }
 
     // Can change the headers, may be useful for changing the display depending on the current user
-    public void setHeaderConfiguration(TableModelHeaderConfiguration<E> tableConfiguration) {
+    public void setHeaderConfiguration(TableModelConfiguration<E> tableConfiguration) {
         this.tableConfiguration = tableConfiguration;
         fireTableStructureChanged();
     }

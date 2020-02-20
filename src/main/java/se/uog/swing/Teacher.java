@@ -35,4 +35,8 @@ public class Teacher {
         this.age = age;
     }
 
+    @Override
+    public String toString() {
+        return String.format("%s : %d", name, age);
+    }
 }
