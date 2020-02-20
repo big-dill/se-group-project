@@ -4,36 +4,46 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.function.BiFunction;
 import javax.swing.AbstractCellEditor;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.TableCellEditor;
 
-public class TableListEditor extends AbstractCellEditor implements TableCellEditor {
+public class TableListEditor<TE, LE> extends AbstractCellEditor
+        implements TableCellEditor, ActionListener {
 
-    private JButton delegate = new JButton("view");
-    private List<?> selectedItems;
+    private JButton delegate = new JButton("editing...");
 
-    public TableListEditor(DefaultListModel<?> listModel, String title) {
+    private DefaultListModel<LE> listElementList;
+    private String dialogTitle;
+    private List<LE> selectedItems;
+
+    // FILTERING INSTANCE VARIABLES:
+
+    // The table model list is needed to get the element in the corresponding row.
+    // Defaults to null as it is not needed.
+    private DefaultListModel<TE> tableElementList = null;
+    // Filter function just returns original listElementList;
+    private BiFunction<DefaultListModel<LE>, TE, DefaultListModel<LE>> filterFunction =
+            (listElementList, tableElement) -> listElementList;
+
+    public TableListEditor(DefaultListModel<LE> listElementList,
+            DefaultListModel<TE> tableElementList, String dialogTitle,
+            BiFunction<DefaultListModel<LE>, TE, DefaultListModel<LE>> filterFunction) {
+
+        this.listElementList = listElementList;
+        this.tableElementList = tableElementList;
+        this.dialogTitle = dialogTitle;
+        this.filterFunction = filterFunction;
 
         // When the button is clicked, open a dialog with the possible list elements
-        delegate.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent actionEvent) {
-
-                // OPEN THE LIST SELECTOR HERE
-                List<?> selection = ListDialog.showDialog(
-                    delegate,
-                    title,
-                    listModel,
-                    selectedItems);
-                changeSelection(selection);
-            }
-        });
+        delegate.addActionListener(this);
     }
 
     // Change if something is selected, otherwise,
-    private void changeSelection(List<?> selectedItems) {
+    private void changeSelection(List<LE> selectedItems) {
         if (selectedItems != null) {
             this.selectedItems = selectedItems;
         }
@@ -51,9 +61,26 @@ public class TableListEditor extends AbstractCellEditor implements TableCellEdit
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected,
             int row, int column) {
 
-        // Set the selected items from what is provided by the TableModel.
-        changeSelection((List<?>) value);
+        TE currentTableRowElement = null;
+        // Get the current table element for filtering etc.
+        if (tableElementList != null) {
+            currentTableRowElement = tableElementList.get(row);
+        }
+
+        // Filter the listElementList based on the provided function
+        listElementList = filterFunction.apply(listElementList, currentTableRowElement);
+
+        // Show the 'editing...' button in the window while the dialog is open
         return delegate;
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        // OPEN THE LIST SELECTOR HERE
+        List<LE> selection = (List<LE>) ListDialog.showDialog(delegate, dialogTitle,
+                listElementList, selectedItems);
+
+        changeSelection(selection);
+    }
 }

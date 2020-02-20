@@ -70,10 +70,6 @@ public class ListDialog extends JDialog implements ActionListener {
         JScrollPane listScroller = new JScrollPane(list);
         listScroller.setPreferredSize(new Dimension(250, 80));
 
-        // Create a container so that we can add a title around
-        // the scroll pane. Can't add a title directly to the
-        // scroll pane because its background would be white.
-        // Lay out the label and scroll pane from top to bottom.
         JPanel listPane = new JPanel();
         listPane.setLayout(new BoxLayout(listPane, BoxLayout.PAGE_AXIS));
         listPane.add(listScroller);

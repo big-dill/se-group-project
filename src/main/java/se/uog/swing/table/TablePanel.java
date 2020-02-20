@@ -1,34 +1,37 @@
 package se.uog.swing.table;
 
-import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
+import java.awt.event.*;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
-
 
 /**
  * Hello world!
  */
-public class EditableTableView extends JPanel {
+class TablePanel extends JPanel {
 
-    private TableView tableView;
+    private JTable table = new JTable();
 
     private JPanel buttonPanel = new JPanel();
     private JButton addButton;
     private JButton removeButton;
 
-    public EditableTableView(TableModel<?> tableModel) {
+    public TablePanel(TableModel<?> tableModel) {
 
-        tableView = new TableView(tableModel);
+        table.setModel(tableModel);
+        table.setRowHeight(25);
+
+        JScrollPane scrollpane = new JScrollPane(table);
+        scrollpane.setPreferredSize(new Dimension(400, 200));
+        add(scrollpane, BorderLayout.CENTER);
 
         addButton = new JButton("Add");
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int rowIndex = tableModel.addDefaultRow();
-                JTable table = tableView.getTable();
                 table.changeSelection(rowIndex, 0, false, false);
                 table.editCellAt(rowIndex, 0);
                 table.transferFocus();
@@ -39,7 +42,7 @@ public class EditableTableView extends JPanel {
         removeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int[] selectedRows = tableView.getTable().getSelectedRows();
+                int[] selectedRows = table.getSelectedRows();
                 for (int rowIndex : selectedRows) {
                     tableModel.removeRow(rowIndex);
                 }
@@ -48,13 +51,11 @@ public class EditableTableView extends JPanel {
 
         buttonPanel.add(addButton);
         buttonPanel.add(removeButton);
-
-        add(tableView, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
-
     }
 
     public JTable getTable() {
-        return tableView.getTable();
+        return table;
     }
+
 }
