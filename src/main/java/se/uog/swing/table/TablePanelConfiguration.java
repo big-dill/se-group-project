@@ -1,6 +1,6 @@
 package se.uog.swing.table;
 
-public interface TableModelConfiguration<E> {
+public interface TablePanelConfiguration<E> {
     public int getColumnCount();
 
     public String[] getColumnNames();

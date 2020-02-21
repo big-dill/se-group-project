@@ -5,7 +5,7 @@ import java.util.List;
 import se.uog.swing.Requirement;
 import se.uog.swing.Teacher;
 
-public class RequirementTableConfiguration implements TableModelConfiguration<Requirement> {
+public class RequirementTableConfiguration implements TablePanelConfiguration<Requirement> {
 
     final static int QUALIFICATION_COLUMN = 0;
     final static int TEACHER_COLUMN = 1;

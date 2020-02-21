@@ -10,10 +10,10 @@ public class TableModel<E> extends AbstractTableModel implements ListDataListene
     private static final long serialVersionUID = 1L;
 
     private DefaultListModel<E> listModel;
-    private TableModelConfiguration<E> tableConfiguration;
+    private TablePanelConfiguration<E> tableConfiguration;
 
     public TableModel(DefaultListModel<E> listModel,
-            TableModelConfiguration<E> tableConfiguration) {
+            TablePanelConfiguration<E> tableConfiguration) {
 
         this.listModel = listModel;
         this.tableConfiguration = tableConfiguration;
@@ -93,7 +93,7 @@ public class TableModel<E> extends AbstractTableModel implements ListDataListene
     }
 
     // Can change the headers, may be useful for changing the display depending on the current user
-    public void setHeaderConfiguration(TableModelConfiguration<E> tableConfiguration) {
+    public void setHeaderConfiguration(TablePanelConfiguration<E> tableConfiguration) {
         this.tableConfiguration = tableConfiguration;
         fireTableStructureChanged();
     }

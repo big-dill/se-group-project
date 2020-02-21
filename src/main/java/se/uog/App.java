@@ -5,9 +5,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import se.uog.swing.AppModel;
 import se.uog.swing.Requirement;
-import se.uog.swing.table.EditableTableView;
 import se.uog.swing.table.TableListEditor;
-import se.uog.swing.table.TableModel;
+import se.uog.swing.table.TablePanel;
 
 /**
  * Hello world!
@@ -35,17 +34,19 @@ public class App extends JFrame {
 
                 AppModel model = new AppModel();
 
-                EditableTableView teacherTableView =
-                        new EditableTableView(model.getTeacherTableModel());
+                TablePanel teacherTableView = new TablePanel(model.getTeacherTableModel());
 
-                EditableTableView requirementTableView =
-                        new EditableTableView(model.getRequirementTableModel());
+                TablePanel requirementTableView = new TablePanel(model.getRequirementTableModel());
 
-                requirementTableView.getTable().getColumnModel().getColumn(1).setCellEditor(
-                        new TableListSelector<Requirement, Qualification>(model.getRequirementListModel(), model.getTeacherListModel(),  "Select Teachers:", (model, rowElement)->{
-                            List<Qualification> qualifications = rowElement.getQualifications();
-                            model.getTeacherListModel() // Some kind of filter operation in here...
-                        }));
+                // requirementTableView.getTable().getColumnModel().getColumn(1)
+                // .setCellEditor(new TableListEditor<Requirement, Qualification>(
+                // model.getRequirementListModel(), model.getTeacherListModel(),
+                // "Select Teachers:", (model, rowElement) -> {
+                // // List<Qualification> qualifications =
+                // // rowElement.getQualifications();
+                // // model.getTeacherListModel() // Some kind of filter operation
+                // // in here...
+                // }));
 
                 new App().add(requirementTableView);
 

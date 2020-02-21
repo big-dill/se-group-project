@@ -10,7 +10,7 @@ import javax.swing.JTable;
 /**
  * Hello world!
  */
-class TablePanel extends JPanel {
+public class TablePanel extends JPanel {
 
     private JTable table = new JTable();
 
