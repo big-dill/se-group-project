@@ -1,11 +1,9 @@
 package se.uog.swing;
 
 import javax.swing.DefaultListModel;
-import se.uog.swing.table.RequirementTableConfiguration;
-import se.uog.swing.table.TableModel;
-import se.uog.swing.table.TeacherTableConfiguration;
-
-import se.uog.swing.*;
+import se.uog.table.ObjectTableModel;
+import se.uog.table.RequirementTableConfiguration;
+import se.uog.table.TeacherTableConfiguration;
 
 /**
  * The source of EVERYTHING.
@@ -13,10 +11,10 @@ import se.uog.swing.*;
 public class AppModel {
     // Update this with actual Teacher objects (remember, toString() method needed!)
     private DefaultListModel<Teacher> teacherListModel;
-    private TableModel<Teacher> teacherTableModel;
+    private ObjectTableModel<Teacher> teacherTableModel;
 
     private DefaultListModel<Requirement> requirementListModel;
-    private TableModel<Requirement> requirementTableModel;
+    private ObjectTableModel<Requirement> requirementTableModel;
 
     public AppModel() {
         setupRequirementModels();
@@ -25,17 +23,17 @@ public class AppModel {
 
     private void setupRequirementModels() {
         requirementListModel = new DefaultListModel<Requirement>();
-        requirementTableModel = new TableModel<Requirement>(requirementListModel,
+        requirementTableModel = new ObjectTableModel<Requirement>(requirementListModel,
                 new RequirementTableConfiguration());
     }
 
     private void setupTeacherModels() {
         teacherListModel = new DefaultListModel<Teacher>();
         teacherTableModel =
-                new TableModel<Teacher>(teacherListModel, new TeacherTableConfiguration());
+                new ObjectTableModel<Teacher>(teacherListModel, new TeacherTableConfiguration());
     }
 
-    public TableModel<Teacher> getTeacherTableModel() {
+    public ObjectTableModel<Teacher> getTeacherTableModel() {
         return teacherTableModel;
     }
 
@@ -43,7 +41,7 @@ public class AppModel {
         return teacherListModel;
     }
 
-    public TableModel<Requirement> getRequirementTableModel() {
+    public ObjectTableModel<Requirement> getRequirementTableModel() {
         return requirementTableModel;
     }
 

@@ -1,4 +1,4 @@
-package se.uog.swing.table;
+package se.uog.table;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -10,7 +10,7 @@ import javax.swing.JTable;
 /**
  * Hello world!
  */
-public class TablePanel extends JPanel {
+public class ObjectTable extends JPanel {
 
     private JTable table = new JTable();
 
@@ -18,7 +18,7 @@ public class TablePanel extends JPanel {
     private JButton addButton;
     private JButton removeButton;
 
-    public TablePanel(TableModel<?> tableModel) {
+    public ObjectTable(ObjectTableModel<?> tableModel) {
 
         table.setModel(tableModel);
         table.setRowHeight(25);

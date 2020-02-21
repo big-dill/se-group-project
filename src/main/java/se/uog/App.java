@@ -4,9 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import se.uog.swing.AppModel;
-import se.uog.swing.Requirement;
-import se.uog.swing.table.TableListEditor;
-import se.uog.swing.table.TablePanel;
+import se.uog.table.ObjectTable;
 
 /**
  * Hello world!
@@ -34,9 +32,10 @@ public class App extends JFrame {
 
                 AppModel model = new AppModel();
 
-                TablePanel teacherTableView = new TablePanel(model.getTeacherTableModel());
+                ObjectTable teacherTableView = new ObjectTable(model.getTeacherTableModel());
 
-                TablePanel requirementTableView = new TablePanel(model.getRequirementTableModel());
+                ObjectTable requirementTableView =
+                        new ObjectTable(model.getRequirementTableModel());
 
                 // requirementTableView.getTable().getColumnModel().getColumn(1)
                 // .setCellEditor(new TableListEditor<Requirement, Qualification>(

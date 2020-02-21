@@ -1,8 +1,8 @@
-package se.uog.swing.table;
+package se.uog.table;
 
 import se.uog.swing.Teacher;
 
-public class TeacherTableConfiguration implements TablePanelConfiguration<Teacher> {
+public class TeacherTableConfiguration implements ObjectTableConfiguration<Teacher> {
 
     final static int NAME_COLUMN = 0;
     final static int ISCOOL_COLUMN = 1;

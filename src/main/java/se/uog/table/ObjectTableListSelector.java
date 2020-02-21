@@ -1,4 +1,4 @@
-package se.uog.swing.table;
+package se.uog.table;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -11,7 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.TableCellEditor;
 
-public class TableListEditor<TE, LE> extends AbstractCellEditor
+public class ObjectTableListSelector<TE, LE> extends AbstractCellEditor
         implements TableCellEditor, ActionListener {
 
     private JButton delegate = new JButton("editing...");
@@ -29,7 +29,7 @@ public class TableListEditor<TE, LE> extends AbstractCellEditor
     private BiFunction<DefaultListModel<LE>, TE, DefaultListModel<LE>> filterFunction =
             (listElementList, tableElement) -> listElementList;
 
-    public TableListEditor(DefaultListModel<LE> listElementList,
+    public ObjectTableListSelector(DefaultListModel<LE> listElementList,
             DefaultListModel<TE> tableElementList, String dialogTitle,
             BiFunction<DefaultListModel<LE>, TE, DefaultListModel<LE>> filterFunction) {
 
@@ -78,7 +78,7 @@ public class TableListEditor<TE, LE> extends AbstractCellEditor
     public void actionPerformed(ActionEvent e) {
 
         // OPEN THE LIST SELECTOR HERE
-        List<LE> selection = (List<LE>) ListDialog.showDialog(delegate, dialogTitle,
+        List<LE> selection = (List<LE>) ListSelectorDialog.showDialog(delegate, dialogTitle,
                 listElementList, selectedItems);
 
         changeSelection(selection);

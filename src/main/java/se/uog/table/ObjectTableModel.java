@@ -1,4 +1,4 @@
-package se.uog.swing.table;
+package se.uog.table;
 
 import javax.swing.DefaultListModel;
 import javax.swing.event.ListDataEvent;
@@ -6,17 +6,17 @@ import javax.swing.event.ListDataListener;
 import javax.swing.table.AbstractTableModel;
 
 
-public class TableModel<E> extends AbstractTableModel implements ListDataListener {
+public class ObjectTableModel<E> extends AbstractTableModel implements ListDataListener {
     private static final long serialVersionUID = 1L;
 
     private DefaultListModel<E> listModel;
-    private TablePanelConfiguration<E> tableConfiguration;
+    private ObjectTableConfiguration<E> configuration;
 
-    public TableModel(DefaultListModel<E> listModel,
-            TablePanelConfiguration<E> tableConfiguration) {
+    public ObjectTableModel(DefaultListModel<E> listModel,
+            ObjectTableConfiguration<E> configuration) {
 
         this.listModel = listModel;
-        this.tableConfiguration = tableConfiguration;
+        this.configuration = configuration;
 
         // Add listener to the listModel which will update.
         listModel.addListDataListener(this);
@@ -34,13 +34,13 @@ public class TableModel<E> extends AbstractTableModel implements ListDataListene
     @Override
     public int getColumnCount() {
         // Return length of the names
-        return tableConfiguration.getColumnCount();
+        return configuration.getColumnCount();
     }
 
     @Override
     public String getColumnName(int columnIndex) {
         // Reference columnNames
-        return tableConfiguration.getColumnNames()[columnIndex];
+        return configuration.getColumn(columnIndex).getColumnTitle();
     }
 
 
@@ -48,7 +48,7 @@ public class TableModel<E> extends AbstractTableModel implements ListDataListene
     public Class<?> getColumnClass(int columnIndex) {
         // Return the class to swing, so it can generate appropriate controls for different
         // primitive types.
-        Class<?> x = tableConfiguration.getColumnClasses()[columnIndex];
+        Class<?> x = configuration.getColumn(columnIndex).getColumnClass();
         // Need to reimplement this so it sets the actual classes we want?
         return x;
     }
@@ -57,19 +57,19 @@ public class TableModel<E> extends AbstractTableModel implements ListDataListene
     public Object getValueAt(int rowIndex, int columnIndex) {
         // This gets the value from the model and puts it in the GUI. :O
         E element = listModel.get(rowIndex);
-        return tableConfiguration.columnGetter(element, columnIndex);
+        return configuration.getColumn(columnIndex).getRowElementGetter().apply(element);
     }
 
     @Override
     public void setValueAt(Object value, int rowIndex, int columnIndex) {
         // This is used to set the value of the model item from the GUI. Sweet.
         E element = listModel.get(rowIndex);
-        tableConfiguration.columnSetter(element, value, columnIndex);
+        configuration.getColumn(columnIndex).getRowElementSetter().accept(element, value);
     }
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return tableConfiguration.isColumnEditable(columnIndex);
+        return configuration.getColumn(columnIndex).isColumnEditable();
     }
 
     // Additional Model Methods
@@ -83,7 +83,7 @@ public class TableModel<E> extends AbstractTableModel implements ListDataListene
 
     public int addDefaultRow() {
         // Add the default element
-        return addRow(tableConfiguration.getDefaultElement());
+        return addRow(configuration.getDefaultElement());
     }
 
     public void removeRow(int rowIndex) {
@@ -93,8 +93,8 @@ public class TableModel<E> extends AbstractTableModel implements ListDataListene
     }
 
     // Can change the headers, may be useful for changing the display depending on the current user
-    public void setHeaderConfiguration(TablePanelConfiguration<E> tableConfiguration) {
-        this.tableConfiguration = tableConfiguration;
+    public void setConfiguration(ObjectTableConfiguration<E> configuration) {
+        this.configuration = configuration;
         fireTableStructureChanged();
     }
 

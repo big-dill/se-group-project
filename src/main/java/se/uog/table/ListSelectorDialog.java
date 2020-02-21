@@ -1,4 +1,4 @@
-package se.uog.swing.table;
+package se.uog.table;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -22,9 +22,9 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
 
-public class ListDialog extends JDialog implements ActionListener {
+public class ListSelectorDialog extends JDialog implements ActionListener {
 
-    private static ListDialog dialog;
+    private static ListSelectorDialog dialog;
     private static List<?> selection;
     private JList<?> list;
 
@@ -34,7 +34,7 @@ public class ListDialog extends JDialog implements ActionListener {
         // Get the frame to attach the dialog to.
         Frame frame = JOptionPane.getFrameForComponent(owner);
 
-        dialog = new ListDialog(frame, dialogTitle, model, initalSelection);
+        dialog = new ListSelectorDialog(frame, dialogTitle, model, initalSelection);
         dialog.setVisible(true);
         return selection;
     }
@@ -48,7 +48,7 @@ public class ListDialog extends JDialog implements ActionListener {
 
     }
 
-    private ListDialog(Frame frame, String dialogTitle, DefaultListModel<?> listModel,
+    private ListSelectorDialog(Frame frame, String dialogTitle, DefaultListModel<?> listModel,
             List<?> initalSelection) {
         super(frame, dialogTitle, true);
 
@@ -96,8 +96,8 @@ public class ListDialog extends JDialog implements ActionListener {
     // Handle clicks on the Set and Cancel buttons.
     public void actionPerformed(ActionEvent e) {
         if ("Set".equals(e.getActionCommand())) {
-            ListDialog.selection = list.getSelectedValuesList();
+            ListSelectorDialog.selection = list.getSelectedValuesList();
         }
-        ListDialog.dialog.setVisible(false);
+        ListSelectorDialog.dialog.setVisible(false);
     }
 }
