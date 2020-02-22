@@ -7,7 +7,7 @@ import static java.util.logging.Level.FINE;
 
 /**
  * This class contains the Logger functionality for the logging of the debug file to
- * TomTrumps.log in the root directory. The log is only produced if the user requests it.
+ * debug_logger_PTT in the root directory. The log is only produced if the user requests it.
  * The class is built in the singleton design pattern.
  */
 
