@@ -1,11 +1,15 @@
 package se.uog.swing;
 
-public class Teacher {
+import java.util.ArrayList;
+import java.util.List;
+
+public class ExampleTeacher {
     String name;
     boolean isCool;
     int age;
+    List<ExampleQualification> qualificationList = new ArrayList<>();
 
-    public Teacher(String name, boolean isCool, int age) {
+    public ExampleTeacher(String name, boolean isCool, int age) {
         this.name = name;
         this.isCool = isCool;
         this.age = age;
@@ -33,6 +37,14 @@ public class Teacher {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public List<ExampleQualification> getQualifications() {
+        return qualificationList;
+    }
+
+    public void setQualifications(List<ExampleQualification> qualificationList) {
+        this.qualificationList = qualificationList;
     }
 
     @Override

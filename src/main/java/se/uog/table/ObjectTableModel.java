@@ -1,5 +1,6 @@
 package se.uog.table;
 
+import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
@@ -10,95 +11,84 @@ public class ObjectTableModel<E> extends AbstractTableModel implements ListDataL
     private static final long serialVersionUID = 1L;
 
     private DefaultListModel<E> listModel;
-    private ObjectTableConfiguration<E> configuration;
+    private List<ObjectTableColumn<E>> objectColumnMap;
 
     public ObjectTableModel(DefaultListModel<E> listModel,
-            ObjectTableConfiguration<E> configuration) {
+            List<ObjectTableColumn<E>> objectColumnMap) {
 
         this.listModel = listModel;
-        this.configuration = configuration;
+        this.objectColumnMap = objectColumnMap;
 
-        // Add listener to the listModel which will update.
+        // Adds a listener to the underlying list model so the table will update when it does.
         listModel.addListDataListener(this);
-        // fireTableStructureChanged();
+        fireTableStructureChanged();
     }
 
-    // Abstract Table Model Overrides
+    // AbstractTableModel Overrides
 
     @Override
     public int getRowCount() {
-        // Return the size of the array list
+        // The number of rows will be the same as the number of elements in the List<E>
         return listModel.getSize();
     }
 
     @Override
     public int getColumnCount() {
-        // Return length of the names
-        return configuration.getColumnCount();
+        // The columns are provided by the objectColumnMap.
+        return objectColumnMap.size();
     }
 
     @Override
     public String getColumnName(int columnIndex) {
-        // Reference columnNames
-        return configuration.getColumn(columnIndex).getColumnTitle();
+        // Gets the column title from the ObjectTableColumn object.
+        return objectColumnMap.get(columnIndex).getColumnTitle();
     }
 
 
     @Override
     public Class<?> getColumnClass(int columnIndex) {
-        // Return the class to swing, so it can generate appropriate controls for different
-        // primitive types.
-        Class<?> x = configuration.getColumn(columnIndex).getColumnClass();
-        // Need to reimplement this so it sets the actual classes we want?
-        return x;
+        // Gets the class of the column item from the ObjectTableColumn object.
+        // ---
+        // Swing likes to know the classes so it can create default editors / renderers for
+        // base primitives. For example, a boolean is represented with a check box.
+        return objectColumnMap.get(columnIndex).getColumnClass();
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        // This gets the value from the model and puts it in the GUI. :O
+        // We pass the element from the current row to the ObjectTableColumn object's
+        // lambda 'getter' function. If <E> were a String, an example lambda be:
+        // (element) -> (element.length()). This would tell the table to populate the
+        // table with the string's length.
         E element = listModel.get(rowIndex);
-        return configuration.getColumn(columnIndex).getRowElementGetter().apply(element);
+        return objectColumnMap.get(columnIndex).getRowElementGetter().apply(element);
     }
 
     @Override
     public void setValueAt(Object value, int rowIndex, int columnIndex) {
-        // This is used to set the value of the model item from the GUI. Sweet.
+        // We pass the element from the current row to the ObjectTableColumn object's
+        // lambda 'setter' function, along with the value that the TableCellEditor has
+        // returned to us.
+        // So, if <E> were a Person, an example lambda be:
+        // (element) -> (element.setName((String) value))
+        // This allows us to use the table to edit the underlying elements. Neat!
+        // Note: we need to cast the value in the setter.
         E element = listModel.get(rowIndex);
-        configuration.getColumn(columnIndex).getRowElementSetter().accept(element, value);
+        objectColumnMap.get(columnIndex).getRowElementSetter().accept(element, value);
     }
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return configuration.getColumn(columnIndex).isColumnEditable();
-    }
-
-    // Additional Model Methods
-
-    public int addRow(E element) {
-        // Add to our list
-        listModel.addElement(element);
-        return listModel.getSize() - 1;
-        // The listeners for this swing event are implemented below as THIS is a listDataListener
-    }
-
-    public int addDefaultRow() {
-        // Add the default element
-        return addRow(configuration.getDefaultElement());
-    }
-
-    public void removeRow(int rowIndex) {
-        // Remove the requirement with the row index
-        listModel.remove(rowIndex);
-        // The listeners for this swing event are implemented below as THIS is a listDataListener
-    }
-
-    // Can change the headers, may be useful for changing the display depending on the current user
-    public void setConfiguration(ObjectTableConfiguration<E> configuration) {
-        this.configuration = configuration;
-        fireTableStructureChanged();
+        // Gets if the column item from the ObjectTableColumn object is editable.
+        // If it is, the table will be able to use its TableCellEditors to set the values
+        // of the objects inside the underlying listModel.
+        return objectColumnMap.get(columnIndex).isColumnEditable();
     }
 
     // ListDataListener Overrides
+
+    // These tell the model to update its view if anything changes in the underlying
+    // list model to keep everything nice and synchronised.
 
     @Override
     public void intervalAdded(ListDataEvent e) {

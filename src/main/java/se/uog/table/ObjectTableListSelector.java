@@ -3,6 +3,7 @@ package se.uog.table;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiFunction;
 import javax.swing.AbstractCellEditor;
@@ -17,8 +18,9 @@ public class ObjectTableListSelector<TE, LE> extends AbstractCellEditor
     private JButton delegate = new JButton("editing...");
 
     private DefaultListModel<LE> listElementList;
+    private DefaultListModel<LE> filteredList;
     private String dialogTitle;
-    private List<LE> selectedItems;
+    private List<LE> selectedItems = new ArrayList<>();
 
     // FILTERING INSTANCE VARIABLES:
 
@@ -26,12 +28,12 @@ public class ObjectTableListSelector<TE, LE> extends AbstractCellEditor
     // Defaults to null as it is not needed.
     private DefaultListModel<TE> tableElementList = null;
     // Filter function just returns original listElementList;
-    private BiFunction<DefaultListModel<LE>, TE, DefaultListModel<LE>> filterFunction =
+    private BiFunction<List<LE>, TE, List<LE>> filterFunction =
             (listElementList, tableElement) -> listElementList;
 
     public ObjectTableListSelector(DefaultListModel<LE> listElementList,
             DefaultListModel<TE> tableElementList, String dialogTitle,
-            BiFunction<DefaultListModel<LE>, TE, DefaultListModel<LE>> filterFunction) {
+            BiFunction<List<LE>, TE, List<LE>> filterFunction) {
 
         this.listElementList = listElementList;
         this.tableElementList = tableElementList;
@@ -66,9 +68,9 @@ public class ObjectTableListSelector<TE, LE> extends AbstractCellEditor
         if (tableElementList != null) {
             currentTableRowElement = tableElementList.get(row);
         }
-
         // Filter the listElementList based on the provided function
-        listElementList = filterFunction.apply(listElementList, currentTableRowElement);
+        filteredList = convertListToDefaultListModel(filterFunction
+                .apply(convertDefaultListModelToList(listElementList), currentTableRowElement));
 
         // Show the 'editing...' button in the window while the dialog is open
         return delegate;
@@ -79,8 +81,24 @@ public class ObjectTableListSelector<TE, LE> extends AbstractCellEditor
 
         // OPEN THE LIST SELECTOR HERE
         List<LE> selection = (List<LE>) ListSelectorDialog.showDialog(delegate, dialogTitle,
-                listElementList, selectedItems);
+                filteredList, selectedItems);
 
         changeSelection(selection);
+    }
+
+    private DefaultListModel<LE> convertListToDefaultListModel(List<LE> list) {
+        DefaultListModel<LE> listModel = new DefaultListModel<LE>();
+        for (LE elem : list) {
+            listModel.addElement(elem);
+        }
+        return listModel;
+    }
+
+    private List<LE> convertDefaultListModelToList(DefaultListModel<LE> listModel) {
+        List<LE> list = new ArrayList<LE>();
+        for (int i = 0; i < listModel.getSize(); i++) {
+            list.add(listModel.getElementAt(i));
+        }
+        return list;
     }
 }

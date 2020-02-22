@@ -1,31 +1,13 @@
 package se.uog.table;
 
-import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultListModel;
 
-public class ObjectTableConfiguration<E> {
-    private E defaultElement;
-    private List<ObjectTableColumn<E>> tableColumns = new ArrayList<>();
+public interface ObjectTableConfiguration<E> {
 
-    public ObjectTableConfiguration(E defaultElement) {
-        this.defaultElement = defaultElement;
-    }
+    public DefaultListModel<E> getListModel();
 
-    public void addColumn(ObjectTableColumn<E> column) {
-        tableColumns.add(column);
-    }
+    public E createDefaultElement();
 
-    public ObjectTableColumn<E> getColumn(int columnIndex) {
-        return tableColumns.get(columnIndex);
-    }
-
-    public int getColumnCount() {
-        return tableColumns.size();
-    }
-
-    public E getDefaultElement() {
-        return defaultElement;
-    }
-    // At present, cannot see need to *remove* column, as this is more of a config class...
-    // It's expected to be dynamic...
+    public List<ObjectTableColumn<E>> getObjectColumnMap();
 }

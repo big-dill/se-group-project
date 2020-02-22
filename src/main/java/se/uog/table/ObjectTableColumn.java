@@ -6,15 +6,12 @@ import javax.swing.table.TableCellEditor;
 
 public class ObjectTableColumn<E> {
 
-    // Column instance variables
     private String columnTitle;
     private Class<?> columnClass;
     private BiConsumer<E, Object> rowElementSetter;
     private Function<E, Object> rowElementGetter;
-
-    // These are defaults
-    private boolean isColumnEditable = true;
-    private TableCellEditor columnCellEditor = null;
+    private boolean isColumnEditable;
+    private TableCellEditor columnCellEditor;
 
     public ObjectTableColumn(String columnTitle, Class<?> columnClass,
             BiConsumer<E, Object> rowElementSetter, Function<E, Object> rowElementGetter,
@@ -46,6 +43,10 @@ public class ObjectTableColumn<E> {
 
     public boolean isColumnEditable() {
         return isColumnEditable;
+    }
+
+    public void setColumnEditable(boolean isColumnEditable) {
+        this.isColumnEditable = isColumnEditable;
     }
 
     public TableCellEditor getColumnCellEditor() {

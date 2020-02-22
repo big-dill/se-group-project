@@ -1,10 +1,9 @@
 package se.uog;
 
-import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import se.uog.swing.AppModel;
-import se.uog.table.ObjectTable;
+import javax.swing.*;
+import java.awt.*;
+import se.uog.swing.*;
+import se.uog.table.*;
 
 /**
  * Hello world!
@@ -12,6 +11,30 @@ import se.uog.table.ObjectTable;
 public class App extends JFrame {
 
     public App() {
+
+        AppModel model = new AppModel();
+
+        ObjectTableConfiguration<ExampleQualification> qualificationTableConfiguration =
+                new ExampleQualificationTableConfiguration(model.getQualificationListModel());
+
+        ObjectTable<ExampleQualification> qualificationTable =
+                new ObjectTable<>(qualificationTableConfiguration);
+
+        ObjectTableConfiguration<ExampleTeacher> teacherTableConfiguration =
+                new ExampleTeacherTableConfiguration(model.getTeacherListModel(),
+                        model.getQualificationListModel());
+
+        ObjectTable<ExampleTeacher> teacherTable = new ObjectTable<>(teacherTableConfiguration);
+
+        JPanel panel = new JPanel(new FlowLayout());
+
+        panel.add(teacherTable);
+        panel.add(qualificationTable);
+
+        teacherTable.setEditable(false);
+
+        add(panel);
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
         setLocationRelativeTo(null);
@@ -29,27 +52,7 @@ public class App extends JFrame {
 
             @Override
             public void run() {
-
-                AppModel model = new AppModel();
-
-                ObjectTable teacherTableView = new ObjectTable(model.getTeacherTableModel());
-
-                ObjectTable requirementTableView =
-                        new ObjectTable(model.getRequirementTableModel());
-
-                // requirementTableView.getTable().getColumnModel().getColumn(1)
-                // .setCellEditor(new TableListEditor<Requirement, Qualification>(
-                // model.getRequirementListModel(), model.getTeacherListModel(),
-                // "Select Teachers:", (model, rowElement) -> {
-                // // List<Qualification> qualifications =
-                // // rowElement.getQualifications();
-                // // model.getTeacherListModel() // Some kind of filter operation
-                // // in here...
-                // }));
-
-                new App().add(requirementTableView);
-
-                new App().add(teacherTableView);
+                new App();
             }
         });
     }
