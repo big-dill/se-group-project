@@ -1,4 +1,4 @@
-package com.toptrumps.cli;
+package se.logger;
 
 import java.io.IOException;
 import java.util.logging.*;
@@ -19,7 +19,7 @@ public class Logger {
     private static final String FILE_PATH = "./debug_logger_PTT.log";
 
     private static Logger instance;
-    java.util.logging.Logger logger;
+    private java.util.logging.Logger logger;
 
     private Handler loggerHandler;
     private boolean isEnabled;
