@@ -11,9 +11,9 @@ public class AppView extends JFrame {
     private static final String WINDOW_TITLE = "AppMenu"; //Obvs can be changed later
     private static final String WELCOME_TEXT = "Welcome";
     public static CardLayout layout = new CardLayout();
-    private static JPanel teacherPanel;
-    private static JPanel coursePanel;
-    private static JPanel mainPanel;
+    private JPanel teacherPanel;
+    private JPanel coursePanel;
+    private JPanel mainPanel;
 
 
     public AppView(MenuActionListener menuActionListener) {
@@ -48,9 +48,6 @@ public class AppView extends JFrame {
         add(mainPanel);
         setVisible(true);
     }
-    private void setPanel(){
-
-    }
 
     private void setLandingPage(JPanel mainPanel){
         JLabel welcomeLabel = new JLabel(WELCOME_TEXT);
@@ -69,15 +66,15 @@ public class AppView extends JFrame {
         return layout;
     }
 
-    public static JPanel getTeacherPanel() {
+    public JPanel getTeacherPanel() {
         return teacherPanel;
     }
 
-    public static JPanel getCoursePanel() {
+    public JPanel getCoursePanel() {
         return coursePanel;
     }
 
-    public static JPanel getMainPanel() {
+    public JPanel getMainPanel() {
         return mainPanel;
     }
 
