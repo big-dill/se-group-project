@@ -16,13 +16,13 @@ public class MenuActionListener implements ActionListener {
 
         switch (command) {
 
-            case AppMenu.FIRST_MENU_ITEM:
+            case AppMenu.LOAD_TEACHER_PAGE:
                 //showTeacherView();
-                System.out.println("First item clicked");
+                System.out.println(command + " clicked");
                 break;
-            case AppMenu.SECOND_MENU_ITEM:
+            case AppMenu.LOAD_COURSE_PAGE:
                 //showCoursesView();
-                System.out.println("Second item clicked");
+                System.out.println(command + " clicked");
                 break;
 
             default:
