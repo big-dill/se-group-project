@@ -11,12 +11,9 @@ public class AppMenu extends JMenuBar {
     private static final String MENU_NAME = "Main menu";
     public static final String LOAD_TEACHER_PAGE = "Teachers";
     public static final String LOAD_COURSE_PAGE = "Courses";
-    private final MenuActionListener menuActionListener;
 
 
     public AppMenu(MenuActionListener menuActionListener) {
-
-        this.menuActionListener = menuActionListener;
 
         JMenu menu = new JMenu(MENU_NAME);
         menu.setMnemonic(KeyEvent.VK_M); // Uses a to open the menu. Press Alt + M.
