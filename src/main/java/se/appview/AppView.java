@@ -7,7 +7,7 @@ public class AppView extends JFrame {
 
     private String WINDOW_TITLE = "AppMenu"; //Obvs can be changed later
 
-    public AppView(){
+    public AppView() {
         super();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle(WINDOW_TITLE);
