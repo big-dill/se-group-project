@@ -9,8 +9,8 @@ import java.awt.event.KeyEvent;
 public class AppMenu extends JMenuBar {
 
     private static final String MENU_NAME = "Main menu";
-    public static final String FIRST_MENU_ITEM = "Teachers";
-    public static final String SECOND_MENU_ITEM = "Courses";
+    public static final String LOAD_TEACHER_PAGE = "Teachers";
+    public static final String LOAD_COURSE_PAGE = "Courses";
     private MenuActionListener mal = new MenuActionListener();
 
 
@@ -19,16 +19,16 @@ public class AppMenu extends JMenuBar {
         JMenu menu = new JMenu(MENU_NAME);
         menu.setMnemonic(KeyEvent.VK_M); // Uses a to open the menu. Press Alt + M.
 
-        JMenuItem firstMenuItem = new JMenuItem(FIRST_MENU_ITEM, KeyEvent.VK_T);
-        firstMenuItem.setMnemonic(KeyEvent.VK_T);
-        firstMenuItem.addActionListener(mal);
+        JMenuItem miLoadTeacherView = new JMenuItem(LOAD_TEACHER_PAGE, KeyEvent.VK_T);
+        miLoadTeacherView.setMnemonic(KeyEvent.VK_T);
+        miLoadTeacherView.addActionListener(mal);
 
-        JMenuItem secondMenuItem = new JMenuItem(SECOND_MENU_ITEM);
-        secondMenuItem.setMnemonic(KeyEvent.VK_C);
-        secondMenuItem.addActionListener(mal);
+        JMenuItem miLoadCourseView = new JMenuItem(LOAD_COURSE_PAGE);
+        miLoadCourseView.setMnemonic(KeyEvent.VK_C);
+        miLoadCourseView.addActionListener(mal);
 
-        menu.add(firstMenuItem);
-        menu.add(secondMenuItem);
+        menu.add(miLoadTeacherView);
+        menu.add(miLoadCourseView);
 
         add(menu);
 
