@@ -1,4 +1,4 @@
-package se.uog.swing;
+package se.uog.model;
 
 public class ExampleQualification {
     private String qualificationName;

@@ -5,24 +5,23 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.BiFunction;
 import javax.swing.DefaultListModel;
-import se.uog.swing.ExampleQualification;
-import se.uog.swing.ExampleTeacher;
+import se.uog.model.ExampleQualification;
+import se.uog.model.ExampleTeacher;
 
 public class ExampleTeacherTableConfiguration implements ObjectTableConfiguration<ExampleTeacher> {
-    /**
-     * Default SerialVersionUID
-     */
-    private static final long serialVersionUID = 1L;
 
-    private DefaultListModel<ExampleTeacher> teacherList;
-    private DefaultListModel<ExampleQualification> qualificationList;
+    protected DefaultListModel<ExampleTeacher> teacherList;
+    protected DefaultListModel<ExampleQualification> qualificationList;
 
+    private List<ObjectTableColumn<ExampleTeacher>> objectColumnMap = new ArrayList<>();
 
     public ExampleTeacherTableConfiguration(DefaultListModel<ExampleTeacher> teacherList,
             DefaultListModel<ExampleQualification> qualificationList) {
 
         this.teacherList = teacherList;
         this.qualificationList = qualificationList;
+
+        initialiseObjectColumnMap();
     }
 
     @Override
@@ -37,9 +36,10 @@ public class ExampleTeacherTableConfiguration implements ObjectTableConfiguratio
 
     @Override
     public List<ObjectTableColumn<ExampleTeacher>> getObjectColumnMap() {
+        return objectColumnMap;
+    }
 
-        List<ObjectTableColumn<ExampleTeacher>> objectColumnMap = new ArrayList<>();
-
+    private void initialiseObjectColumnMap() {
         ObjectTableColumn<ExampleTeacher> nameColumn =
             new ObjectTableColumnBuilder<ExampleTeacher>()
                 .setTitle("Name")
@@ -48,7 +48,7 @@ public class ExampleTeacherTableConfiguration implements ObjectTableConfiguratio
                 .setRowElementSetter((teacher, value) -> teacher.setName((String) value))
                 .build();
 
-        ObjectTableColumn<ExampleTeacher> ageColumn = 
+        ObjectTableColumn<ExampleTeacher> ageColumn =
             new ObjectTableColumnBuilder<ExampleTeacher>()
                 .setTitle("Age")
                 .setClass(Integer.class)
@@ -64,19 +64,19 @@ public class ExampleTeacherTableConfiguration implements ObjectTableConfiguratio
                 .setRowElementSetter((teacher, value) -> teacher.setCool((Boolean) value))
                 .build();
 
-    /**
-     * Create Cell Editor for Final Column
-     */
+        /**
+         * Create Cell Editor for Final Column
+         */
 
         // CREATE A FILTER FUNCTION FOR OUR LIST SELECTOR
         BiFunction<List<ExampleQualification>, ExampleTeacher, List<ExampleQualification>> filterFunction =
-            (qualificationList, teacher) -> {
+            (qualificationList, teacherElement) -> {
 
                 Iterator<ExampleQualification> iterator = qualificationList.iterator();
                 while (iterator.hasNext()) {
                     ExampleQualification qualification = iterator.next();
                     String qFirstLetter = qualification.getName().toLowerCase().substring(0, 1);
-                    String tFirstLetter = teacher.getName().toLowerCase().substring(0, 1);
+                    String tFirstLetter = teacherElement.getName().toLowerCase().substring(0, 1);
 
                     if (!tFirstLetter.equals(qFirstLetter)) {
                         iterator.remove();
@@ -88,9 +88,9 @@ public class ExampleTeacherTableConfiguration implements ObjectTableConfiguratio
         // CREATE A LIST SELECTOR THAT IS USED ON THE QUALIFICATION COLUMN
         ObjectTableListSelector<ExampleTeacher, ExampleQualification> qualificationListSelector =
             new ObjectTableListSelector<>(
-                qualificationList, 
+                qualificationList,
                 teacherList,
-                "Choose Qualifications:", 
+                "Choose Qualifications:",
                 filterFunction
             );
 
@@ -110,7 +110,5 @@ public class ExampleTeacherTableConfiguration implements ObjectTableConfiguratio
         objectColumnMap.add(ageColumn);
         objectColumnMap.add(isCoolColumn);
         objectColumnMap.add(qualificationsColumn);
-
-        return objectColumnMap;
     }
 }

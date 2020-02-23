@@ -22,10 +22,20 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
 
+// TODO: Bug fix on cancel return value
+/**
+ * A singleton class which displays a pop-up dialog for selecting elements from a DefaultListModel.
+ */
 public class ListSelectorDialog extends JDialog implements ActionListener {
+
+    /**
+     * Default serial.
+     */
+    private static final long serialVersionUID = 1L;
 
     private static ListSelectorDialog dialog;
     private static List<?> selection;
+    private List<?> initialSelection;
     private JList<?> list;
 
     public static List<?> showDialog(Component owner, String dialogTitle, DefaultListModel<?> model,
@@ -51,6 +61,8 @@ public class ListSelectorDialog extends JDialog implements ActionListener {
     private ListSelectorDialog(Frame frame, String dialogTitle, DefaultListModel<?> listModel,
             List<?> initalSelection) {
         super(frame, dialogTitle, true);
+
+        this.initialSelection = initalSelection;
 
         // Create and initialize the buttons.
         JButton cancelButton = new JButton("Cancel");
@@ -97,6 +109,8 @@ public class ListSelectorDialog extends JDialog implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if ("Set".equals(e.getActionCommand())) {
             ListSelectorDialog.selection = list.getSelectedValuesList();
+        } else {
+            ListSelectorDialog.selection = initialSelection;
         }
         ListSelectorDialog.dialog.setVisible(false);
     }

@@ -11,9 +11,18 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableColumnModel;
 
 /**
- * Hello world!
+ * A class that encapsulates an ObjectTable component. It was designed to allow the class to be
+ * consumed in a similar fashion to other JComponents from Swing. Its architecture is similar to the
+ * 'seperable model' architecture of Swing, only the difference is that it requires a more involved
+ * configuration object because of how it 'maps' each table row and column to an object list element
+ * and its attributes (respectively).
+ *
+ * @see se.uog.table.ObjectTableConfiguration
+ *
+ * @param <E> The class of object which the table represents.
  */
 public class ObjectTable<E> extends JPanel {
     /**
@@ -21,22 +30,121 @@ public class ObjectTable<E> extends JPanel {
      */
     private static final long serialVersionUID = 1L;
 
+    // Model references:
+    private ObjectTableConfiguration<E> objectTableConfiguration;
+    private DefaultListModel<E> listModel;
+    private List<ObjectTableColumn<E>> objectColumnMap;
+    private ObjectTableModel<E> tableModel;
+
+    // View references:
+    // Table
     private JTable table = new JTable();
     private JScrollPane tableScrollPane;
-
-    private DefaultListModel<E> listModel;
-    private ObjectTableModel<E> tableModel;
-    private List<ObjectTableColumn<E>> objectColumnMap;
-
+    // Button Panel
     private JPanel buttonPanel;
     private JButton addButton;
     private JButton removeButton;
 
-
+    /**
+     * Constructs a table component which is mapped to the DefaultListModel provided in the
+     * objectTableConfiguration. Similar to a JTable component, with added functionality. Models can
+     * be swapped in and out using the {@link #setConfiguration()} method.
+     *
+     * @param objectTableConfiguration Provides the DefaultListModel<E> to map to, as well as the
+     *                                 column configuration to tell the table how to display and
+     *                                 edit each row's object's underlying attributes.
+     */
     public ObjectTable(ObjectTableConfiguration<E> objectTableConfiguration) {
 
+        this.objectTableConfiguration = objectTableConfiguration;
+
+        // Updates the table model, etc.
         setConfiguration(objectTableConfiguration);
 
+        // View Setup
+        // See private methods below.
+        setupTable();
+        setupButtonPanel();
+    }
+
+    /**
+     * Sets the objectTableConfiguration for this component. Essentially, the configuration can be
+     * viewed as a model for the JTable, albeit with a slightly more complicated setup also
+     * included.
+     *
+     * @param objectTableConfiguration The configuration for this table.
+     */
+    public void setConfiguration(ObjectTableConfiguration<E> objectTableConfiguration) {
+
+        listModel = objectTableConfiguration.getListModel();
+        objectColumnMap = objectTableConfiguration.getObjectColumnMap();
+
+        // Create a JTable model using the object list and the column/attribute mapping in the
+        // config
+        tableModel = new ObjectTableModel<E>(listModel, objectColumnMap);
+
+        // Link the view with this model
+        table.setModel(tableModel);
+
+        // See private method below
+        setTableCellEditors();
+    }
+
+    /**
+     * Sets if the table is editable. If false, no cells can be edited and the Add/Delete button
+     * panel is hidden.
+     *
+     * @param isEditable
+     */
+    public void setEditable(boolean isEditable) {
+        buttonPanel.setVisible(isEditable);
+
+        // Enable or disable all editors on the table.
+        for (ObjectTableColumn<E> modelColumn : objectColumnMap) {
+            modelColumn.setColumnEditable(isEditable);
+        }
+
+    }
+
+    /**
+     * Checks to see if a custom editor has been defined for a table column (for example, does the
+     * objectColumnMap define if a combobox should be used to select an item, or is there a
+     * listSelector which references another list, etc.).
+     *
+     * If a custom column editor is defined in the configuration, the JTable column model is updated
+     * here.
+     */
+    private void setTableCellEditors() {
+
+        TableColumnModel columnModel = table.getColumnModel();
+
+        for (int i = 0; i < objectColumnMap.size(); i++) {
+            // Get the custom TableCellEditor from the config object.
+            TableCellEditor tableCellEditor = objectColumnMap.get(i).getColumnCellEditor();
+            if (tableCellEditor != null) {
+                // If there is a custom editor given, set it here.
+                columnModel.getColumn(i).setCellEditor(tableCellEditor);
+            }
+        }
+    }
+
+    private void setupTable() {
+
+        // LAYOUT
+        table.setRowHeight(25);
+        tableScrollPane = new JScrollPane(table);
+        tableScrollPane.setPreferredSize(new Dimension(400, 200));
+
+        // ADD
+        add(tableScrollPane, BorderLayout.CENTER);
+    }
+
+    /**
+     * Much like in Swing architecture, the input 'controller' is defined within this component as
+     * it is tightly coupled with this component's functionality. Thus the use of anonymous classes
+     * within the ActionListeners.
+     */
+    private void setupButtonPanel() {
         addButton = new JButton("Add");
         addButton.addActionListener(new ActionListener() {
             @Override
@@ -70,54 +178,4 @@ public class ObjectTable<E> extends JPanel {
         buttonPanel.add(removeButton);
         add(buttonPanel, BorderLayout.SOUTH);
     }
-
-    public void setConfiguration(ObjectTableConfiguration<E> objectTableConfiguration) {
-
-        listModel = objectTableConfiguration.getListModel();
-
-        // Get the object-column mapping from the subclass using a factory method.
-        objectColumnMap = objectTableConfiguration.getObjectColumnMap();
-
-        tableModel = new ObjectTableModel<E>(listModel, objectColumnMap);
-        // Create a JTable using an ObjectTableModel which combines the list model and how the table
-        // should map to the containing objects.
-        table.setModel(tableModel);
-
-        // Check to see if a custom editor has been defined for a table column (for example, does
-        // the objectColumnMap define if a combobox should be used to select an item, or is there a
-        // listSelector which references another list, etc.).
-
-        for (int i = 0; i < objectColumnMap.size(); i++) {
-            ObjectTableColumn<E> objectTableColumn = objectColumnMap.get(i);
-            TableCellEditor tableCellEditor = objectTableColumn.getColumnCellEditor();
-            if (tableCellEditor != null) {
-                // If one has been defined, set the JTable column model to use it.
-                // Note: The column model is part of the 'view', which is why this is not
-                // encapsulated
-                // in the ObjectTableModel...which would have been cleaner. Swing, eh? :P
-                table.getColumnModel().getColumn(i).setCellEditor(tableCellEditor);
-            }
-        }
-
-        // LAYOUT
-        table.setRowHeight(25);
-        tableScrollPane = new JScrollPane(table);
-        tableScrollPane.setPreferredSize(new Dimension(400, 200));
-
-        // ADD
-        add(tableScrollPane, BorderLayout.CENTER);
-    }
-
-    public void setEditable(boolean isEditable) {
-        buttonPanel.setVisible(isEditable);
-
-        // Enable or disable all editors on the table.
-        for (ObjectTableColumn<E> modelColumn : objectColumnMap) {
-            modelColumn.setColumnEditable(isEditable);
-        }
-
-        // Trigger rebuild of view to enable / disable editors.
-        tableModel.fireTableStructureChanged();
-    }
-
 }

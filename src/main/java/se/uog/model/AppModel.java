@@ -1,4 +1,4 @@
-package se.uog.swing;
+package se.uog.model;
 
 import javax.swing.DefaultListModel;
 
@@ -8,8 +8,7 @@ import javax.swing.DefaultListModel;
 public class AppModel {
 
     private DefaultListModel<ExampleTeacher> teacherListModel = new DefaultListModel<>();
-    private DefaultListModel<ExampleQualification> qualificationListModel =
-            new DefaultListModel<>();
+    private DefaultListModel<ExampleQualification> qualificationListModel = new DefaultListModel<>();
 
     public DefaultListModel<ExampleTeacher> getTeacherListModel() {
         return teacherListModel;
@@ -18,6 +17,5 @@ public class AppModel {
     public DefaultListModel<ExampleQualification> getQualificationListModel() {
         return qualificationListModel;
     }
-
 
 }

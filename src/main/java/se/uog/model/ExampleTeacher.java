@@ -1,4 +1,4 @@
-package se.uog.swing;
+package se.uog.model;
 
 import java.util.ArrayList;
 import java.util.List;

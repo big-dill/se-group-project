@@ -6,13 +6,34 @@ import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 import javax.swing.table.AbstractTableModel;
 
-
+/**
+ * This class creates a model which a JTable can use to interact with a list of Objects with the
+ * class <E>. Each column can be configured to get and set an attribute of that class, and each row
+ * in the model displays an element in the Object list.
+ *
+ * Inherits from Swing's AbstractTableModel so it can be consumed by a JTable. It also implements
+ * Swing's ListDataListener, so it can observe the underlying list and ensure the table view is
+ * synchronised with it.
+ *
+ * @param <E> The class of object which the table represents.
+ */
 public class ObjectTableModel<E> extends AbstractTableModel implements ListDataListener {
+    /**
+     * Add default serial
+     */
     private static final long serialVersionUID = 1L;
 
     private DefaultListModel<E> listModel;
     private List<ObjectTableColumn<E>> objectColumnMap;
 
+    /**
+     * Creates an ObjectTableModel.
+     *
+     * @param listModel       The list which the table is synchronised with. Each row represents a
+     *                        list element.
+     * @param objectColumnMap A configuration object which tells the table how to map a column to
+     *                        the list elements' attributes.
+     */
     public ObjectTableModel(DefaultListModel<E> listModel,
             List<ObjectTableColumn<E>> objectColumnMap) {
 
@@ -21,6 +42,7 @@ public class ObjectTableModel<E> extends AbstractTableModel implements ListDataL
 
         // Adds a listener to the underlying list model so the table will update when it does.
         listModel.addListDataListener(this);
+        // Initially update the view.
         fireTableStructureChanged();
     }
 
