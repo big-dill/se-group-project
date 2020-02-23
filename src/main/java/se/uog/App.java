@@ -34,10 +34,12 @@ public final class App {
         hugh.addQualification(maths);
 
 
+        // should return false false true 
         System.out.println(englishLit.assignTeacher(gareth));
         System.out.println(englishLit.assignTeacher(hugh));
 
         gareth.addQualification(primaryTeacher);
+        
         System.out.println(englishLit.assignTeacher(gareth));
 
 
