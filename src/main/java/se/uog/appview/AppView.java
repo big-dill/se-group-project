@@ -14,7 +14,7 @@ public class AppView extends JFrame {
 
     private AppMenu menuBar;
 
-    public AppView(AppModel appModel, AppController appController) {
+    public AppView(AppController appController) {
         super();
 
         this.menuBar = new AppMenu(appController);
