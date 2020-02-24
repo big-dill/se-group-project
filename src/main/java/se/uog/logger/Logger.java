@@ -83,7 +83,7 @@ public class Logger {
      * Wrapper that verifies if the Logger is enabled, and if true, writes
      * messages passed to it to the log file.
      *
-     * @param logEntry logs to file if the logger has been enabled/
+     * @param logEntry entry to be logged if logger is enabled.
      */
     public void logToFileIfEnabled(String logEntry) {
         logToFile(logEntry);
@@ -92,7 +92,7 @@ public class Logger {
     /**
      * Writes messages passed to it to the log.
      *
-     * @param logEntry Writes entries to the log.
+     * @param logEntry Entry written to log.
      */
     private void logToFile(String logEntry) {
         java.util.logging.Logger.getLogger(LOGGER).fine(logEntry);
