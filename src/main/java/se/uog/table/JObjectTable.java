@@ -24,14 +24,14 @@ import javax.swing.table.TableColumnModel;
  *
  * @param <E> The class of object which the table represents.
  */
-public class ObjectTable<E> extends JPanel {
+public class JObjectTable<E> extends JPanel {
     /**
      * Default serial version
      */
     private static final long serialVersionUID = 1L;
 
     // Model references:
-    private ObjectTableConfiguration<E> objectTableConfiguration;
+    private ObjectTableConfig<E> objectTableConfiguration;
     private DefaultListModel<E> listModel;
     private List<ObjectTableColumn<E>> objectColumnMap;
     private ObjectTableModel<E> tableModel;
@@ -54,7 +54,7 @@ public class ObjectTable<E> extends JPanel {
      *                                 column configuration to tell the table how to display and
      *                                 edit each row's object's underlying attributes.
      */
-    public ObjectTable(ObjectTableConfiguration<E> objectTableConfiguration) {
+    public JObjectTable(ObjectTableConfig<E> objectTableConfiguration) {
 
         this.objectTableConfiguration = objectTableConfiguration;
 
@@ -74,7 +74,7 @@ public class ObjectTable<E> extends JPanel {
      *
      * @param objectTableConfiguration The configuration for this table.
      */
-    public void setConfiguration(ObjectTableConfiguration<E> objectTableConfiguration) {
+    public void setConfiguration(ObjectTableConfig<E> objectTableConfiguration) {
 
         listModel = objectTableConfiguration.getListModel();
         objectColumnMap = objectTableConfiguration.getObjectColumnMap();

@@ -27,21 +27,15 @@ public class AnotherTeacherTableConfiguration extends ExampleTeacherTableConfigu
     private void initialiseObjectColumnMap() {
 
         ObjectTableColumn<ExampleTeacher> nameColumn =
-            new ObjectTableColumnBuilder<ExampleTeacher>()
-                .setTitle("Name")
-                .setClass(String.class)
-                .setRowElementGetter((teacher) -> teacher.getName())
-                .setEditable(false)
-                .build();
+                new ObjectTableColumnBuilder<ExampleTeacher>().setTitle("Name")
+                        .setClass(String.class).setRowElementGetter((teacher) -> teacher.getName())
+                        .setEditable(false).build();
 
 
         ObjectTableColumn<ExampleTeacher> isCoolColumn =
-            new ObjectTableColumnBuilder<ExampleTeacher>()
-                .setTitle("Is Cool?")
-                .setClass(Boolean.class)
-                .setRowElementGetter((teacher) -> teacher.isCool())
-                .setEditable(false)
-                .build();
+                new ObjectTableColumnBuilder<ExampleTeacher>().setTitle("Is Cool?")
+                        .setClass(Boolean.class).setRowElementGetter((teacher) -> teacher.isCool())
+                        .setEditable(false).build();
 
         objectColumnMap.add(nameColumn);
         objectColumnMap.add(isCoolColumn);

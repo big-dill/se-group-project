@@ -13,8 +13,8 @@ import se.uog.model.ExampleTeacher;
 import se.uog.table.AnotherTeacherTableConfiguration;
 import se.uog.table.ExampleQualificationTableConfiguration;
 import se.uog.table.ExampleTeacherTableConfiguration;
-import se.uog.table.ObjectTable;
-import se.uog.table.ObjectTableConfiguration;
+import se.uog.table.JObjectTable;
+import se.uog.table.ObjectTableConfig;
 
 /**
  * Hello world!
@@ -27,20 +27,23 @@ public class App extends JFrame {
 
         AppModel model = new AppModel();
 
-        ObjectTableConfiguration<ExampleQualification> qualificationTableConfiguration = new ExampleQualificationTableConfiguration(
-                model.getQualificationListModel());
+        ObjectTableConfig<ExampleQualification> qualificationTableConfiguration =
+                new ExampleQualificationTableConfiguration(model.getQualificationListModel());
 
-        ObjectTable<ExampleQualification> qualificationTable = new ObjectTable<>(qualificationTableConfiguration);
+        JObjectTable<ExampleQualification> qualificationTable =
+                new JObjectTable<>(qualificationTableConfiguration);
 
         // Two configs... potentially two models...
 
-        ObjectTableConfiguration<ExampleTeacher> teacherTableConfiguration = new ExampleTeacherTableConfiguration(
-                model.getTeacherListModel(), model.getQualificationListModel());
+        ObjectTableConfig<ExampleTeacher> teacherTableConfiguration =
+                new ExampleTeacherTableConfiguration(model.getTeacherListModel(),
+                        model.getQualificationListModel());
 
-        ObjectTableConfiguration<ExampleTeacher> anotherTableConfiguration = new AnotherTeacherTableConfiguration(
-                model.getTeacherListModel(), model.getQualificationListModel());
+        ObjectTableConfig<ExampleTeacher> anotherTableConfiguration =
+                new AnotherTeacherTableConfiguration(model.getTeacherListModel(),
+                        model.getQualificationListModel());
 
-        ObjectTable<ExampleTeacher> teacherTable = new ObjectTable<>(teacherTableConfiguration);
+        JObjectTable<ExampleTeacher> teacherTable = new JObjectTable<>(teacherTableConfiguration);
 
         JPanel panel = new JPanel(new FlowLayout());
 

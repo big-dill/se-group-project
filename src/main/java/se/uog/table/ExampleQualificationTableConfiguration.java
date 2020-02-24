@@ -6,7 +6,7 @@ import javax.swing.DefaultListModel;
 import se.uog.model.ExampleQualification;
 
 public class ExampleQualificationTableConfiguration
-        implements ObjectTableConfiguration<ExampleQualification> {
+        implements ObjectTableConfig<ExampleQualification> {
 
     DefaultListModel<ExampleQualification> qualificationList;
 
@@ -32,13 +32,12 @@ public class ExampleQualificationTableConfiguration
         // This is where we create a 'mapping' which our ObjectTable can use to know how each
         // column is supposed to handle the underlying 'ExampleQualification' object.
         ObjectTableColumn<ExampleQualification> nameColumn =
-            new ObjectTableColumnBuilder<ExampleQualification>()
-                .setTitle("Qualification Name")
-                .setClass(String.class)
-                .setRowElementGetter((qualification) -> qualification.getName())
-                .setRowElementSetter(
-                            (qualification, value) -> qualification.setName((String) value))
-                .build();
+                new ObjectTableColumnBuilder<ExampleQualification>().setTitle("Qualification Name")
+                        .setClass(String.class)
+                        .setRowElementGetter((qualification) -> qualification.getName())
+                        .setRowElementSetter(
+                                (qualification, value) -> qualification.setName((String) value))
+                        .build();
 
 
         objectColumnMap.add(nameColumn);

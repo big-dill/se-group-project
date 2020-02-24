@@ -7,7 +7,7 @@ import javax.swing.DefaultListModel;
  * An interface which ensures that an ObjectTable receives the required information so that it can
  * be built.
  */
-public interface ObjectTableConfiguration<E> {
+public interface ObjectTableConfig<E> {
 
     /**
      * Returns the DefaultListModel which the ObjectTable is tied to. The ObjectTable is registered
