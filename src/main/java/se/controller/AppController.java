@@ -24,6 +24,12 @@ public class AppController implements ActionListener {
 
         switch (command) {
 
+            case AppMenu.LOAD_HOME_PAGE:
+
+                appView.setVisibleCard(AppMenu.LOAD_HOME_PAGE);
+                System.out.println(command + " clicked");
+                break;
+
             case AppMenu.LOAD_TEACHER_PAGE:
 
                 appView.setVisibleCard(AppMenu.LOAD_TEACHER_PAGE);
@@ -34,6 +40,15 @@ public class AppController implements ActionListener {
                 appView.setVisibleCard(AppMenu.LOAD_COURSE_PAGE);
                 System.out.println(command + " clicked");
                 break;
+            case AppMenu.LOAD_QUALIFICATION_PAGE:
+                appView.setVisibleCard(AppMenu.LOAD_QUALIFICATION_PAGE);
+
+                System.out.println(command + " clicked");
+                break;
+            case AppMenu.LOAD_TRAINING_PAGE:
+                appView.setVisibleCard(AppMenu.LOAD_TRAINING_PAGE);
+                System.out.println(command + " clicked");
+
 
             default:
         }

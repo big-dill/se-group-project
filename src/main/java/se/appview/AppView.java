@@ -26,7 +26,7 @@ public class AppView extends JFrame {
 
         JPanel landingMenu = new JPanel();
         setLandingPage(landingMenu);
-        mainPanel.add(landingMenu, WELCOME_TEXT);
+        mainPanel.add(landingMenu, AppMenu.LOAD_HOME_PAGE);
 
         JPanel teacherPanel = new JPanel();
         setTeacherPanel(teacherPanel);
@@ -35,9 +35,17 @@ public class AppView extends JFrame {
         JPanel coursePanel = new JPanel();
         setCoursePanel(coursePanel);
 
+        JPanel qualificationPanel = new JPanel();
+        setQualificationPanel(qualificationPanel);
+        mainPanel.add(qualificationPanel, AppMenu.LOAD_QUALIFICATION_PAGE);
+
+        JPanel trainingPanel = new JPanel();
+        setTrainingPanel(trainingPanel);
+        mainPanel.add(trainingPanel, AppMenu.LOAD_TRAINING_PAGE);
+
         mainPanel.add(coursePanel, AppMenu.LOAD_COURSE_PAGE);
 
-        cardLayout.show(mainPanel, WELCOME_TEXT);
+        cardLayout.show(mainPanel, AppMenu.LOAD_HOME_PAGE);
 
         add(mainPanel);
         setVisible(true);
@@ -52,9 +60,15 @@ public class AppView extends JFrame {
         teacherPanel.setBackground(Color.red);
     }
 
-    private void setCoursePanel(JPanel teacherPanel) {
-        teacherPanel.setBackground(Color.blue);
+    private void setCoursePanel(JPanel coursePanel) {
+        coursePanel.setBackground(Color.blue);
     }
+
+    private void setQualificationPanel(JPanel qualificationPanel) {
+        qualificationPanel.setBackground(Color.CYAN);
+    }
+
+    private void setTrainingPanel(JPanel trainingPanel){trainingPanel.setBackground(Color.GREEN);}
 
     public void setVisibleCard(String constraint) {
         cardLayout.show(mainPanel, constraint);
