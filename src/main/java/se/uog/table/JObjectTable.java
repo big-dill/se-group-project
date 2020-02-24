@@ -34,16 +34,12 @@ public class JObjectTable<E> extends JPanel {
     private ObjectTableModel<E> objectTableConfiguration;
     private DefaultListModel<E> listModel;
     private List<ObjectTableColumn<E>> objectColumnMap;
-    private ObjectTableModelAdaptor<E> tableModel;
 
     // View references:
     // Table
     private JTable table = new JTable();
-    private JScrollPane tableScrollPane;
     // Button Panel
     private JPanel buttonPanel;
-    private JButton addButton;
-    private JButton removeButton;
 
     /**
      * Constructs a table component which is mapped to the DefaultListModel provided in the
@@ -81,10 +77,9 @@ public class JObjectTable<E> extends JPanel {
 
         // Create a JTable model using the object list and the column/attribute mapping in the
         // config
-        tableModel = new ObjectTableModelAdaptor<E>(listModel, objectColumnMap);
 
         // Link the view with this model
-        table.setModel(tableModel);
+        table.setModel(new ObjectTableModelAdaptor<E>(listModel, objectColumnMap));
 
         // See private method below
         setTableCellEditors();
@@ -132,7 +127,7 @@ public class JObjectTable<E> extends JPanel {
 
         // LAYOUT
         table.setRowHeight(25);
-        tableScrollPane = new JScrollPane(table);
+        JScrollPane tableScrollPane = new JScrollPane(table);
         tableScrollPane.setPreferredSize(new Dimension(400, 200));
 
         // ADD
@@ -145,7 +140,7 @@ public class JObjectTable<E> extends JPanel {
      * within the ActionListeners.
      */
     private void setupButtonPanel() {
-        addButton = new JButton("Add");
+        JButton addButton = new JButton("Add");
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -161,7 +156,7 @@ public class JObjectTable<E> extends JPanel {
             }
         });
 
-        removeButton = new JButton("Delete");
+        JButton removeButton = new JButton("Delete");
         removeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

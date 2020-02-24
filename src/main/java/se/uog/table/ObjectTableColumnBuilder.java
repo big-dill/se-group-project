@@ -103,7 +103,7 @@ public final class ObjectTableColumnBuilder<E> {
             throw new IllegalStateException("No column class");
         if (rowElementGetter == null)
             throw new IllegalStateException("No element getter");
-        if (rowElementSetter == null && isColumnEditable == true)
+        if (rowElementSetter == null && isColumnEditable)
             throw new IllegalStateException("No element setter for editable component");
 
         return new ObjectTableColumn<E>(columnTitle, columnClass, rowElementSetter,

@@ -28,12 +28,12 @@ public final class AppModelTest {
 
 
         // should return false false true
-        System.out.println(englishLit.assignTeacher(gareth));
-        System.out.println(englishLit.assignTeacher(hugh));
+        // System.out.println(englishLit.assignTeacher(gareth));
+        // System.out.println(englishLit.assignTeacher(hugh));
 
         gareth.addQualification(primaryTeacher);
 
-        System.out.println(englishLit.assignTeacher(gareth));
+        // System.out.println(englishLit.assignTeacher(gareth));
 
 
 

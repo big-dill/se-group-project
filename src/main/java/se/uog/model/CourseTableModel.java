@@ -1,7 +1,6 @@
 package se.uog.model;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.BiFunction;
@@ -13,9 +12,9 @@ import se.uog.table.ObjectTableModel;
 
 public class CourseTableModel implements ObjectTableModel<Course> {
 
-    DefaultListModel<Course> courseList;
-    DefaultListModel<Qualification> qualificationList;
-    DefaultListModel<Teacher> teacherList;
+    private DefaultListModel<Course> courseList;
+    private DefaultListModel<Qualification> qualificationList;
+    private DefaultListModel<Teacher> teacherList;
 
     public CourseTableModel(DefaultListModel<Course> courseList, DefaultListModel<Teacher> teacherList,
             DefaultListModel<Qualification> qualificationList) {
@@ -77,6 +76,12 @@ public class CourseTableModel implements ObjectTableModel<Course> {
         return columns;
     }
 
+
+    /**
+     * Provides the filter function for the teachersColumn cell editor.
+     * Reimplements Julia's algorithm.
+     * @return the filter function
+     */
     private BiFunction<List<Teacher>, Course, List<Teacher>> getTeacherColumnFilterFunction() {
         // Create filter which will be consumed by the ObjectTableListSelector. 
         // This only displays teachers with the relevant qualifications.
@@ -90,21 +95,15 @@ public class CourseTableModel implements ObjectTableModel<Course> {
                 List<Qualification> requiredQualifications = course.getRequirements();
                 List<Qualification> teachersQualifications = iterator.next().getQualifications();
           
-                HashSet<Qualification> hset= new HashSet<>(); 
                 boolean hasRequiredQualifications = true;
-
-                // Add all the requirements to a hashset
-                for(Qualification q : teachersQualifications) {
-                    if(!hset.contains(q)) {
-                        hset.add(q); 
-                    }   
-                }
-                // If at any point, the hash does not contain one of the teacher's qualifications...
-                for(Qualification q: requiredQualifications) {
-                    if(!hset.contains(q))
-                        // They are not good enough!
-                        hasRequiredQualifications = false; 
+                // Julia's algorithm:
+                // Checks if each of the required qualifications exists in the teacher's skillset.
+                // TODO: O(nm) -> reimplement with hashset for O(n+m)?
+                for (Qualification f : requiredQualifications) {
+                    if (!teachersQualifications.contains(f)) {
+                        hasRequiredQualifications = false;
                         break;
+                    }
                 }
 
                 if (!hasRequiredQualifications) {

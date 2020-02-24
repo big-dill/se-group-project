@@ -3,12 +3,15 @@ package se.uog.model;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
-import se.uog.table.*;
+import se.uog.table.ObjectTableColumn;
+import se.uog.table.ObjectTableColumnBuilder;
+import se.uog.table.ObjectTableListSelector;
+import se.uog.table.ObjectTableModel;
 
 public class TeacherTableModel implements ObjectTableModel<Teacher> {
 
-    DefaultListModel<Teacher> teacherList;
-    DefaultListModel<Qualification> qualificationList;
+    private DefaultListModel<Teacher> teacherList;
+    private DefaultListModel<Qualification> qualificationList;
 
     public TeacherTableModel(DefaultListModel<Teacher> teacherList,
             DefaultListModel<Qualification> qualificationList) {

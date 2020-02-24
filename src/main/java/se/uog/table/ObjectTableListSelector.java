@@ -12,33 +12,38 @@ import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.TableCellEditor;
 
-public class ObjectTableListSelector<TE, LE> extends AbstractCellEditor
+/**
+ * 
+ * @param <T> The Table element class
+ * @param <L> The List element class
+ */
+public class ObjectTableListSelector<T, L> extends AbstractCellEditor
         implements TableCellEditor, ActionListener {
 
     private JButton delegate = new JButton("editing...");
 
-    private DefaultListModel<LE> listElementList;
-    private DefaultListModel<LE> filteredList;
+    private DefaultListModel<L> listElementList;
+    private DefaultListModel<L> filteredList;
     private String dialogTitle;
-    private List<LE> selectedItems = new ArrayList<>();
+    private List<L> selectedItems = new ArrayList<>();
 
     // FILTERING INSTANCE VARIABLES:
 
     // The table model list is needed to get the element in the corresponding row.
     // Defaults to null as it is not needed.
-    private DefaultListModel<TE> tableElementList = null;
+    private DefaultListModel<T> tableElementList = null;
     // Filter function just returns original listElementList;
-    private BiFunction<List<LE>, TE, List<LE>> filterFunction =
+    private BiFunction<List<L>, T, List<L>> filterFunction =
             (listElementList, tableElement) -> listElementList;
 
-    public ObjectTableListSelector(DefaultListModel<LE> listElementList, String dialogTitle) {
+    public ObjectTableListSelector(DefaultListModel<L> listElementList, String dialogTitle) {
         // Defaults to no filter function
         this(listElementList, null, dialogTitle, (targetList, tableElement) -> targetList);
     }
 
-    public ObjectTableListSelector(DefaultListModel<LE> listElementList,
-            DefaultListModel<TE> tableElementList, String dialogTitle,
-            BiFunction<List<LE>, TE, List<LE>> filterFunction) {
+    public ObjectTableListSelector(DefaultListModel<L> listElementList,
+            DefaultListModel<T> tableElementList, String dialogTitle,
+            BiFunction<List<L>, T, List<L>> filterFunction) {
 
         this.listElementList = listElementList;
         this.tableElementList = tableElementList;
@@ -50,7 +55,7 @@ public class ObjectTableListSelector<TE, LE> extends AbstractCellEditor
     }
 
     // Change if something is selected, otherwise,
-    private void changeSelection(List<LE> selectedItems) {
+    private void changeSelection(List<L> selectedItems) {
         if (selectedItems != null) {
             this.selectedItems = selectedItems;
         }
@@ -68,7 +73,7 @@ public class ObjectTableListSelector<TE, LE> extends AbstractCellEditor
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected,
             int row, int column) {
 
-        TE currentTableRowElement = null;
+        T currentTableRowElement = null;
         // Get the current table element for filtering etc.
         if (tableElementList != null) {
             currentTableRowElement = tableElementList.get(row);
@@ -85,22 +90,22 @@ public class ObjectTableListSelector<TE, LE> extends AbstractCellEditor
     public void actionPerformed(ActionEvent e) {
 
         // OPEN THE LIST SELECTOR HERE
-        List<LE> selection = (List<LE>) ListSelectorDialog.showDialog(delegate, dialogTitle,
+        List<L> selection = (List<L>) ListSelectorDialog.showDialog(delegate, dialogTitle,
                 filteredList, selectedItems);
 
         changeSelection(selection);
     }
 
-    private DefaultListModel<LE> convertListToDefaultListModel(List<LE> list) {
-        DefaultListModel<LE> listModel = new DefaultListModel<LE>();
-        for (LE elem : list) {
+    private DefaultListModel<L> convertListToDefaultListModel(List<L> list) {
+        DefaultListModel<L> listModel = new DefaultListModel<L>();
+        for (L elem : list) {
             listModel.addElement(elem);
         }
         return listModel;
     }
 
-    private List<LE> convertDefaultListModelToList(DefaultListModel<LE> listModel) {
-        List<LE> list = new ArrayList<LE>();
+    private List<L> convertDefaultListModelToList(DefaultListModel<L> listModel) {
+        List<L> list = new ArrayList<L>();
         for (int i = 0; i < listModel.getSize(); i++) {
             list.add(listModel.getElementAt(i));
         }

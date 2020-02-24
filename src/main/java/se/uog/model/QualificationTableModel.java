@@ -10,7 +10,7 @@ import se.uog.table.ObjectTableModel;
 
 public class QualificationTableModel implements ObjectTableModel<Qualification> {
 
-    DefaultListModel<Qualification> qualificationList;
+    private DefaultListModel<Qualification> qualificationList;
 
     public QualificationTableModel(DefaultListModel<Qualification> qualificationList) {
         this.qualificationList = qualificationList;
@@ -22,7 +22,7 @@ public class QualificationTableModel implements ObjectTableModel<Qualification> 
     }
 
     @Override
-    public se.uog.model.Qualification createDefaultElement() {
+    public Qualification createDefaultElement() {
         return new Qualification("");
     }
 
