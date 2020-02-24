@@ -10,8 +10,8 @@ public class AppMenu extends JMenuBar {
 
     private static final String MENU_NAME = "Main menu";
 
-    AppController appController;
-    JMenu menu;
+    private AppController appController;
+    private JMenu menu;
 
     public AppMenu(AppController appController) {
         this.appController = appController;
