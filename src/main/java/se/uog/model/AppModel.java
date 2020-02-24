@@ -6,26 +6,37 @@ public class AppModel {
     // DefaultListModels so they can be used in Swing views
     // Don't have to write the observer pattern stuff for them, it's already done
     DefaultListModel<Qualification> qualificationList;
-    DefaultListModel<Teacher> teacherList;
-    DefaultListModel<Course> courseList;
+    QualificationTableModel qualificationTableModel;
 
-    // This might need setters to load from the database at some point...
+    DefaultListModel<Teacher> teacherList;
+    TeacherTableModel teacherTableModel;
+
+    DefaultListModel<Course> courseList;
+    CourseTableModel courseTableModel;
+
+
     public AppModel() {
+        // TODO: ListModels need to be loaded and saved to the database at some point
         qualificationList = new DefaultListModel<>();
         teacherList = new DefaultListModel<>();
         courseList = new DefaultListModel<>();
+
+        // Create Base Table Models
+        qualificationTableModel = new QualificationTableModel(qualificationList);
+        teacherTableModel = new TeacherTableModel(teacherList, qualificationList);
+        courseTableModel = new CourseTableModel(courseList, teacherList, qualificationList);
     }
 
-    public DefaultListModel<Qualification> getQualificationList() {
-        return qualificationList;
+    public QualificationTableModel getQualificationTableModel() {
+        return qualificationTableModel;
     }
 
-    public DefaultListModel<Teacher> getTeacherList() {
-        return teacherList;
+    public TeacherTableModel getTeacherTableModel() {
+        return teacherTableModel;
     }
 
-    public DefaultListModel<Course> getCourseList() {
-        return courseList;
+    public CourseTableModel getCourseTableModel() {
+        return courseTableModel;
     }
 
 }
