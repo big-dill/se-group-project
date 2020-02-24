@@ -7,12 +7,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-public class MenuActionListener implements ActionListener {
+public class AppController implements ActionListener {
 
     private final AppView appView;
 
 
-    public MenuActionListener(){
+    public AppController(){
         this.appView = new AppView(this);
     }
 
@@ -26,12 +26,12 @@ public class MenuActionListener implements ActionListener {
 
             case AppMenu.LOAD_TEACHER_PAGE:
 
-                appView.getCardLayout().show(appView.getMainPanel(), "1");
+                appView.setVisibleCard(AppMenu.LOAD_TEACHER_PAGE);
                 System.out.println(command + " clicked");
                 break;
             case AppMenu.LOAD_COURSE_PAGE:
                 //showCoursesView();
-                appView.getCardLayout().show(appView.getMainPanel(), "2");
+                appView.setVisibleCard(AppMenu.LOAD_COURSE_PAGE);
                 System.out.println(command + " clicked");
                 break;
 

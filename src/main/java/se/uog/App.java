@@ -1,7 +1,6 @@
 package se.uog;
 
-import se.appview.AppView;
-import se.controller.MenuActionListener;
+import se.controller.AppController;
 
 /**
  * Hello world!
@@ -16,6 +15,6 @@ public final class App {
      */
     public static void main(String[] args) {
         System.out.println("Hello World!");
-        new MenuActionListener();
+        new AppController();
     }
 }
