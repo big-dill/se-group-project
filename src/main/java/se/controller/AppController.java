@@ -12,7 +12,7 @@ public class AppController implements ActionListener {
     private final AppView appView;
 
 
-    public AppController(){
+    public AppController() {
         this.appView = new AppView(this);
     }
 

@@ -43,16 +43,16 @@ public class AppView extends JFrame {
         setVisible(true);
     }
 
-    private void setLandingPage(JPanel mainPanel){
+    private void setLandingPage(JPanel mainPanel) {
         JLabel welcomeLabel = new JLabel(WELCOME_TEXT);
         mainPanel.add(welcomeLabel);
     }
 
-    private void setTeacherPanel(JPanel teacherPanel){
+    private void setTeacherPanel(JPanel teacherPanel) {
         teacherPanel.setBackground(Color.red);
     }
 
-    private void setCoursePanel(JPanel teacherPanel){
+    private void setCoursePanel(JPanel teacherPanel) {
         teacherPanel.setBackground(Color.blue);
     }
 

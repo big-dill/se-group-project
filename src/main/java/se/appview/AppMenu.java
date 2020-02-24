@@ -13,7 +13,7 @@ public class AppMenu extends JMenuBar {
     public static final String LOAD_COURSE_PAGE = "Courses";
 
 
-     AppMenu(AppController appController) {
+    AppMenu(AppController appController) {
 
         JMenu menu = new JMenu(MENU_NAME);
         menu.setMnemonic(KeyEvent.VK_M); // Uses a to open the menu. Press Alt + M.
