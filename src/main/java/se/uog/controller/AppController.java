@@ -48,7 +48,7 @@ public class AppController implements ActionListener {
                 appView.setVisibleCard(AppMenu.LOAD_TRAINING_PAGE);
                 System.out.println(command + " clicked");
                 break;
-                
+
             default:
         }
     }
