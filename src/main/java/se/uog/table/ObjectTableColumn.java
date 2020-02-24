@@ -5,7 +5,7 @@ import java.util.function.Function;
 import javax.swing.table.TableCellEditor;
 
 /**
- * This class is consumed by {@link se.uog.table.ObjectTableModel} and
+ * This class is consumed by {@link se.uog.table.ObjectTableModelAdaptor} and
  * {@link se.uog.table.ObjectTable}. It tells the model and view how to map each table column to the
  * underlying class's attribute, including it's getters and setters.
  *

@@ -5,7 +5,7 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 import se.uog.table.*;
 
-public class TeacherTableModel implements ObjectTableConfig<Teacher> {
+public class TeacherTableModel implements ObjectTableModel<Teacher> {
 
     DefaultListModel<Teacher> teacherList;
     DefaultListModel<Qualification> qualificationList;

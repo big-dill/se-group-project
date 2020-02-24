@@ -1,22 +1,12 @@
 package se.uog.appview.pages;
 
-import java.util.UUID;
 import javax.swing.JPanel;
 
 public abstract class PageView extends JPanel {
 
-    String pageName = "";
-    String id = "";
-
-    public PageView() {
-        id = UUID.randomUUID().toString();
-    }
-
-    public void setName(String pageName) {
-        this.pageName = pageName;
-    }
-
-    final public String getPageID() {
-        return String.format("%s:%s", pageName, id);
-    }
+    /**
+     * Returns a name which is consumed by the menu / cardLayout in the main AppView This method
+     * must be implemented in the classes.
+     */
+    public abstract String getName();
 }

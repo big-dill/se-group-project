@@ -21,7 +21,7 @@ public class AppModel {
         teacherList = new DefaultListModel<>();
         courseList = new DefaultListModel<>();
 
-        // Create Base Table Models
+        // Create Object Table Models for our view
         qualificationTableModel = new QualificationTableModel(qualificationList);
         teacherTableModel = new TeacherTableModel(teacherList, qualificationList);
         courseTableModel = new CourseTableModel(courseList, teacherList, qualificationList);

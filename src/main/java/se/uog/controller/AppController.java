@@ -3,7 +3,6 @@ package se.uog.controller;
 import java.awt.event.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import se.uog.appview.AppMenu;
 import se.uog.appview.AppView;
 import se.uog.appview.pages.CoursePage;
 import se.uog.appview.pages.PageView;
@@ -27,6 +26,7 @@ public class AppController implements ActionListener {
 
         setupPages();
 
+        // Set visible only after setup
         appView.setVisible(true);
     }
 
@@ -34,15 +34,12 @@ public class AppController implements ActionListener {
 
         // Qualification Page
         qualificationPage = new QualificationPage(appModel.getQualificationTableModel());
-        qualificationPage.setName("Qualification Page");
         appView.addPage(qualificationPage, KeyEvent.VK_Q);
 
         teacherPage = new TeacherPage(appModel.getTeacherTableModel());
-        qualificationPage.setName("Teacher Page");
         appView.addPage(teacherPage, KeyEvent.VK_T);
 
         coursePage = new CoursePage(appModel.getCourseTableModel());
-        qualificationPage.setName("Course Page");
         appView.addPage(coursePage, KeyEvent.VK_C);
     }
 

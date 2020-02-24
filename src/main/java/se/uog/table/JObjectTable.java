@@ -31,10 +31,10 @@ public class JObjectTable<E> extends JPanel {
     private static final long serialVersionUID = 1L;
 
     // Model references:
-    private ObjectTableConfig<E> objectTableConfiguration;
+    private ObjectTableModel<E> objectTableConfiguration;
     private DefaultListModel<E> listModel;
     private List<ObjectTableColumn<E>> objectColumnMap;
-    private ObjectTableModel<E> tableModel;
+    private ObjectTableModelAdaptor<E> tableModel;
 
     // View references:
     // Table
@@ -54,7 +54,7 @@ public class JObjectTable<E> extends JPanel {
      *                                 column configuration to tell the table how to display and
      *                                 edit each row's object's underlying attributes.
      */
-    public JObjectTable(ObjectTableConfig<E> objectTableConfiguration) {
+    public JObjectTable(ObjectTableModel<E> objectTableConfiguration) {
 
         this.objectTableConfiguration = objectTableConfiguration;
 
@@ -74,14 +74,14 @@ public class JObjectTable<E> extends JPanel {
      *
      * @param objectTableConfiguration The configuration for this table.
      */
-    public void setConfiguration(ObjectTableConfig<E> objectTableConfiguration) {
+    public void setConfiguration(ObjectTableModel<E> objectTableConfiguration) {
 
         listModel = objectTableConfiguration.getListModel();
         objectColumnMap = objectTableConfiguration.getObjectColumnMap();
 
         // Create a JTable model using the object list and the column/attribute mapping in the
         // config
-        tableModel = new ObjectTableModel<E>(listModel, objectColumnMap);
+        tableModel = new ObjectTableModelAdaptor<E>(listModel, objectColumnMap);
 
         // Link the view with this model
         table.setModel(tableModel);

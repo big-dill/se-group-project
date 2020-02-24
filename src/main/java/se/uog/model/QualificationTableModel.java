@@ -6,9 +6,9 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 import se.uog.table.ObjectTableColumn;
 import se.uog.table.ObjectTableColumnBuilder;
-import se.uog.table.ObjectTableConfig;
+import se.uog.table.ObjectTableModel;
 
-public class QualificationTableModel implements ObjectTableConfig<Qualification> {
+public class QualificationTableModel implements ObjectTableModel<Qualification> {
 
     DefaultListModel<Qualification> qualificationList;
 

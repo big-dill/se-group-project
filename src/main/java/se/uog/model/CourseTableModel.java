@@ -1,11 +1,17 @@
 package se.uog.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.function.BiFunction;
 import javax.swing.DefaultListModel;
-import se.uog.table.*;
+import se.uog.table.ObjectTableColumn;
+import se.uog.table.ObjectTableColumnBuilder;
+import se.uog.table.ObjectTableListSelector;
+import se.uog.table.ObjectTableModel;
 
-public class CourseTableModel implements ObjectTableConfig<Course> {
+public class CourseTableModel implements ObjectTableModel<Course> {
 
     DefaultListModel<Course> courseList;
     DefaultListModel<Qualification> qualificationList;
@@ -55,14 +61,58 @@ public class CourseTableModel implements ObjectTableConfig<Course> {
                 .setClass(List.class)
                 .setRowElementGetter(course -> course.getAssignedTeacher())
                 .setRowElementSetter((course, val) -> {
-
+                    course.setAssignedTeacher((Teacher) val);
                 })
-                .setCellEditor(new ObjectTableListSelector<Course, Teacher>(teacherList, "Select Teacher(s):"))
+                .setCellEditor(new ObjectTableListSelector<Course, Teacher>(
+                    teacherList, 
+                    courseList, 
+                    "Select Teacher(s):", 
+                    getTeacherColumnFilterFunction() // This is from the private method below.
+                ))
                 .build();
 
         columns.add(nameColumn);
         columns.add(qualificationsColumn);
         columns.add(teachersColumn);
         return columns;
+    }
+
+    private BiFunction<List<Teacher>, Course, List<Teacher>> getTeacherColumnFilterFunction() {
+        // Create filter which will be consumed by the ObjectTableListSelector. 
+        // This only displays teachers with the relevant qualifications.
+
+         return (teacherList, course) -> {
+            
+            // For each Teacher in our Teacher list
+            Iterator<Teacher> iterator = teacherList.iterator();
+            
+            while(iterator.hasNext()) {
+                List<Qualification> requiredQualifications = course.getRequirements();
+                List<Qualification> teachersQualifications = iterator.next().getQualifications();
+          
+                HashSet<Qualification> hset= new HashSet<>(); 
+                boolean hasRequiredQualifications = true;
+
+                // Add all the requirements to a hashset
+                for(Qualification q : requiredQualifications) {
+                    if(!hset.contains(q)) {
+                        hset.add(q); 
+                    }   
+                }
+                // If at any point, the hash does not contain one of the teacher's qualifications...
+                for(Qualification q: teachersQualifications) {
+                    if(!hset.contains(q))
+                        // They are not good enough!
+                        hasRequiredQualifications = false; 
+                        break;
+                }
+
+                if (!hasRequiredQualifications) {
+                    // Remove if they do not have the right stuff!
+                    iterator.remove();
+                }
+            }
+            return teacherList;
+        };
     }
 }
