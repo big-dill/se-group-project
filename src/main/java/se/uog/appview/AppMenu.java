@@ -1,7 +1,7 @@
-package se.appview;
+package se.uog.appview;
 
 
-import se.controller.AppController;
+import se.uog.controller.AppController;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;

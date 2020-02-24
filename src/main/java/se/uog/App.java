@@ -1,6 +1,6 @@
 package se.uog;
 
-import se.controller.AppController;
+import se.uog.controller.AppController;
 
 /**
  * Hello world!
