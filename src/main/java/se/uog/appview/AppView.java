@@ -1,14 +1,18 @@
 package se.uog.appview;
 
+import java.awt.CardLayout;
+import java.awt.Color;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import se.uog.controller.AppController;
 
-import javax.swing.*;
-import java.awt.*;
-
+import se.uog.model.*;
+import se.uog.appview.pages.*;
 
 public class AppView extends JFrame {
 
-    private static final String WINDOW_TITLE = "AppMenu"; //Obvs can be changed later
+    private static final String WINDOW_TITLE = "AppMenu"; // Obvs can be changed later
     private static final String WELCOME_TEXT = "Welcome";
     private CardLayout cardLayout = new CardLayout();
     private JPanel mainPanel;
@@ -28,15 +32,29 @@ public class AppView extends JFrame {
         setLandingPage(landingMenu);
         mainPanel.add(landingMenu, AppMenu.LOAD_HOME_PAGE);
 
-        JPanel teacherPanel = new JPanel();
+        // HACKS START HERE
+        // ----------------
+        AppModel model = new AppModel();
+
+        TeacherTableModel teacherModel =
+                new TeacherTableModel(model.getTeacherList(), model.getQualificationList());
+        JPanel teacherPanel = new TeacherPage(teacherModel);
+
         setTeacherPanel(teacherPanel);
         mainPanel.add(teacherPanel, AppMenu.LOAD_TEACHER_PAGE);
 
-        JPanel coursePanel = new JPanel();
+        CourseTableModel courseModel = new CourseTableModel(model.getCourseList(),
+                model.getTeacherList(), model.getQualificationList());
+        JPanel coursePanel = new CoursePage(courseModel);
+
         setCoursePanel(coursePanel);
         mainPanel.add(coursePanel, AppMenu.LOAD_COURSE_PAGE);
 
-        JPanel qualificationPanel = new JPanel();
+        QualificationTableModel qualificationModel =
+                new QualificationTableModel(model.getQualificationList());
+
+        JPanel qualificationPanel = new QualificationPage(qualificationModel);
+
         setQualificationPanel(qualificationPanel);
         mainPanel.add(qualificationPanel, AppMenu.LOAD_QUALIFICATION_PAGE);
 
@@ -69,7 +87,9 @@ public class AppView extends JFrame {
         qualificationPanel.setBackground(Color.CYAN);
     }
 
-    private void setTrainingPanel(JPanel trainingPanel){trainingPanel.setBackground(Color.GREEN);}
+    private void setTrainingPanel(JPanel trainingPanel) {
+        trainingPanel.setBackground(Color.GREEN);
+    }
 
     public void setVisibleCard(String constraint) {
         cardLayout.show(mainPanel, constraint);

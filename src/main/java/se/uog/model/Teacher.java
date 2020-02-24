@@ -1,4 +1,4 @@
-package se.AppModel;
+package se.uog.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,16 +16,20 @@ public class Teacher {
         return name;
     }
 
-    public List<Qualification> getQualifications (){
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Qualification> getQualifications() {
         return teacherQualifications;
     }
 
-    public void addQualification(Qualification q){
+    public void addQualification(Qualification q) {
         teacherQualifications.add(q);
     }
 
-
-    
-
+    public void clearQualifications() {
+        teacherQualifications.clear();
+    }
 
 }

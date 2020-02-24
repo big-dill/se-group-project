@@ -31,6 +31,11 @@ public class ObjectTableListSelector<TE, LE> extends AbstractCellEditor
     private BiFunction<List<LE>, TE, List<LE>> filterFunction =
             (listElementList, tableElement) -> listElementList;
 
+    public ObjectTableListSelector(DefaultListModel<LE> listElementList, String dialogTitle) {
+        // Defaults to no filter function
+        this(listElementList, null, dialogTitle, (targetList, tableElement) -> targetList);
+    }
+
     public ObjectTableListSelector(DefaultListModel<LE> listElementList,
             DefaultListModel<TE> tableElementList, String dialogTitle,
             BiFunction<List<LE>, TE, List<LE>> filterFunction) {
