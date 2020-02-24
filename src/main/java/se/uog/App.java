@@ -1,6 +1,6 @@
 package se.uog;
 
-import se.appview.AppView;
+import se.uog.controller.AppController;
 
 /**
  * Hello world!
@@ -15,6 +15,6 @@ public final class App {
      */
     public static void main(String[] args) {
         System.out.println("Hello World!");
-        new AppView();
+        new AppController();
     }
 }
