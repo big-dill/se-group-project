@@ -34,6 +34,7 @@ public class AppView extends JFrame {
 
         JPanel coursePanel = new JPanel();
         setCoursePanel(coursePanel);
+        mainPanel.add(coursePanel, AppMenu.LOAD_COURSE_PAGE);
 
         JPanel qualificationPanel = new JPanel();
         setQualificationPanel(qualificationPanel);
@@ -43,7 +44,7 @@ public class AppView extends JFrame {
         setTrainingPanel(trainingPanel);
         mainPanel.add(trainingPanel, AppMenu.LOAD_TRAINING_PAGE);
 
-        mainPanel.add(coursePanel, AppMenu.LOAD_COURSE_PAGE);
+
 
         cardLayout.show(mainPanel, AppMenu.LOAD_HOME_PAGE);
 
