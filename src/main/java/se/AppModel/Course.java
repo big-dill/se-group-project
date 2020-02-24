@@ -1,13 +1,15 @@
 package se.AppModel;
+
 import java.util.ArrayList;
+import java.util.List;
+
 public class Course {
     private String name;
-    private ArrayList<Qualification> requirements;
+    private List<Qualification> requirements = new ArrayList<Qualification>();
     private Teacher assignedTeacher;
 
     public Course (String n) {
         name = n; 
-        requirements = new ArrayList<Qualification>();
     }
 
     //method to add a teacher to the course (but only if theyre qualifications meet the requirement)
