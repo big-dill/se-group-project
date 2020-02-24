@@ -59,9 +59,9 @@ public class CourseTableModel implements ObjectTableModel<Course> {
         ObjectTableColumn<Course> teachersColumn = new ObjectTableColumnBuilder<Course>()
                 .setTitle("Designated Teachers")
                 .setClass(List.class)
-                .setRowElementGetter(course -> course.getAssignedTeacher())
+                .setRowElementGetter(course -> course.getAssignedTeachers())
                 .setRowElementSetter((course, val) -> {
-                    course.setAssignedTeacher((Teacher) val);
+                    course.setAssignedTeachers((List<Teacher>) val);
                 })
                 .setCellEditor(new ObjectTableListSelector<Course, Teacher>(
                     teacherList, 
@@ -94,13 +94,13 @@ public class CourseTableModel implements ObjectTableModel<Course> {
                 boolean hasRequiredQualifications = true;
 
                 // Add all the requirements to a hashset
-                for(Qualification q : requiredQualifications) {
+                for(Qualification q : teachersQualifications) {
                     if(!hset.contains(q)) {
                         hset.add(q); 
                     }   
                 }
                 // If at any point, the hash does not contain one of the teacher's qualifications...
-                for(Qualification q: teachersQualifications) {
+                for(Qualification q: requiredQualifications) {
                     if(!hset.contains(q))
                         // They are not good enough!
                         hasRequiredQualifications = false; 

@@ -17,4 +17,9 @@ public class Qualification {
         this.qualificationName = qualificationName;
     }
 
+    @Override
+    public String toString() {
+        // TODO Auto-generated method stub
+        return qualificationName;
+    }
 }

@@ -7,6 +7,7 @@ public class Course {
     private String name;
     private List<Qualification> requirements = new ArrayList<Qualification>();
     private Teacher assignedTeacher;
+    private List<Teacher> assignedTeachers;
 
     public Course(String n) {
         name = n;
@@ -55,12 +56,18 @@ public class Course {
         this.requirements = requirements;
     }
 
-    public Teacher getAssignedTeacher() {
-        return assignedTeacher;
+    public List<Teacher> getAssignedTeachers() {
+        return assignedTeachers;
     }
 
-    public void setAssignedTeacher(Teacher assignedTeacher) {
-        this.assignedTeacher = assignedTeacher;
+    public void setAssignedTeachers(List<Teacher> assignedTeachers) {
+        this.assignedTeachers = assignedTeachers;
+    }
+
+    @Override
+    public String toString() {
+        // TODO Auto-generated method stub
+        return name;
     }
 
 }

@@ -32,4 +32,9 @@ public class Teacher {
         teacherQualifications.clear();
     }
 
+    @Override
+    public String toString() {
+        // TODO Auto-generated method stub
+        return name;
+    }
 }
