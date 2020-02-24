@@ -5,14 +5,14 @@ import javax.swing.DefaultListModel;
 public class AppModel {
     // DefaultListModels so they can be used in Swing views
     // Don't have to write the observer pattern stuff for them, it's already done
-    DefaultListModel<Qualification> qualificationList;
-    QualificationTableModel qualificationTableModel;
+    private DefaultListModel<Qualification> qualificationList;
+    private QualificationTableModel qualificationTableModel;
 
-    DefaultListModel<Teacher> teacherList;
-    TeacherTableModel teacherTableModel;
+    private DefaultListModel<Teacher> teacherList;
+    private TeacherTableModel teacherTableModel;
 
-    DefaultListModel<Course> courseList;
-    CourseTableModel courseTableModel;
+    private DefaultListModel<Course> courseList;
+    private CourseTableModel courseTableModel;
 
 
     public AppModel() {
