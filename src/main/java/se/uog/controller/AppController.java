@@ -22,7 +22,7 @@ public class AppController implements ActionListener {
 
     public AppController(AppModel model) {
         this.appModel = model;
-        this.appView = new AppView(model, this);
+        this.appView = new AppView(this);
 
         setupPages();
 
@@ -33,13 +33,13 @@ public class AppController implements ActionListener {
     private void setupPages() {
 
         // Qualification Page
-        qualificationPage = new QualificationPage(appModel.getQualificationTableModel());
+        PageView qualificationPage = new QualificationPage(appModel.getQualificationTableModel());
         appView.addPage(qualificationPage, KeyEvent.VK_Q);
 
-        teacherPage = new TeacherPage(appModel.getTeacherTableModel());
+        PageView teacherPage = new TeacherPage(appModel.getTeacherTableModel());
         appView.addPage(teacherPage, KeyEvent.VK_T);
 
-        coursePage = new CoursePage(appModel.getCourseTableModel());
+        PageView coursePage = new CoursePage(appModel.getCourseTableModel());
         appView.addPage(coursePage, KeyEvent.VK_C);
     }
 
