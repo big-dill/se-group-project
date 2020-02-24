@@ -165,6 +165,7 @@ public class JObjectTable<E> extends JPanel {
         removeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 int[] selectedRows = table.getSelectedRows();
                 for (int rowIndex : selectedRows) {
                     // Delete the element from the model.
