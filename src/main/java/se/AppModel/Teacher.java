@@ -1,24 +1,29 @@
 package se.AppModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Teacher {
     private String name;
-    private ArrayList<Qualification> teacherQualifications;
+    private List<Qualification> teacherQualifications = new ArrayList<Qualification>();
 
     public Teacher(String n) {
         name = n;
-        teacherQualifications = new ArrayList<Qualification>();
     }
 
-    public ArrayList<Qualification> getQualifications (){
+    public String getName() {
+        return name;
+    }
+
+    public List<Qualification> getQualifications (){
         return teacherQualifications;
     }
 
     public void addQualification(Qualification q){
         teacherQualifications.add(q);
     }
+
 
     
 

@@ -9,4 +9,8 @@ public class Qualification {
         qualificationName = s;
     }
 
+    public Qualification getQualification() {
+        return this;
+    }
+
 }
