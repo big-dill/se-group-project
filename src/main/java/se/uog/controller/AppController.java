@@ -16,10 +16,6 @@ public class AppController implements ActionListener {
     private final AppView appView;
     private AppModel appModel;
 
-    private PageView qualificationPage;
-    private PageView teacherPage;
-    private PageView coursePage;
-
     public AppController(AppModel model) {
         this.appModel = model;
         this.appView = new AppView(this);

@@ -4,7 +4,6 @@ import java.awt.CardLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import se.uog.controller.AppController;
-import se.uog.model.AppModel;
 
 public class AppView extends JFrame {
 
