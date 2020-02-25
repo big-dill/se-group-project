@@ -1,6 +1,7 @@
 package se.uog;
 
 import se.uog.controller.AppController;
+import se.uog.model.AppModel;
 import se.uog.logger.Logger;
 
 
@@ -18,6 +19,8 @@ public class App {
             }
         }
 
-        new AppController();
+        AppModel appModel = new AppModel();
+        new AppController(appModel);
+        new AppController(appModel);
     }
 }
