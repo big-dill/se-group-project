@@ -69,7 +69,7 @@ public class AppController {
         }
 
         // Quit the app
-        Runtime.getRuntime().exit(0);
+        System.exit(0);
     }
 
 }
