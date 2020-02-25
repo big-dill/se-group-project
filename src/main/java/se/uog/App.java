@@ -1,20 +1,16 @@
 package se.uog;
 
 import se.uog.controller.AppController;
+import se.uog.model.AppModel;
 
 /**
  * Hello world!
  */
-public final class App {
-    private App() {
+public class App {
+    public static void main(String[] args) {
+
+        AppModel appModel = new AppModel();
+        new AppController(appModel);
     }
 
-    /**
-     * Says hello to the world.
-     * @param args The arguments of the program.
-     */
-    public static void main(String[] args) {
-        System.out.println("Hello World!");
-        new AppController();
-    }
 }
