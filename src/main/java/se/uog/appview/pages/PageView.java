@@ -2,6 +2,10 @@ package se.uog.appview.pages;
 
 import javax.swing.JPanel;
 
+/**
+ * An abstract class which extends JPanel. Needs to guarantee it has a name so it can be consumed by
+ * the AppView.addPage() method.
+ */
 public abstract class PageView extends JPanel {
 
     /**

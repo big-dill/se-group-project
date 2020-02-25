@@ -34,4 +34,7 @@ public class AppView extends JFrame {
         cardLayout.show(mainPanel, pageName);
     }
 
+    // setPageEnabled()
+    // Also need to set the menuBar to disabled here too for the page...
+
 }

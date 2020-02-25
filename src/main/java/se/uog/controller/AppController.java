@@ -37,6 +37,14 @@ public class AppController implements ActionListener {
 
         PageView coursePage = new CoursePage(appModel.getCourseTableModel());
         appView.addPage(coursePage, KeyEvent.VK_C);
+
+        // NOTE:
+        // You can create other 'tableModels' and dynamically switch them in using:
+        // e.g. coursePage.setTableModel(appModel.getAdminCourseTableModel);
+        // This will be useful for changing users!
+
+        // We can probably use inheritance in some way and just override the column part of the
+        // model!
     }
 
 

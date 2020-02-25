@@ -55,7 +55,7 @@ public class JObjectTable<E> extends JPanel {
         this.objectTableConfiguration = objectTableConfiguration;
 
         // Updates the table model, etc.
-        setConfiguration(objectTableConfiguration);
+        setModel(objectTableConfiguration);
 
         // View Setup
         // See private methods below.
@@ -68,12 +68,12 @@ public class JObjectTable<E> extends JPanel {
      * viewed as a model for the JTable, albeit with a slightly more complicated setup also
      * included.
      *
-     * @param objectTableConfiguration The configuration for this table.
+     * @param objectTableModel The configuration for this table.
      */
-    public void setConfiguration(ObjectTableModel<E> objectTableConfiguration) {
+    public void setModel(ObjectTableModel<E> objectTableModel) {
 
-        listModel = objectTableConfiguration.getListModel();
-        objectColumnMap = objectTableConfiguration.getObjectColumnMap();
+        listModel = objectTableModel.getListModel();
+        objectColumnMap = objectTableModel.getObjectColumnMap();
 
         // Create a JTable model using the object list and the column/attribute mapping in the
         // config

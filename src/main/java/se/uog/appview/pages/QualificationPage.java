@@ -4,10 +4,12 @@ import se.uog.model.Qualification;
 import se.uog.table.JObjectTable;
 import se.uog.table.ObjectTableModel;
 
-public class QualificationPage extends PageView {
+public class QualificationPage extends PageView implements TablePageView<Qualification> {
+
+    private JObjectTable<Qualification> table;
 
     public QualificationPage(ObjectTableModel<Qualification> tableModel) {
-        JObjectTable<Qualification> table = new JObjectTable<>(tableModel);
+        table = new JObjectTable<>(tableModel);
         add(table);
     }
 
@@ -15,4 +17,10 @@ public class QualificationPage extends PageView {
     public String getName() {
         return "Qualifications";
     }
+
+    @Override
+    public void setTableModel(ObjectTableModel<Qualification> model) {
+        table.setModel(model);
+    }
+
 }
