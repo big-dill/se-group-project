@@ -1,17 +1,18 @@
 package se.uog.controller;
 
-import java.awt.event.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+
+import javax.swing.JPanel;
+
 import se.uog.appview.AppView;
 import se.uog.appview.pages.CoursePage;
-import se.uog.appview.pages.PageView;
 import se.uog.appview.pages.QualificationPage;
 import se.uog.appview.pages.TeacherPage;
+import se.uog.database.Database;
 import se.uog.model.AppModel;
 
-
-public class AppController implements ActionListener {
+public class AppController {
 
     private final AppView appView;
     private AppModel appModel;
@@ -29,32 +30,32 @@ public class AppController implements ActionListener {
     private void setupPages() {
 
         // Qualification Page
-        PageView qualificationPage = new QualificationPage(appModel.getQualificationTableModel());
-        appView.addPage(qualificationPage, KeyEvent.VK_Q);
+        JPanel qualificationPage = new QualificationPage(appModel.getQualificationTableModel());
+        appView.addPage(qualificationPage, "Qualifications", KeyEvent.VK_Q);
 
-        PageView teacherPage = new TeacherPage(appModel.getTeacherTableModel());
-        appView.addPage(teacherPage, KeyEvent.VK_T);
+        JPanel teacherPage = new TeacherPage(appModel.getTeacherTableModel());
+        appView.addPage(teacherPage, "Teachers", KeyEvent.VK_T);
 
-        PageView coursePage = new CoursePage(appModel.getCourseTableModel());
-        appView.addPage(coursePage, KeyEvent.VK_C);
+        JPanel coursePage = new CoursePage(appModel.getCourseTableModel());
+        appView.addPage(coursePage, "Courses", KeyEvent.VK_C);
 
         // NOTE:
         // You can create other 'tableModels' and dynamically switch them in using:
         // e.g. coursePage.setTableModel(appModel.getAdminCourseTableModel);
         // This will be useful for changing users!
 
-        // We can probably use inheritance in some way and just override the column part of the
+        // We can probably use inheritance in some way and just override the column part
+        // of the
         // model!
     }
 
-
-    @Override
-    public void actionPerformed(final ActionEvent e) {
-        String command = e.getActionCommand();
-        System.out.println(command);
-        // Command will be PAGE_ID, so no need for switch, just set the page to the pageID.
-        appView.setPage(command);
+    public void setPage(String pageName) {
+        appView.setPage(pageName);
     }
+
+    public void close() {
+        new Database(appModel);
+        System.exit(0);
+    }
+
 }
-
-
