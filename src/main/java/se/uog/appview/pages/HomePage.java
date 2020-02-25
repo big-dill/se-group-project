@@ -1,12 +1,8 @@
 package se.uog.appview.pages;
 
-import se.uog.model.Course;
-import se.uog.model.Teacher;
-import se.uog.table.JObjectTable;
-import se.uog.table.ObjectTableModel;
+
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class HomePage extends PageView {
