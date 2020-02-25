@@ -1,7 +1,8 @@
 package se.uog.appview;
 
-import java.awt.event.*;
 import java.awt.CardLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -28,7 +29,7 @@ public class AppView extends JFrame {
 
         // Handle closing
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Do nothing, as the listener will handle this.
-        this.addWindowListener(new java.awt.event.WindowAdapter() {
+        this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent winEvt) {
                 appController.close();
             }

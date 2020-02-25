@@ -14,7 +14,6 @@ import se.uog.appview.pages.CoursePage;
 import se.uog.appview.pages.QualificationPage;
 import se.uog.appview.pages.TeacherPage;
 import se.uog.model.AppModel;
-import se.uog.model.AppModelDeserializer;
 import se.uog.model.AppModelSerializer;
 
 public class AppController {
@@ -69,7 +68,8 @@ public class AppController {
             e.printStackTrace();
         }
 
-        System.exit(0);
+        // Quit the app
+        Runtime.getRuntime().exit(0);
     }
 
 }
