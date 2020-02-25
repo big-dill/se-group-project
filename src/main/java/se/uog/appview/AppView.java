@@ -25,6 +25,7 @@ public class AppView extends JFrame {
         add(mainPanel);
     }
 
+
     public void addPage(JPanel page, int menuMneumonic) {
         mainPanel.add(page, page.getName());
         menuBar.addPage(page.getName(), menuMneumonic);
@@ -33,6 +34,8 @@ public class AppView extends JFrame {
     public void setPage(String pageName) {
         cardLayout.show(mainPanel, pageName);
     }
+
+    public void toggleMenuBar(){menuBar.toggleEnabled();} // package-private
 
     // setPageEnabled()
     // Also need to set the menuBar to disabled here too for the page...

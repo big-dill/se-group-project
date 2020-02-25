@@ -13,7 +13,7 @@ public class AppMenu extends JMenuBar {
     private AppController appController;
     private JMenu menu;
 
-    public AppMenu(AppController appController) {
+    AppMenu(AppController appController) {
         this.appController = appController;
         this.menu = new JMenu(MENU_NAME);
 
@@ -21,12 +21,20 @@ public class AppMenu extends JMenuBar {
         add(menu);
     }
 
-    public void addPage(String pageName, int mneumonic) {
+    void addPage(String pageName, int mneumonic) {
         JMenuItem pageViewItem = new JMenuItem(pageName, mneumonic);
         pageViewItem.setMnemonic(mneumonic);
         pageViewItem.addActionListener(appController);
         menu.add(pageViewItem);
     }
+
+    void toggleEnabled(){
+        if (menu.isEnabled()) {
+            menu.setEnabled(false);
+        }
+        else {menu.setEnabled(true);}
+    }
+
 
     // public void disablePage()
     // public void enablePage()

@@ -34,4 +34,5 @@ public class AppModel {
         return courseTableModel;
     }
 
+
 }
