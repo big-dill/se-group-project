@@ -1,10 +1,17 @@
 package se.uog.controller;
 
-import java.awt.event.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+
 import se.uog.appview.AppView;
-import se.uog.appview.pages.*;
+
+import se.uog.appview.pages.CoursePage;
+import se.uog.appview.pages.HomePage;
+import se.uog.appview.pages.PageView;
+import se.uog.appview.pages.QualificationPage;
+import se.uog.appview.pages.TeacherPage;
+
 import se.uog.model.AppModel;
 
 
