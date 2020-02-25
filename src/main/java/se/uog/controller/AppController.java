@@ -1,16 +1,21 @@
 package se.uog.controller;
 
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import javax.swing.JPanel;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import se.uog.appview.AppView;
 import se.uog.appview.pages.CoursePage;
 import se.uog.appview.pages.QualificationPage;
 import se.uog.appview.pages.TeacherPage;
-import se.uog.database.Database;
 import se.uog.model.AppModel;
+import se.uog.model.AppModelDeserializer;
+import se.uog.model.AppModelSerializer;
 
 public class AppController {
 
@@ -54,7 +59,16 @@ public class AppController {
     }
 
     public void close() {
-        new Database(appModel);
+        Gson gson = new GsonBuilder().registerTypeAdapter(AppModel.class, new AppModelSerializer()).create();
+        try {
+            FileWriter writer = new FileWriter("model.json");
+            gson.toJson(appModel, writer);
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         System.exit(0);
     }
 

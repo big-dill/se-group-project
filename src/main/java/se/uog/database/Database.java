@@ -1,17 +1,21 @@
 package se.uog.database;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import se.uog.model.AppModel;
+import se.uog.model.AppModelSerializer;
 
 public class Database {
     public Database(AppModel model) {
-        // Serialise model into JSON
-        Gson gson = new Gson();
 
-        String serialisedModel = gson.toJson(model);
+        Gson gson = new GsonBuilder()
+            .registerTypeAdapter(AppModel.class, new AppModelSerializer())
+            .create();
 
-        System.out.println(serialisedModel);
+        String json = gson.toJson(model);
+
+        System.out.println(json);
 
     }
 }
