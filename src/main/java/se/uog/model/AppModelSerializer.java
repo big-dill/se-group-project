@@ -10,37 +10,39 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
+/**
+ * A custom serializer for the AppModel wrapper.
+ *
+ * This dictates how the model is stored as JSON and also will take care of ID
+ * referencing classes which are referred to outside of their respective lists.
+ */
 public class AppModelSerializer implements JsonSerializer<AppModel> {
 
     public static final String QUALIFICATION_LIST_FIELD = "qualifications";
+    public static final String TRAINING_LIST_FIELD = "training";
     public static final String TEACHER_LIST_FIELD = "teachers";
     public static final String COURSE_LIST_FIELD = "courses";
 
+    AppModel appModel;
+    JsonObject jsonObject = new JsonObject();
+
     @Override
     public JsonElement serialize(AppModel appModel, Type typeOfSrc, JsonSerializationContext context) {
-        JsonObject jsonObject = new JsonObject();
+        this.appModel = appModel;
 
-        // Store qualifications
-        Gson gson = new Gson();
-        jsonObject.addProperty(QUALIFICATION_LIST_FIELD, gson.toJson(appModel.getQualificationArray()));
-
-        // For the teacher's we'll need to convert the qualifications to just their IDs.
-        gson = new GsonBuilder().registerTypeAdapter(Qualification.class, new IDReferencedSerializer()).create();
-
-        // Store teachers
-        jsonObject.addProperty(TEACHER_LIST_FIELD, gson.toJson(appModel.getTeacherArray()));
-
-        // Store courses
-        gson = new GsonBuilder().registerTypeAdapter(Qualification.class, new IDReferencedSerializer())
-                .registerTypeAdapter(Teacher.class, new IDReferencedSerializer()).create();
-
-        jsonObject.addProperty(COURSE_LIST_FIELD, gson.toJson(appModel.getCourseArray()));
-
-        System.out.println(jsonObject.toString());
+        serializeQualifications();
+        serializeTraining();
+        serializeTeachers();
+        serializeCourses();
 
         return jsonObject;
     }
 
+    /**
+     * This class is a JsonSerializer which can be 'hooked into' gson, so when it
+     * hits anything with the class 'IDReferenced', it can store it just as its ID,
+     * rather than the whole object..
+     */
     private class IDReferencedSerializer implements JsonSerializer<IDReferenced> {
 
         @Override
@@ -48,6 +50,59 @@ public class AppModelSerializer implements JsonSerializer<AppModel> {
             return new JsonPrimitive(src.getID());
         }
 
+    }
+
+    /**
+     * Serializes the qualifications into a json array
+     */
+    private void serializeQualifications() {
+        Gson gson = new Gson();
+
+        jsonObject.addProperty(QUALIFICATION_LIST_FIELD, gson.toJson(appModel.getQualificationArray()));
+    }
+
+    /**
+     * Serializes the training into a json array.
+     *
+     * Converts the qualifications into just their ID references so that any POJO
+     * references are preserved after deserialization.
+     */
+    private void serializeTraining() {
+        Gson gson = new GsonBuilder()
+            .registerTypeAdapter(Qualification.class, new IDReferencedSerializer())
+            .create();
+
+        jsonObject.addProperty(TRAINING_LIST_FIELD, gson.toJson(appModel.getTrainingArray()));
+    }
+
+    /**
+     * Serializes the teachers into a json array.
+     *
+     * Converts the qualifications and the training into just their ID references so
+     * that any POJO references are preserved after deserialization.
+     */
+    private void serializeTeachers() {
+        Gson gson = new GsonBuilder()
+            .registerTypeAdapter(Qualification.class, new IDReferencedSerializer())
+            .registerTypeAdapter(Training.class, new IDReferencedSerializer())
+            .create();
+
+        jsonObject.addProperty(TEACHER_LIST_FIELD, gson.toJson(appModel.getTeacherArray()));
+    }
+
+    /**
+     * Serialises the courses into a json array.
+     *
+     * Converts the teachers into their ID references so that any POJO references
+     * are preserved after deserialization.
+     */
+    private void serializeCourses() {
+        Gson gson = new GsonBuilder()
+            .registerTypeAdapter(Qualification.class, new IDReferencedSerializer())
+            .registerTypeAdapter(Teacher.class, new IDReferencedSerializer())
+            .create();
+
+        jsonObject.addProperty(COURSE_LIST_FIELD, gson.toJson(appModel.getCourseArray()));
     }
 
 }
