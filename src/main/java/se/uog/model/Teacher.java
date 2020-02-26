@@ -2,24 +2,13 @@ package se.uog.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
-public class Teacher implements IDReferenced {
-    private String id;
+public class Teacher extends IDReferenced {
     private String name;
     private List<Qualification> teacherQualifications = new ArrayList<Qualification>();
 
     public Teacher(String n) {
-        id = UUID.randomUUID().toString();
         name = n;
-    }
-
-    public String getID() {
-        return id;
-    }
-
-    public void setID(String id) {
-        this.id = id;
     }
 
     public String getName() {

@@ -1,15 +1,16 @@
 package se.uog.model;
 
-public class Training {
+public class Training extends IDReferenced {
+    public String id;
     private String name;
     private Qualification trainingQualification;
 
-    public Training (String n) {
+    public Training(String n) {
+
         name = n;
     }
-    
 
-    public void trainTeacher (Teacher teacher) {
+    public void trainTeacher(Teacher teacher) {
         teacher.addQualification(trainingQualification);
     }
 
@@ -28,6 +29,4 @@ public class Training {
     public void setTrainingQualification(Qualification trainingQualification) {
         this.trainingQualification = trainingQualification;
     }
-   
-
 }
