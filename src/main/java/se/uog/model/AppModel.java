@@ -63,51 +63,46 @@ public class AppModel {
     // for serialization / deserialization into a file format / for databases.
 
     public Qualification[] getQualificationArray() {
-        return getDefaultListModelArray(qualificationList);
+        Qualification[] array = new Qualification[qualificationList.getSize()];
+        qualificationList.copyInto(array);
+        return array;
     }
 
     public void setQualificationList(Qualification[] array) {
-        qualificationList = createDefaultListModelFromArray(array);
+        populateDefaultListModelFromArray(qualificationList, array);
     }
 
     public Training[] getTrainingArray() {
-        return getDefaultListModelArray(trainingList);
+        Training[] array = new Training[trainingList.getSize()];
+        trainingList.copyInto(array);
+        return array;
     }
 
     public void setTrainingList(Training[] array) {
-        trainingList = createDefaultListModelFromArray(array);
+        populateDefaultListModelFromArray(trainingList, array);
     }
 
     public Teacher[] getTeacherArray() {
-        return getDefaultListModelArray(teacherList);
+        Teacher[] array = new Teacher[teacherList.getSize()];
+        teacherList.copyInto(array);
+        return array;
     }
 
     public void setTeacherList(Teacher[] array) {
-        teacherList = createDefaultListModelFromArray(array);
+        populateDefaultListModelFromArray(teacherList, array);
     }
 
     public Course[] getCourseArray() {
-        return getDefaultListModelArray(courseList);
+        Course[] array = new Course[courseList.getSize()];
+        courseList.copyInto(array);
+        return array;
     }
 
     public void setCourseList(Course[] array) {
-        courseList = createDefaultListModelFromArray(array);
+        populateDefaultListModelFromArray(courseList, array);
     }
 
     // Helper methods for converting swing DefaultListModels to arrays.
-
-    /**
-     * Converts a swing DefaultListModel into an array
-     *
-     * @param <T>       The type of DefaultListModel and the returned array
-     * @param listModel The DefaultListModel to convert
-     * @return An array of type <T> of the elements in listModel
-     */
-    private <T> T[] getDefaultListModelArray(DefaultListModel<T> listModel) {
-        Object[] array = new Object[listModel.getSize()];
-        listModel.copyInto(array);
-        return (T[]) array;
-    }
 
     /**
      * Creates a swing DefaultListModel from an array
@@ -116,12 +111,12 @@ public class AppModel {
      * @param array The array to convert to a DefaultListModel
      * @return A DefaultListModel populated by array
      */
-    private <T> DefaultListModel<T> createDefaultListModelFromArray(T[] array) {
-        DefaultListModel<T> listModel = new DefaultListModel<>();
+    private <T> DefaultListModel<T> populateDefaultListModelFromArray(DefaultListModel<T> list, T[] array) {
+        list.clear();
         for (T elem : array) {
-            listModel.addElement(elem);
+            list.addElement(elem);
         }
-        return listModel;
+        return list;
     }
 
 }

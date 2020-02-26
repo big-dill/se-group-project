@@ -63,8 +63,7 @@ public class AppModelDeserializer implements JsonDeserializer<AppModel> {
 
     private Training[] deserializeTraining(Qualification[] qualificationArray) {
         Gson gson = new GsonBuilder()
-            .registerTypeAdapter(Qualification.class, new IDReferencedDeserializer(qualificationArray))
-            .create();
+                .registerTypeAdapter(Qualification.class, new IDReferencedDeserializer(qualificationArray)).create();
 
         JsonElement trainingArrayJson = sourceJsonObject.get(AppModelSerializer.TRAINING_LIST_FIELD);
         return gson.fromJson(trainingArrayJson.getAsString(), Training[].class);
@@ -72,9 +71,8 @@ public class AppModelDeserializer implements JsonDeserializer<AppModel> {
 
     private Teacher[] deserializeTeachers(Qualification[] qualificationArray, Training[] trainingArray) {
         Gson gson = new GsonBuilder()
-            .registerTypeAdapter(Qualification.class, new IDReferencedDeserializer(qualificationArray))
-            .registerTypeAdapter(Training.class, new IDReferencedDeserializer(trainingArray))
-            .create();
+                .registerTypeAdapter(Qualification.class, new IDReferencedDeserializer(qualificationArray))
+                .registerTypeAdapter(Training.class, new IDReferencedDeserializer(trainingArray)).create();
 
         JsonElement teacherArray = sourceJsonObject.get(AppModelSerializer.TEACHER_LIST_FIELD);
         return gson.fromJson(teacherArray.getAsString(), Teacher[].class);
@@ -82,9 +80,8 @@ public class AppModelDeserializer implements JsonDeserializer<AppModel> {
 
     private Course[] deserializeCourses(Qualification[] qualificationArray, Teacher[] teacherArray) {
         Gson gson = new GsonBuilder()
-            .registerTypeAdapter(Qualification.class, new IDReferencedDeserializer(qualificationArray))
-            .registerTypeAdapter(Teacher.class, new IDReferencedDeserializer(teacherArray))
-            .create();
+                .registerTypeAdapter(Qualification.class, new IDReferencedDeserializer(qualificationArray))
+                .registerTypeAdapter(Teacher.class, new IDReferencedDeserializer(teacherArray)).create();
 
         JsonElement courseArrayJson = sourceJsonObject.get(AppModelSerializer.COURSE_LIST_FIELD);
         return gson.fromJson(courseArrayJson.getAsString(), Course[].class);

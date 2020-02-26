@@ -1,7 +1,6 @@
 package se.uog.model;
 
 public class Training extends IDReferenced {
-    public String id;
     private String name;
     private Qualification trainingQualification;
 
