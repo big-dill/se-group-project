@@ -23,22 +23,17 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
-// TODO: Bug fix on cancel return value
 /**
  * A singleton class which displays a pop-up dialog for selecting elements from
  * a DefaultListModel.
  */
 public class ListSelectorDialog extends JDialog implements ActionListener {
-
-    /**
-     * Default serial.
-     */
     private static final long serialVersionUID = 1L;
 
     private static ListSelectorDialog dialog;
     private static List<?> selection;
-    private JList<?> list;
     private DefaultListModel<?> listModel;
+    private JList<?> list;
 
     public static List<?> showDialog(Component owner, String dialogTitle, DefaultListModel<?> model,
             List<?> initalSelection) {
@@ -54,9 +49,11 @@ public class ListSelectorDialog extends JDialog implements ActionListener {
     private void setSelection(List<?> selection) {
         // Set the current selection
         ListSelectorDialog.selection = selection;
+
+        // Update the view accordingly
         list.clearSelection();
 
-        // Set the selection to match the selection.
+        // Toggle selection on each item
         Iterator iterator = selection.iterator();
         while (iterator.hasNext()) {
             int index = listModel.indexOf(iterator.next());

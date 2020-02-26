@@ -53,14 +53,9 @@ public class ObjectTableListSelector<T, L> extends AbstractCellEditor implements
 
     // Change if something is selected, otherwise,
     private void changeSelection(List<L> selection) {
-
-        System.out.println("changeSelectionIn: " + selection);
         if (selection != null) {
             this.selectedItems = selection;
         }
-        System.out.println("changeSelectionOut: " + selectedItems);
-
-        System.out.println("after fire: " + selectedItems);
         stopCellEditing();
     }
 
@@ -91,10 +86,7 @@ public class ObjectTableListSelector<T, L> extends AbstractCellEditor implements
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println(selectedItems);
         List<L> selection = (List<L>) ListSelectorDialog.showDialog(delegate, dialogTitle, filteredList, selectedItems);
-
-        System.out.println("Selection return: " + selection);
         changeSelection(selection);
     }
 
