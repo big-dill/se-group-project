@@ -1,45 +1,51 @@
 package se.uog.controller;
 
 import java.awt.event.KeyEvent;
-import java.io.FileWriter;
 import java.io.IOException;
 
 import javax.swing.JPanel;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-
 import se.uog.appview.AppView;
-
 import se.uog.appview.pages.CoursePage;
 import se.uog.appview.pages.HomePage;
 import se.uog.appview.pages.QualificationPage;
 import se.uog.appview.pages.TeacherPage;
 import se.uog.appview.pages.TrainingPage;
+import se.uog.database.FileStorage;
+import se.uog.database.JSONConverter;
 import se.uog.model.AppModel;
-
-import se.uog.model.AppModel;
-import se.uog.model.AppModelSerializer;
 
 public class AppController {
 
+    private static final String JSON_MODEL_FILENAME = "model.json";
+
+    private final FileStorage appStorage;
     private final AppView appView;
     private AppModel appModel;
 
-    public AppController(AppModel model) {
-        this.appModel = model;
+    public AppController() {
+
+        // Load the model from the storage...
+        this.appStorage = new FileStorage(JSON_MODEL_FILENAME);
+
+        // If storage fails or no file exists, create a blank model...
+        try {
+            appModel = JSONConverter.convertJSONToAppModel(appStorage.getJSON());
+        } catch (IOException e) {
+            System.err.println("Could not read model from file. Check for model.json in path.");
+            System.err.println("Creating new model...");
+            appModel = new AppModel();
+        }
+
         this.appView = new AppView(this);
 
-        setupPages();
+        setupView();
 
         // Set visible only after setup
         appView.setVisible(true);
     }
 
-    private void setupPages() {
+    private void setupView() {
 
         JPanel homePage = new HomePage();
         appView.addPage(homePage, "Home", KeyEvent.VK_H);
@@ -71,13 +77,12 @@ public class AppController {
     }
 
     public void close() {
-        Gson gson = new GsonBuilder().registerTypeAdapter(AppModel.class, new AppModelSerializer()).create();
+        // Try saving to storage. If it fails, print a stack trace.
         try {
-            FileWriter writer = new FileWriter("model.json");
-            gson.toJson(appModel, writer);
-            writer.flush();
-            writer.close();
+            appStorage.storeJSON(JSONConverter.convertAppModelToJSON(appModel));
         } catch (IOException e) {
+            // Could probably prompt user for action here, rather than just flatly closing.
+            System.err.println("IO error, could not store database in file.");
             e.printStackTrace();
         }
 
