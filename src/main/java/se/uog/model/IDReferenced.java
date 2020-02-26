@@ -1,7 +1,16 @@
 package se.uog.model;
 
-public interface IDReferenced {
-    public String getID();
+import java.util.UUID;
 
-    public void setID(String id);
+public abstract class IDReferenced {
+
+    private String id;
+
+    public IDReferenced() {
+        id = UUID.randomUUID().toString();
+    }
+
+    final public String getID() {
+        return id;
+    }
 }
