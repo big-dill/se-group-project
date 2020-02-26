@@ -19,5 +19,4 @@ public class QualificationPage extends JPanel implements TablePageView<Qualifica
     public void setTableModel(ObjectTableModel<Qualification> model) {
         table.setModel(model);
     }
-
 }

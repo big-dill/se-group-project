@@ -40,7 +40,7 @@ public class AppController {
     private void setupPages() {
 
         JPanel homePage = new LoginPage(appView);
-        appView.addPage(homePage, "Login", KeyEvent.VK_H);
+        appView.addPage(homePage, "Login", KeyEvent.VK_L);
 
         JPanel qualificationPage = new QualificationPage(appModel.getQualificationTableModel());
         appView.addPage(qualificationPage, "Qualifications", KeyEvent.VK_Q);

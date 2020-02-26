@@ -1,6 +1,9 @@
 package se.uog.appview;
 
+import se.uog.appview.pages.LoginPage;
 import se.uog.controller.AppController;
+import se.uog.model.UserEnum;
+import se.uog.model.UserType;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -22,14 +25,16 @@ public class AppMenu extends JMenuBar {
 
 
     public void addPage(String pageName, int mneumonic) {
-        JMenuItem pageViewItem = new JMenuItem(pageName, mneumonic);
-        pageViewItem.setMnemonic(mneumonic);
 
-        // Set action listener here, so appController is clean
-        pageViewItem.addActionListener(e -> appController.setPage(pageName));
+            JMenuItem pageViewItem = new JMenuItem(pageName, mneumonic);
+            pageViewItem.setMnemonic(mneumonic);
 
-        menu.add(pageViewItem);
-    }
+            // Set action listener here, so appController is clean
+            pageViewItem.addActionListener(e -> appController.setPage(pageName));
+
+            menu.add(pageViewItem);
+        }
+
 
     public JMenu getMenu() {
         return menu;

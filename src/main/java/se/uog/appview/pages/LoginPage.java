@@ -47,9 +47,22 @@ public class LoginPage extends JPanel {
         buttons.add(director, gbc);
 
         JButton admin = new JButton("Administrator");
+        admin.addActionListener(e -> {
+            appView.setPage("Courses");
+            appView.setMenuEnabled(true);
+            UserType.getInstance().setUserEnum(UserEnum.ADMINISTRATOR);
+        });
+
+
         buttons.add(admin, gbc);
 
         JButton teacher = new JButton("Teacher");
+        teacher.addActionListener(e -> {
+            appView.setPage("Courses");
+            appView.setMenuEnabled(true);
+            UserType.getInstance().setUserEnum(UserEnum.TEACHER);
+        });
+
         buttons.add(teacher, gbc);
 
         gbc.weighty = 1;
