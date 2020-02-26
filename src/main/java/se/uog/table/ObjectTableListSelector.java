@@ -13,12 +13,11 @@ import javax.swing.JTable;
 import javax.swing.table.TableCellEditor;
 
 /**
- * 
+ *
  * @param <T> The Table element class
  * @param <L> The List element class
  */
-public class ObjectTableListSelector<T, L> extends AbstractCellEditor
-        implements TableCellEditor, ActionListener {
+public class ObjectTableListSelector<T, L> extends AbstractCellEditor implements TableCellEditor, ActionListener {
 
     private JButton delegate = new JButton("editing...");
 
@@ -33,17 +32,15 @@ public class ObjectTableListSelector<T, L> extends AbstractCellEditor
     // Defaults to null as it is not needed.
     private DefaultListModel<T> tableElementList = null;
     // Filter function just returns original listElementList;
-    private BiFunction<List<L>, T, List<L>> filterFunction =
-            (listElementList, tableElement) -> listElementList;
+    private BiFunction<List<L>, T, List<L>> filterFunction = (listElementList, tableElement) -> listElementList;
 
     public ObjectTableListSelector(DefaultListModel<L> listElementList, String dialogTitle) {
         // Defaults to no filter function
         this(listElementList, null, dialogTitle, (targetList, tableElement) -> targetList);
     }
 
-    public ObjectTableListSelector(DefaultListModel<L> listElementList,
-            DefaultListModel<T> tableElementList, String dialogTitle,
-            BiFunction<List<L>, T, List<L>> filterFunction) {
+    public ObjectTableListSelector(DefaultListModel<L> listElementList, DefaultListModel<T> tableElementList,
+            String dialogTitle, BiFunction<List<L>, T, List<L>> filterFunction) {
 
         this.listElementList = listElementList;
         this.tableElementList = tableElementList;
@@ -59,7 +56,6 @@ public class ObjectTableListSelector<T, L> extends AbstractCellEditor
         if (selectedItems != null) {
             this.selectedItems = selectedItems;
         }
-
         stopCellEditing();
     }
 
@@ -70,8 +66,10 @@ public class ObjectTableListSelector<T, L> extends AbstractCellEditor
     }
 
     @Override
-    public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected,
-            int row, int column) {
+    public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+
+        // Set the initial values to the values in the table cell...
+        changeSelection((List<L>) value);
 
         T currentTableRowElement = null;
         // Get the current table element for filtering etc.
@@ -79,8 +77,8 @@ public class ObjectTableListSelector<T, L> extends AbstractCellEditor
             currentTableRowElement = tableElementList.get(row);
         }
         // Filter the listElementList based on the provided function
-        filteredList = convertListToDefaultListModel(filterFunction
-                .apply(convertDefaultListModelToList(listElementList), currentTableRowElement));
+        filteredList = convertListToDefaultListModel(
+                filterFunction.apply(convertDefaultListModelToList(listElementList), currentTableRowElement));
 
         // Show the 'editing...' button in the window while the dialog is open
         return delegate;
@@ -88,11 +86,7 @@ public class ObjectTableListSelector<T, L> extends AbstractCellEditor
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
-        // OPEN THE LIST SELECTOR HERE
-        List<L> selection = (List<L>) ListSelectorDialog.showDialog(delegate, dialogTitle,
-                filteredList, selectedItems);
-
+        List<L> selection = (List<L>) ListSelectorDialog.showDialog(delegate, dialogTitle, filteredList, selectedItems);
         changeSelection(selection);
     }
 

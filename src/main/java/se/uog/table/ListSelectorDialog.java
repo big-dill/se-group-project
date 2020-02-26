@@ -7,12 +7,13 @@ import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Iterator;
 import java.util.List;
+
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
+import javax.swing.DefaultListSelectionModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JList;
@@ -21,10 +22,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
-
 // TODO: Bug fix on cancel return value
 /**
- * A singleton class which displays a pop-up dialog for selecting elements from a DefaultListModel.
+ * A singleton class which displays a pop-up dialog for selecting elements from
+ * a DefaultListModel.
  */
 public class ListSelectorDialog extends JDialog implements ActionListener {
 
@@ -49,15 +50,9 @@ public class ListSelectorDialog extends JDialog implements ActionListener {
     }
 
     private void setSelection(List<?> selection) {
-
+        // Set the current selection
+        ListSelectorDialog.selection = selection;
         list.clearSelection();
-
-        Iterator<?> iterator = selection.iterator();
-
-        while (iterator.hasNext()) {
-            list.setSelectedValue(iterator.next(), false);
-        }
-
     }
 
     private ListSelectorDialog(Frame frame, String dialogTitle, DefaultListModel<?> listModel,
@@ -75,6 +70,34 @@ public class ListSelectorDialog extends JDialog implements ActionListener {
 
         // main part of the dialog
         list = new JList(listModel);
+
+        // Code taken from:
+        // Allows single click (de)selection of a list
+        // https://stackoverflow.com/questions/2528344/jlist-deselect-when-clicking-an-already-selected-item
+        list.setSelectionModel(new DefaultListSelectionModel() {
+
+            boolean gestureStarted = false;
+
+            @Override
+            public void setSelectionInterval(int index0, int index1) {
+                if (!gestureStarted) {
+                    if (isSelectedIndex(index0)) {
+                        super.removeSelectionInterval(index0, index1);
+                    } else {
+                        super.addSelectionInterval(index0, index1);
+                    }
+                }
+                gestureStarted = true;
+            }
+
+            @Override
+            public void setValueIsAdjusting(boolean isAdjusting) {
+                if (isAdjusting == false) {
+                    gestureStarted = false;
+                }
+            }
+        });
+        // End code from source
 
         list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         list.setLayoutOrientation(JList.VERTICAL);
