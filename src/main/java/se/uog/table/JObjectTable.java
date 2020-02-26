@@ -25,6 +25,7 @@ import javax.swing.table.TableColumnModel;
  *
  * @param <E> The class of object which the table represents.
  */
+@SuppressWarnings("serial")
 public class JObjectTable<E> extends JPanel {
 
     // Model references:

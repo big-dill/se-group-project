@@ -6,6 +6,7 @@ import se.uog.model.Course;
 import se.uog.table.JObjectTable;
 import se.uog.table.ObjectTableModel;
 
+@SuppressWarnings("serial")
 public class CoursePage extends JPanel implements TablePageView<Course> {
 
     private JObjectTable<Course> table;

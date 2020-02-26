@@ -5,6 +5,7 @@ import se.uog.controller.AppController;
 import javax.swing.*;
 import java.awt.event.*;
 
+@SuppressWarnings("serial")
 public class AppMenu extends JMenuBar {
 
     private static final String MENU_NAME = "Main menu";

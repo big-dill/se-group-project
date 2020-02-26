@@ -19,6 +19,7 @@ import javax.swing.table.TableCellEditor;
  * @param <T> The Table element class
  * @param <L> The List element class
  */
+@SuppressWarnings("serial")
 public class ObjectTableListSelector<T, L> extends AbstractCellEditor implements TableCellEditor {
 
     private JButton delegate = new JButton("editing...");

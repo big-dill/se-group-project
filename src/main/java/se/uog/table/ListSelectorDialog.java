@@ -29,6 +29,8 @@ import javax.swing.ListSelectionModel;
  * This class is adapted from the Swing tutorial for ListDialog:
  * https://docs.oracle.com/javase/tutorial/uiswing/examples/components/ListDialogRunnerProject/src/components/ListDialog.java
  */
+
+@SuppressWarnings("serial")
 public class ListSelectorDialog extends JDialog {
 
     private static ListSelectorDialog dialog;
