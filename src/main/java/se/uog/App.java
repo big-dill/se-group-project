@@ -1,10 +1,7 @@
 package se.uog;
 
-import java.io.FileReader;
-
 import se.uog.controller.AppController;
 import se.uog.logger.Logger;
-import se.uog.model.AppModel;
 
 public class App {
 
