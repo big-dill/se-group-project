@@ -18,6 +18,8 @@ import se.uog.appview.pages.CoursePage;
 import se.uog.appview.pages.HomePage;
 import se.uog.appview.pages.QualificationPage;
 import se.uog.appview.pages.TeacherPage;
+import se.uog.appview.pages.TrainingPage;
+import se.uog.model.AppModel;
 
 import se.uog.model.AppModel;
 import se.uog.model.AppModelSerializer;
@@ -50,6 +52,9 @@ public class AppController {
 
         JPanel coursePage = new CoursePage(appModel.getCourseTableModel());
         appView.addPage(coursePage, "Courses", KeyEvent.VK_C);
+
+        JPanel trainingPage = new TrainingPage(appModel.getTrainingTableModel());
+        appView.addPage(trainingPage, "Training", KeyEvent.VK_R);
 
         // NOTE:
         // You can create other 'tableModels' and dynamically switch them in using:
