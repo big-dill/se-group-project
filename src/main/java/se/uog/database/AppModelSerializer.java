@@ -1,4 +1,4 @@
-package se.uog.model;
+package se.uog.database;
 
 import java.lang.reflect.Type;
 
@@ -9,6 +9,12 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
+
+import se.uog.model.AppModel;
+import se.uog.model.IDReferenced;
+import se.uog.model.Qualification;
+import se.uog.model.Teacher;
+import se.uog.model.Training;
 
 /**
  * A custom serializer for the AppModel wrapper.
