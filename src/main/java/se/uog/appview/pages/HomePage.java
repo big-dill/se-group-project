@@ -1,16 +1,20 @@
 package se.uog.appview.pages;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
-import javax.swing.*;
-import java.awt.*;
-
-public class HomePage extends PageView {
+public class HomePage extends JPanel {
 
     private static final String TITLE = "<html><h1><strong><i>Staff Management Application</i></strong></h1><hr></html>";
-    private static final String SUB_TITLE = "<html><i>Please select your role below </i><html>"; // extra space necessary to stop it looking strange
+    // extra space necessary to stop it looking strange
+    private static final String SUB_TITLE = "<html><i>Please select your role below </i><html>";
 
-    public HomePage(){
+    public HomePage() {
 
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setLayout(new GridBagLayout());
@@ -38,12 +42,4 @@ public class HomePage extends PageView {
         gbc.weighty = 1;
         add(buttons, gbc);
     }
-
-
-    @Override
-    public String getName() {
-        return "Home";
-    }
-
-
 }

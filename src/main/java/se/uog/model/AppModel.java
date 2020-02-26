@@ -5,16 +5,20 @@ import javax.swing.DefaultListModel;
 public class AppModel {
     // DefaultListModels so they can be used in Swing views
     // Don't have to write the observer pattern stuff for them, it's already done
+    private DefaultListModel<Qualification> qualificationList;
     private QualificationTableModel qualificationTableModel;
-    private TeacherTableModel teacherTableModel;
-    private CourseTableModel courseTableModel;
 
+    private DefaultListModel<Teacher> teacherList;
+    private TeacherTableModel teacherTableModel;
+
+    private DefaultListModel<Course> courseList;
+    private CourseTableModel courseTableModel;
 
     public AppModel() {
         // TODO: ListModels need to be loaded and saved to the database at some point
-        DefaultListModel<Qualification> qualificationList = new DefaultListModel<>();
-        DefaultListModel<Teacher> teacherList = new DefaultListModel<>();
-        DefaultListModel<Course> courseList = new DefaultListModel<>();
+        qualificationList = new DefaultListModel<>();
+        teacherList = new DefaultListModel<>();
+        courseList = new DefaultListModel<>();
 
         // Create Object Table Models for our view
         qualificationTableModel = new QualificationTableModel(qualificationList);
@@ -32,6 +36,45 @@ public class AppModel {
 
     public CourseTableModel getCourseTableModel() {
         return courseTableModel;
+    }
+
+    public Qualification[] getQualificationArray() {
+        Qualification[] array = new Qualification[qualificationList.getSize()];
+        qualificationList.copyInto(array);
+        return array;
+    }
+
+    public void setQualificationList(Qualification[] array) {
+        qualificationList.clear();
+        for (Qualification q : array) {
+            qualificationList.addElement(q);
+        }
+    }
+
+    public Teacher[] getTeacherArray() {
+        Teacher[] array = new Teacher[teacherList.getSize()];
+        teacherList.copyInto(array);
+        return array;
+    }
+
+    public void setTeacherList(Teacher[] array) {
+        teacherList.clear();
+        for (Teacher t : array) {
+            teacherList.addElement(t);
+        }
+    }
+
+    public Course[] getCourseArray() {
+        Course[] array = new Course[courseList.getSize()];
+        courseList.copyInto(array);
+        return array;
+    }
+
+    public void setCourseList(Course[] array) {
+        courseList.clear();
+        for (Course c : array) {
+            courseList.addElement(c);
+        }
     }
 
 }
