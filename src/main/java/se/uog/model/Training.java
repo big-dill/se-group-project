@@ -1,8 +1,11 @@
 package se.uog.model;
 
+import java.util.List;
+
 public class Training extends IDReferenced {
     private String name;
     private Qualification trainingQualification;
+    private List<Teacher> assignedTeachers;
 
     public Training(String n) {
 
@@ -21,11 +24,19 @@ public class Training extends IDReferenced {
         this.name = name;
     }
 
-    public Qualification getTrainingQualification() {
+     Qualification getTrainingQualification() {
         return trainingQualification;
     }
 
-    public void setTrainingQualification(Qualification trainingQualification) {
+     void setTrainingQualification(Qualification trainingQualification) {
         this.trainingQualification = trainingQualification;
+    }
+
+     List<Teacher> getAssignedTeachers() {
+        return assignedTeachers;
+    }
+
+     void setAssignedTeachers(List<Teacher> assignedTeachers) {
+        this.assignedTeachers = assignedTeachers;
     }
 }

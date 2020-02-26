@@ -15,6 +15,8 @@ import se.uog.appview.pages.TrainingPage;
 import se.uog.database.FileStorage;
 import se.uog.database.JSONConverterUtil;
 import se.uog.model.AppModel;
+import se.uog.model.UserEnum;
+import se.uog.model.UserType;
 
 public class AppController {
 
@@ -78,7 +80,7 @@ public class AppController {
 
         if(pageName.equals("Login")){
             appView.setMenuEnabled(false);
-            UserType.getInstance().setUserEnum(UserEnum.UNASSIGNED);
+            UserType.getInstance().setUserEnum(UserEnum.DIRECTOR);
         }
     }
 

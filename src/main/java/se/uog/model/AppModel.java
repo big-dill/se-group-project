@@ -38,7 +38,7 @@ public class AppModel {
         qualificationTableModel = new QualificationTableModel(qualificationList);
         teacherTableModel = new TeacherTableModel(teacherList, qualificationList);
         courseTableModel = new CourseTableModel(courseList, teacherList, qualificationList);
-        trainingTableModel = new TrainingTableModel(trainingList, qualificationList);
+        trainingTableModel = new TrainingTableModel(trainingList, qualificationList, teacherList);
     }
 
     // These methods return the table models required by the pages

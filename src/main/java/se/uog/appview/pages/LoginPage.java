@@ -6,8 +6,6 @@ import se.uog.model.UserType;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -46,9 +44,18 @@ public class LoginPage extends JPanel {
         });
         buttons.add(director, gbc);
 
+        JButton teacher = new JButton("Class Director");
+        teacher.addActionListener(e -> {
+            appView.setPage("Courses");
+            appView.setMenuEnabled(true);
+            UserType.getInstance().setUserEnum(UserEnum.CLASS_DIRECTOR);
+        });
+
+        buttons.add(teacher, gbc);
+
         JButton admin = new JButton("Administrator");
         admin.addActionListener(e -> {
-            appView.setPage("Courses");
+            appView.setPage("Teachers");
             appView.setMenuEnabled(true);
             UserType.getInstance().setUserEnum(UserEnum.ADMINISTRATOR);
         });
@@ -56,14 +63,6 @@ public class LoginPage extends JPanel {
 
         buttons.add(admin, gbc);
 
-        JButton teacher = new JButton("Teacher");
-        teacher.addActionListener(e -> {
-            appView.setPage("Courses");
-            appView.setMenuEnabled(true);
-            UserType.getInstance().setUserEnum(UserEnum.TEACHER);
-        });
-
-        buttons.add(teacher, gbc);
 
         gbc.weighty = 1;
         add(buttons, gbc);
