@@ -20,19 +20,19 @@ public class AppMenu extends JMenuBar {
         add(menu);
     }
 
+
     public void addPage(String pageName, int mneumonic) {
         JMenuItem pageViewItem = new JMenuItem(pageName, mneumonic);
         pageViewItem.setMnemonic(mneumonic);
 
         // Set action listener here, so appController is clean
-        pageViewItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                appController.setPage(pageName);
-            }
-        });
+        pageViewItem.addActionListener(e -> appController.setPage(pageName));
 
         menu.add(pageViewItem);
+    }
+
+    public JMenu getMenu() {
+        return menu;
     }
 
     // public void disablePage()

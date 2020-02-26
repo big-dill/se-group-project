@@ -8,21 +8,19 @@ import javax.swing.JPanel;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 
 import se.uog.appview.AppView;
 
 import se.uog.appview.pages.CoursePage;
-import se.uog.appview.pages.HomePage;
+import se.uog.appview.pages.LoginPage;
 import se.uog.appview.pages.QualificationPage;
 import se.uog.appview.pages.TeacherPage;
 import se.uog.appview.pages.TrainingPage;
 import se.uog.model.AppModel;
 
-import se.uog.model.AppModel;
 import se.uog.model.AppModelSerializer;
+import se.uog.model.UserEnum;
+import se.uog.model.UserType;
 
 public class AppController {
 
@@ -41,8 +39,8 @@ public class AppController {
 
     private void setupPages() {
 
-        JPanel homePage = new HomePage();
-        appView.addPage(homePage, "Home", KeyEvent.VK_H);
+        JPanel homePage = new LoginPage(appView);
+        appView.addPage(homePage, "Login", KeyEvent.VK_H);
 
         JPanel qualificationPage = new QualificationPage(appModel.getQualificationTableModel());
         appView.addPage(qualificationPage, "Qualifications", KeyEvent.VK_Q);
@@ -68,6 +66,11 @@ public class AppController {
 
     public void setPage(String pageName) {
         appView.setPage(pageName);
+
+        if(pageName.equals("Login")){
+            appView.setMenuEnabled(false);
+            UserType.getInstance().setUserEnum(UserEnum.UNASSIGNED);
+        }
     }
 
     public void close() {
