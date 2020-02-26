@@ -1,8 +1,12 @@
 package se.uog.appview;
 
 import java.awt.CardLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 import se.uog.controller.AppController;
 
 public class AppView extends JFrame {
@@ -19,15 +23,22 @@ public class AppView extends JFrame {
         this.menuBar = new AppMenu(appController);
         setJMenuBar(menuBar);
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle(WINDOW_TITLE);
         setSize(600, 400);
         add(mainPanel);
+
+        // Handle closing
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Do nothing, as the listener will handle this.
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent winEvt) {
+                appController.close();
+            }
+        });
     }
 
-    public void addPage(JPanel page, int menuMneumonic) {
-        mainPanel.add(page, page.getName());
-        menuBar.addPage(page.getName(), menuMneumonic);
+    public void addPage(JPanel page, String pageName, int menuMneumonic) {
+        mainPanel.add(page, pageName);
+        menuBar.addPage(pageName, menuMneumonic);
     }
 
     public void setPage(String pageName) {

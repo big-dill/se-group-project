@@ -1,10 +1,9 @@
 package se.uog.appview;
 
-
 import se.uog.controller.AppController;
 
 import javax.swing.*;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 
 public class AppMenu extends JMenuBar {
 
@@ -24,7 +23,15 @@ public class AppMenu extends JMenuBar {
     public void addPage(String pageName, int mneumonic) {
         JMenuItem pageViewItem = new JMenuItem(pageName, mneumonic);
         pageViewItem.setMnemonic(mneumonic);
-        pageViewItem.addActionListener(appController);
+
+        // Set action listener here, so appController is clean
+        pageViewItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                appController.setPage(pageName);
+            }
+        });
+
         menu.add(pageViewItem);
     }
 
