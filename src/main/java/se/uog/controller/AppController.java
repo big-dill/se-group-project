@@ -1,13 +1,15 @@
 package se.uog.controller;
 
-import java.awt.event.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+
 import se.uog.appview.AppView;
 import se.uog.appview.pages.CoursePage;
 import se.uog.appview.pages.PageView;
 import se.uog.appview.pages.QualificationPage;
 import se.uog.appview.pages.TeacherPage;
+import se.uog.appview.pages.TrainingPage;
 import se.uog.model.AppModel;
 
 
@@ -37,6 +39,9 @@ public class AppController implements ActionListener {
 
         PageView coursePage = new CoursePage(appModel.getCourseTableModel());
         appView.addPage(coursePage, KeyEvent.VK_C);
+
+        PageView trainingPage = new TrainingPage(appModel.getTrainingTableModel());
+        appView.addPage(trainingPage, KeyEvent.VK_R);
 
         // NOTE:
         // You can create other 'tableModels' and dynamically switch them in using:

@@ -28,5 +28,6 @@ public class Training {
     public void setTrainingQualification(Qualification trainingQualification) {
         this.trainingQualification = trainingQualification;
     }
+   
 
 }

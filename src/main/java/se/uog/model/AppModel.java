@@ -8,6 +8,7 @@ public class AppModel {
     private QualificationTableModel qualificationTableModel;
     private TeacherTableModel teacherTableModel;
     private CourseTableModel courseTableModel;
+    private TrainingTableModel trainingTableModel;
 
 
     public AppModel() {
@@ -15,11 +16,17 @@ public class AppModel {
         DefaultListModel<Qualification> qualificationList = new DefaultListModel<>();
         DefaultListModel<Teacher> teacherList = new DefaultListModel<>();
         DefaultListModel<Course> courseList = new DefaultListModel<>();
+        DefaultListModel<Training> trainingList = new DefaultListModel<>();
 
         // Create Object Table Models for our view
         qualificationTableModel = new QualificationTableModel(qualificationList);
         teacherTableModel = new TeacherTableModel(teacherList, qualificationList);
         courseTableModel = new CourseTableModel(courseList, teacherList, qualificationList);
+        trainingTableModel = new TrainingTableModel(trainingList, qualificationList);
+    }
+
+    public TrainingTableModel getTrainingTableModel() {
+        return trainingTableModel;
     }
 
     public QualificationTableModel getQualificationTableModel() {

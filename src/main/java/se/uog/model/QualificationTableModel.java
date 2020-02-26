@@ -38,6 +38,8 @@ public class QualificationTableModel implements ObjectTableModel<Qualification> 
             .setEditable(true)
             .build();
 
+            
+
         columns.add(nameColumn);
 
         return columns;
