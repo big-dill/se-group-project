@@ -102,7 +102,7 @@ public class ListSelectorDialog extends JDialog implements ActionListener {
 
             @Override
             public void setValueIsAdjusting(boolean isAdjusting) {
-                if (isAdjusting == false) {
+                if (!isAdjusting) {
                     gestureStarted = false;
                 }
             }
