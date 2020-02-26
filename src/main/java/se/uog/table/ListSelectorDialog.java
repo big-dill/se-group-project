@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -37,6 +38,7 @@ public class ListSelectorDialog extends JDialog implements ActionListener {
     private static ListSelectorDialog dialog;
     private static List<?> selection;
     private JList<?> list;
+    private DefaultListModel<?> listModel;
 
     public static List<?> showDialog(Component owner, String dialogTitle, DefaultListModel<?> model,
             List<?> initalSelection) {
@@ -53,14 +55,25 @@ public class ListSelectorDialog extends JDialog implements ActionListener {
         // Set the current selection
         ListSelectorDialog.selection = selection;
         list.clearSelection();
+
+        // Set the selection to match the selection.
+        Iterator iterator = selection.iterator();
+        while (iterator.hasNext()) {
+            int index = listModel.indexOf(iterator.next());
+            if (index >= 0) {
+                list.addSelectionInterval(index, index);
+            }
+        }
     }
 
     private ListSelectorDialog(Frame frame, String dialogTitle, DefaultListModel<?> listModel,
             List<?> initalSelection) {
         super(frame, dialogTitle, true);
 
+        this.listModel = listModel;
+
         // Create and initialize the buttons.
-        JButton cancelButton = new JButton("Cancel");
+        JButton cancelButton = new JButton("Clear");
         cancelButton.addActionListener(this);
         //
         final JButton setButton = new JButton("Set");
