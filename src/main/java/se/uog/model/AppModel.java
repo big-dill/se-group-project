@@ -10,7 +10,10 @@ public class AppModel {
 
     private DefaultListModel<Teacher> teacherList;
     private TeacherTableModel teacherTableModel;
-
+   
+    private DefaultListModel<Training> trainingList;
+    private TrainingTableModel trainingTableModel;
+    
     private DefaultListModel<Course> courseList;
     private CourseTableModel courseTableModel;
 
@@ -19,11 +22,17 @@ public class AppModel {
         qualificationList = new DefaultListModel<>();
         teacherList = new DefaultListModel<>();
         courseList = new DefaultListModel<>();
+        trainingList = new DefaultListModel<>();
 
         // Create Object Table Models for our view
         qualificationTableModel = new QualificationTableModel(qualificationList);
         teacherTableModel = new TeacherTableModel(teacherList, qualificationList);
         courseTableModel = new CourseTableModel(courseList, teacherList, qualificationList);
+        trainingTableModel = new TrainingTableModel(trainingList, qualificationList);
+    }
+
+    public TrainingTableModel getTrainingTableModel() {
+        return trainingTableModel;
     }
 
     public QualificationTableModel getQualificationTableModel() {
@@ -50,6 +59,22 @@ public class AppModel {
             qualificationList.addElement(q);
         }
     }
+
+    public Training[] getTrainingArray() {
+        Training[] array = new Training[trainingList.getSize()];
+        trainingList.copyInto(array);
+        return array;
+    }
+
+    public void setTrainingList(Training[] array) {
+        trainingList.clear();
+        for (Training q : array) {
+            trainingList.addElement(q);
+        }
+    }
+
+
+    
 
     public Teacher[] getTeacherArray() {
         Teacher[] array = new Teacher[teacherList.getSize()];
