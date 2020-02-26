@@ -7,10 +7,11 @@ import javax.swing.JPanel;
 
 import se.uog.model.Training;
 
+@SuppressWarnings("serial")
 public class TrainingPage extends JPanel implements TablePageView<Training> {
     private JObjectTable<Training> table;
 
-    public TrainingPage (ObjectTableModel<Training> tableModel){
+    public TrainingPage(ObjectTableModel<Training> tableModel) {
         table = new JObjectTable<>(tableModel);
         add(table);
     }

@@ -7,13 +7,21 @@ import javax.swing.event.ListDataListener;
 import javax.swing.table.AbstractTableModel;
 
 /**
- * This class creates a model which a JTable can use to interact with a list of Objects with the
- * class <E>. Each column can be configured to get and set an attribute of that class, and each row
- * in the model displays an element in the Object list.
+ * This class adapts an ObjectTableModel into a TableModel which can be used by
+ * JTable.
  *
- * Inherits from Swing's AbstractTableModel so it can be consumed by a JTable. It also implements
- * Swing's ListDataListener, so it can observe the underlying list and ensure the table view is
- * synchronised with it.
+ * It allows a JTable to represent an object, where the rows are the objects
+ * inside a list of class<E>, and the columns are different attributes of the
+ * class <E>. Thus, a cell represents a particular object and an attribute on
+ * that object, whose getters and setters are defined in the ObjectTableModel
+ * (using functional programming style lambdas).
+ *
+ * This reduces rewriting lots of code for views and controllers for each
+ * different base class we have.
+ *
+ * It inherits from Swing's AbstractTableModel, and also implements Swing's
+ * ListDataListener, so it can listen to the underlying list and ensure the
+ * table view is synchronised with it.
  *
  * @param <E> The class of object which the table represents.
  */
@@ -27,20 +35,18 @@ public class ObjectTableModelAdaptor<E> extends AbstractTableModel implements Li
     private List<ObjectTableColumn<E>> objectColumnMap;
 
     /**
-     * Creates an ObjectTableModel.
+     * Creates an adaptor which can be consumed by JTable, converting an
+     * ObjectTableModel into a swing compatable TableModel.
      *
-     * @param listModel       The list which the table is synchronised with. Each row represents a
-     *                        list element.
-     * @param objectColumnMap A configuration object which tells the table how to map a column to
-     *                        the list elements' attributes.
+     * @param objectTableModel The object table model.
      */
-    public ObjectTableModelAdaptor(DefaultListModel<E> listModel,
-            List<ObjectTableColumn<E>> objectColumnMap) {
+    public ObjectTableModelAdaptor(ObjectTableModel<E> objectTableModel) {
 
-        this.listModel = listModel;
-        this.objectColumnMap = objectColumnMap;
+        this.listModel = objectTableModel.getListModel();
+        this.objectColumnMap = objectTableModel.getObjectColumnMap();
 
-        // Adds a listener to the underlying list model so the table will update when it does.
+        // Adds a listener to the underlying list model so the table will update when it
+        // does.
         listModel.addListDataListener(this);
         // Initially update the view.
         fireTableStructureChanged();
@@ -66,13 +72,13 @@ public class ObjectTableModelAdaptor<E> extends AbstractTableModel implements Li
         return objectColumnMap.get(columnIndex).getColumnTitle();
     }
 
-
     @Override
     public Class<?> getColumnClass(int columnIndex) {
         // Gets the class of the column item from the ObjectTableColumn object.
         // ---
-        // Swing likes to know the classes so it can create default editors / renderers for
-        // base primitives. For example, a boolean is represented with a check box.
+        // Swing likes to know the classes so it can create default editors / renderers
+        // for base primitives. For example, a boolean is represented with a checkbox by
+        // default.
         return objectColumnMap.get(columnIndex).getColumnClass();
     }
 
@@ -102,7 +108,8 @@ public class ObjectTableModelAdaptor<E> extends AbstractTableModel implements Li
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         // Gets if the column item from the ObjectTableColumn object is editable.
-        // If it is, the table will be able to use its TableCellEditors to set the values
+        // If it is, the table will be able to use its TableCellEditors to set the
+        // values
         // of the objects inside the underlying listModel.
         return objectColumnMap.get(columnIndex).isColumnEditable();
     }

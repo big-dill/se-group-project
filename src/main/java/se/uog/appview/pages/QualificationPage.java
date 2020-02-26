@@ -6,6 +6,7 @@ import se.uog.model.Qualification;
 import se.uog.table.JObjectTable;
 import se.uog.table.ObjectTableModel;
 
+@SuppressWarnings("serial")
 public class QualificationPage extends JPanel implements TablePageView<Qualification> {
 
     private JObjectTable<Qualification> table;

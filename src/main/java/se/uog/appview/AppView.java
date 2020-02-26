@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 import se.uog.controller.AppController;
 
+@SuppressWarnings("serial")
 public class AppView extends JFrame {
 
     private static final String WINDOW_TITLE = "AppMenu"; // Obvs can be changed later
