@@ -8,7 +8,7 @@ import java.nio.file.Paths;
  * A JSONStorageInterface class which writes and reads to a specified file.
  */
 public class FileStorage implements JSONStorageInterface {
-    String filename;
+    private String filename;
 
     /**
      * Creates a FileStorage object for reading and writing JSON to disk.

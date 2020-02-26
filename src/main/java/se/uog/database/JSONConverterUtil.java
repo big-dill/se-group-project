@@ -9,7 +9,7 @@ import se.uog.model.AppModel;
  * Converts parts of our App (in this case, the AppModel) to and from JSON for
  * storage.
  */
-public class JSONConverter {
+public class JSONConverterUtil {
 
     /**
      * Converts an AppModel to a JSON string.

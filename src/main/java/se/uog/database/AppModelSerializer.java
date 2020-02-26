@@ -29,8 +29,8 @@ public class AppModelSerializer implements JsonSerializer<AppModel> {
     public static final String TEACHER_LIST_FIELD = "teachers";
     public static final String COURSE_LIST_FIELD = "courses";
 
-    AppModel appModel;
-    JsonObject jsonObject = new JsonObject();
+    private AppModel appModel;
+    private JsonObject jsonObject = new JsonObject();
 
     @Override
     public JsonElement serialize(AppModel appModel, Type typeOfSrc, JsonSerializationContext context) {

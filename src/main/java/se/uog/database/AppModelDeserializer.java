@@ -25,8 +25,8 @@ import se.uog.model.Training;
  */
 public class AppModelDeserializer implements JsonDeserializer<AppModel> {
 
-    JsonObject sourceJsonObject;
-    AppModel appModel = new AppModel(); // The target AppModel which will be returned.
+    private JsonObject sourceJsonObject;
+    private AppModel appModel = new AppModel(); // The target AppModel which will be returned.
 
     public AppModel deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
             throws JsonParseException {

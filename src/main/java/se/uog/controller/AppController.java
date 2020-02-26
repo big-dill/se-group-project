@@ -12,7 +12,7 @@ import se.uog.appview.pages.QualificationPage;
 import se.uog.appview.pages.TeacherPage;
 import se.uog.appview.pages.TrainingPage;
 import se.uog.database.FileStorage;
-import se.uog.database.JSONConverter;
+import se.uog.database.JSONConverterUtil;
 import se.uog.model.AppModel;
 
 public class AppController {
@@ -30,7 +30,7 @@ public class AppController {
 
         // If storage fails or no file exists, create a blank model...
         try {
-            appModel = JSONConverter.convertJSONToAppModel(appStorage.getJSON());
+            appModel = JSONConverterUtil.convertJSONToAppModel(appStorage.getJSON());
         } catch (IOException e) {
             System.err.println("Could not read model from file. Check for model.json in path.");
             System.err.println("Creating new model...");
@@ -79,7 +79,7 @@ public class AppController {
     public void close() {
         // Try saving to storage. If it fails, print a stack trace.
         try {
-            appStorage.storeJSON(JSONConverter.convertAppModelToJSON(appModel));
+            appStorage.storeJSON(JSONConverterUtil.convertAppModelToJSON(appModel));
         } catch (IOException e) {
             // Could probably prompt user for action here, rather than just flatly closing.
             System.err.println("IO error, could not store database in file.");
