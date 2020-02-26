@@ -8,11 +8,17 @@ import javax.swing.JPanel;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 import se.uog.appview.AppView;
+
 import se.uog.appview.pages.CoursePage;
+import se.uog.appview.pages.HomePage;
 import se.uog.appview.pages.QualificationPage;
 import se.uog.appview.pages.TeacherPage;
+
 import se.uog.model.AppModel;
 import se.uog.model.AppModelSerializer;
 
@@ -33,7 +39,9 @@ public class AppController {
 
     private void setupPages() {
 
-        // Qualification Page
+        JPanel homePage = new HomePage();
+        appView.addPage(homePage, "Home", KeyEvent.VK_H);
+
         JPanel qualificationPage = new QualificationPage(appModel.getQualificationTableModel());
         appView.addPage(qualificationPage, "Qualifications", KeyEvent.VK_Q);
 

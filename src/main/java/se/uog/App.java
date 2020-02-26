@@ -9,11 +9,12 @@ import com.google.gson.GsonBuilder;
 import se.uog.controller.AppController;
 import se.uog.model.AppModel;
 import se.uog.model.AppModelDeserializer;
+import se.uog.logger.Logger;
 
-/**
- * Hello world!
- */
 public class App {
+
+    private static String LOGGER_FLAG = "-t";
+
     public static void main(String[] args) {
 
         AppModel appModel;
@@ -26,7 +27,12 @@ public class App {
             appModel = new AppModel();
         }
 
+        if (args.length > 0 && args[0].equals(LOGGER_FLAG)) {
+            System.out.println("Logger enabled");
+            Logger.getInstance().enable();
+            Logger.getInstance().logToFileIfEnabled("Logger enabled.");
+        }
+
         new AppController(appModel);
     }
-
 }
