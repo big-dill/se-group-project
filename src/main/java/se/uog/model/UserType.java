@@ -21,14 +21,12 @@ public class UserType {
 
     @Override
     public String toString() {
-        return "UserType{" +
-            "userEnum=" + userEnum +
-            '}';
+        return userEnum + "";
     }
 
     public void setUserEnum(UserEnum userEnum) {
         System.out.println("ffiring");
-        UserEnum oldNEnum = UserEnum.UNASSIGNED;
+        UserEnum oldNEnum = this.userEnum;
         this.userEnum = userEnum;
         propertyChangeSupport.firePropertyChange("userEnum", oldNEnum, userEnum);
     }

@@ -18,20 +18,17 @@ public class TrainingPage extends JPanel implements TablePageView<Training> {
     public TrainingPage (ObjectTableModel<Training> tableModel){
         table = new JObjectTable<>(tableModel);
         UserType ue = UserType.getInstance();
-        JLabel jl = new JLabel(String.valueOf(ue.toString()));
-        add(jl);
+
+        UserType.getInstance().addPropertyChangeListener(propertyChangeEvent -> {
+            System.out.println(ue.getUserEnum());
+            if (propertyChangeEvent.getNewValue().equals(UserEnum.CLASS_DIRECTOR)){
+                table.setEditable(false);
+            }
+            else{table.setEditable(true);}
+        });
+
 
         add(table);
-
-
-
-        UserType.getInstance().addPropertyChangeListener(new PropertyChangeListener() {
-            @Override
-            public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
-                System.out.println(ue.getUserEnum());
-                jl.setText(String.valueOf(ue));
-            }
-        });
 
     }
 
