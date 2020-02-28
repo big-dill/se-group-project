@@ -8,9 +8,8 @@ import se.uog.model.UserType;
 import se.uog.table.JObjectTable;
 import se.uog.table.ObjectTableModel;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
+@SuppressWarnings("serial")
 public class QualificationPage extends JPanel implements TablePageView<Qualification> {
 
     private JObjectTable<Qualification> table;

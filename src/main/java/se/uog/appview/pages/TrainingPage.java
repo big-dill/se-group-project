@@ -4,18 +4,15 @@ import se.uog.model.UserEnum;
 import se.uog.model.UserType;
 import se.uog.table.JObjectTable;
 import se.uog.table.ObjectTableModel;
-
 import javax.swing.*;
-
 import se.uog.model.Training;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
+@SuppressWarnings("serial")
 public class TrainingPage extends JPanel implements TablePageView<Training> {
     private JObjectTable<Training> table;
 
-    public TrainingPage (ObjectTableModel<Training> tableModel){
+    public TrainingPage(ObjectTableModel<Training> tableModel) {
         table = new JObjectTable<>(tableModel);
         UserType ue = UserType.getInstance();
 

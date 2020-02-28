@@ -8,6 +8,7 @@ import se.uog.model.UserType;
 import se.uog.table.JObjectTable;
 import se.uog.table.ObjectTableModel;
 
+@SuppressWarnings("serial")
 public class TeacherPage extends JPanel implements TablePageView<Teacher> {
     private JObjectTable<Teacher> table;
 

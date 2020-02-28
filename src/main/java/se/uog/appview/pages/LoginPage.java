@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+@SuppressWarnings("serial")
 public class LoginPage extends JPanel {
 
     private static final String TITLE = "<html><h1><strong><i>Staff Management Application</i></strong></h1><hr></html>";
