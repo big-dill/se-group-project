@@ -14,11 +14,22 @@ public class QualificationPage extends JPanel implements TablePageView<Qualifica
     public QualificationPage(ObjectTableModel<Qualification> tableModel) {
         table = new JObjectTable<>(tableModel);
         add(table);
+        table.setEditable(false);
     }
 
     @Override
     public void setTableModel(ObjectTableModel<Qualification> model) {
         table.setModel(model);
+    }
+
+    @Override
+    public void setTableEnabled(boolean isEnabled) {
+        table.setEditable(isEnabled);
+    }
+
+    @Override
+    public void setTableButtonsEnabled(boolean isEnabled) {
+        table.setAddRemoveButtons(isEnabled);
     }
 
 }

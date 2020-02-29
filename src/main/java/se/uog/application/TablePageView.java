@@ -7,4 +7,8 @@ import se.uog.table.ObjectTableModel;
  */
 public interface TablePageView<E> {
     public void setTableModel(ObjectTableModel<E> model);
+
+    public void setTableEnabled(boolean isEnabled);
+
+    public void setTableButtonsEnabled(boolean isEnabled);
 }

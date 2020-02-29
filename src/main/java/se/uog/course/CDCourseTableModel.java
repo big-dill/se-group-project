@@ -12,35 +12,20 @@ import se.uog.table.ObjectTableListSelector;
 
 public class CDCourseTableModel extends CourseTableModel {
 
+    private List<ObjectTableColumn<Course>> columns = new ArrayList<>();
     private DefaultListModel<Qualification> qualificationList;
 
-    public CDCourseTableModel(DefaultListModel<Course> courseList,
-    DefaultListModel<Qualification> qualificationList) {
-    super(courseList);
-    this.qualificationList = qualificationList;
-// TODO Auto-generated constructor stub
-}
-
-    @Override
-    public DefaultListModel<Course> getListModel() {
-        return courseList;
-    }
-
-    @Override
-    public Course createDefaultElement() {
-        return new Course("");
-    }
-
-    @Override
-    public List<ObjectTableColumn<Course>> getObjectColumnMap() {
-        List<ObjectTableColumn<Course>> columns = new ArrayList<>();
-
+    public CDCourseTableModel(DefaultListModel<Course> courseList, DefaultListModel<Qualification> qualificationList) {
+        super(courseList);
+        this.qualificationList = qualificationList;
+       
+        // Setup Columns
         ObjectTableColumn<Course> courseDirectorColumn = new ObjectTableColumnBuilder<Course>()
-        .setTitle("Course Director Name")
-        .setClass(String.class)
-        .setRowElementGetter(course -> course.getCourseDirectorName())
-        .setRowElementSetter((course, val) -> course.setCourseDirectorName((String) val))
-        .build();
+            .setTitle("Course Director Name")
+            .setClass(String.class)
+            .setRowElementGetter(course -> course.getCourseDirectorName())
+            .setRowElementSetter((course, val) -> course.setCourseDirectorName((String) val))
+            .build();
 
         ObjectTableColumn<Course> nameColumn = new ObjectTableColumnBuilder<Course>()
                 .setTitle("Course Title")
@@ -81,8 +66,21 @@ public class CDCourseTableModel extends CourseTableModel {
         columns.add(teachersColumn);
         columns.add(isApprovedColumn);
 
-        return columns;
     }
 
+    @Override
+    public DefaultListModel<Course> getListModel() {
+        return courseList;
+    }
+
+    @Override
+    public Course createDefaultElement() {
+        return new Course("");
+    }
+
+    @Override
+    public List<ObjectTableColumn<Course>> getObjectColumnMap() {
+        return columns;
+    }
 
 }

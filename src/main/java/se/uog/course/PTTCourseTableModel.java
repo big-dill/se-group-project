@@ -10,28 +10,18 @@ import se.uog.table.ObjectTableColumnBuilder;
 
 public class PTTCourseTableModel extends CourseTableModel {
 
+    private List<ObjectTableColumn<Course>> columns = new ArrayList<>();
+
     public PTTCourseTableModel(DefaultListModel<Course> courseList) {
         super (courseList);
 
-        // TODO Auto-generated constructor stub
-    }
-
-    @Override
-    public DefaultListModel<Course> getListModel() {
-        // TODO Auto-generated method stub
-        return super.getListModel();
-    }
-
-    @Override
-    public List<ObjectTableColumn<Course>> getObjectColumnMap() {
-        List<ObjectTableColumn<Course>> columns = new ArrayList<>();
-
+        // Generate Columns
         ObjectTableColumn<Course> courseDirectorColumn = new ObjectTableColumnBuilder<Course>()
-        .setTitle("Course Director Name")
-        .setClass(String.class)
-        .setRowElementGetter(course -> course.getCourseDirectorName())
-        .setEditable(false)
-        .build();
+            .setTitle("Course Director Name")
+            .setClass(String.class)
+            .setRowElementGetter(course -> course.getCourseDirectorName())
+            .setEditable(false)
+            .build();
 
         ObjectTableColumn<Course> nameColumn = new ObjectTableColumnBuilder<Course>()
                 .setTitle("Course Title")
@@ -69,6 +59,16 @@ public class PTTCourseTableModel extends CourseTableModel {
         columns.add(qualificationsColumn);
         columns.add(teachersColumn);
         columns.add(isApprovedColumn);
+    }
+
+    @Override
+    public DefaultListModel<Course> getListModel() {
+        return super.getListModel();
+    }
+
+    @Override
+    public List<ObjectTableColumn<Course>> getObjectColumnMap() {
+
 
         return columns;
     }

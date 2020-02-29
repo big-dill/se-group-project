@@ -19,4 +19,15 @@ public class TeacherPage extends JPanel implements TablePageView<Teacher> {
     public void setTableModel(ObjectTableModel<Teacher> model) {
         table.setModel(model);
     }
+
+    @Override
+    public void setTableEnabled(boolean isEnabled) {
+        table.setEditable(isEnabled);
+    }
+
+    @Override
+    public void setTableButtonsEnabled(boolean isEnabled) {
+        table.setAddRemoveButtons(isEnabled);
+    }
+
 }

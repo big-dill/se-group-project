@@ -20,4 +20,15 @@ public class TrainingPage extends JPanel implements TablePageView<Training> {
     public void setTableModel(ObjectTableModel<Training> model) {
         table.setModel(model);
     }
+
+    @Override
+    public void setTableEnabled(boolean isEnabled) {
+        table.setEditable(isEnabled);
+    }
+
+    @Override
+    public void setTableButtonsEnabled(boolean isEnabled) {
+        table.setAddRemoveButtons(isEnabled);
+    }
+
 }

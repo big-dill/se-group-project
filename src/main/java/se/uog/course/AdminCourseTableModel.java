@@ -15,36 +15,20 @@ import se.uog.teacher.Teacher;
 
 public class AdminCourseTableModel extends CourseTableModel {
 
+    private List<ObjectTableColumn<Course>> columns = new ArrayList<>();
     private DefaultListModel<Teacher> teacherList;
 
     public AdminCourseTableModel(DefaultListModel<Course> courseList, DefaultListModel<Teacher> teacherList) {
-        super (courseList);
+        super(courseList);
         this.teacherList = teacherList;
 
-// TODO Auto-generated constructor stub
-}
-
-
-    @Override
-    public DefaultListModel<Course> getListModel() {
-        return courseList;
-    }
-
-    @Override
-    public Course createDefaultElement() {
-        return new Course("");
-    }
-
-    @Override
-    public List<ObjectTableColumn<Course>> getObjectColumnMap() {
-        List<ObjectTableColumn<Course>> columns = new ArrayList<>();
-
+           // Setup Columns
         ObjectTableColumn<Course> courseDirectorColumn = new ObjectTableColumnBuilder<Course>()
-        .setTitle("Course Director Name")
-        .setClass(String.class)
-        .setRowElementGetter(course -> course.getCourseDirectorName())
-        .setEditable(false)
-        .build();
+            .setTitle("Course Director Name")
+            .setClass(String.class)
+            .setRowElementGetter(course -> course.getCourseDirectorName())
+            .setEditable(false)
+            .build();
 
         ObjectTableColumn<Course> nameColumn = new ObjectTableColumnBuilder<Course>()
                 .setTitle("Course Title")
@@ -88,32 +72,47 @@ public class AdminCourseTableModel extends CourseTableModel {
         columns.add(qualificationsColumn);
         columns.add(teachersColumn);
         columns.add(isApprovedColumn);
+    }
+
+    @Override
+    public DefaultListModel<Course> getListModel() {
+        return courseList;
+    }
+
+    @Override
+    public Course createDefaultElement() {
+        return new Course("");
+    }
+
+    @Override
+    public List<ObjectTableColumn<Course>> getObjectColumnMap() {
 
         return columns;
     }
 
-
     /**
-     * Provides the filter function for the teachersColumn cell editor.
-     * Reimplements Julia's algorithm.
+     * Provides the filter function for the teachersColumn cell editor. Reimplements
+     * Julia's algorithm.
+     *
      * @return the filter function
      */
     private BiFunction<List<Teacher>, Course, List<Teacher>> getTeacherColumnFilterFunction() {
-        // Create filter which will be consumed by the ObjectTableListSelector. 
+        // Create filter which will be consumed by the ObjectTableListSelector.
         // This only displays teachers with the relevant qualifications.
 
-         return (teacherList, course) -> {
-            
+        return (teacherList, course) -> {
+
             // For each Teacher in our Teacher list
             Iterator<Teacher> iterator = teacherList.iterator();
-            
-            while(iterator.hasNext()) {
+
+            while (iterator.hasNext()) {
                 List<Qualification> requiredQualifications = course.getRequirements();
                 List<Qualification> teachersQualifications = iterator.next().getQualifications();
-          
+
                 boolean hasRequiredQualifications = true;
                 // Julia's algorithm:
-                // Checks if each of the required qualifications exists in the teacher's skillset.
+                // Checks if each of the required qualifications exists in the teacher's
+                // skillset.
                 // TODO: O(nm) -> reimplement with hashset for O(n+m)?
                 for (Qualification f : requiredQualifications) {
                     if (!teachersQualifications.contains(f)) {
