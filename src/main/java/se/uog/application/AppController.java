@@ -1,6 +1,8 @@
 package se.uog.application;
 
 import java.awt.event.KeyEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.IOException;
 
 import javax.swing.JPanel;
@@ -11,14 +13,19 @@ import se.uog.database.JSONConverterUtil;
 import se.uog.qualification.QualificationPage;
 import se.uog.teacher.TeacherPage;
 import se.uog.training.TrainingPage;
+import se.uog.user.User;
 
-public class AppController {
+public class AppController implements PropertyChangeListener {
 
     private static final String JSON_MODEL_FILENAME = "model.json";
 
     private final FileStorage appStorage;
     private final AppView appView;
     private AppModel appModel;
+    private QualificationPage qualificationPage;
+    private TeacherPage teacherPage;
+    private CoursePage coursePage;
+    private TrainingPage trainingPage;
 
     public AppController() {
 
@@ -44,19 +51,19 @@ public class AppController {
 
     private void setupView() {
 
-        JPanel homePage = new HomePage();
+        JPanel homePage = new HomePage(this, appView);
         appView.addPage(homePage, "Home", KeyEvent.VK_H);
 
-        JPanel qualificationPage = new QualificationPage(appModel.getQualificationTableModel());
+        qualificationPage = new QualificationPage(appModel.getQualificationTableModel(), this);
         appView.addPage(qualificationPage, "Qualifications", KeyEvent.VK_Q);
 
-        JPanel teacherPage = new TeacherPage(appModel.getTeacherTableModel());
+        teacherPage = new TeacherPage(appModel.getTeacherTableModel(), this);
         appView.addPage(teacherPage, "Teachers", KeyEvent.VK_T);
 
-        JPanel coursePage = new CoursePage(appModel.getAdminCourseTableModel());
+        coursePage = new CoursePage(appModel.getAdminCourseTableModel(), this);
         appView.addPage(coursePage, "Courses", KeyEvent.VK_C);
 
-        JPanel trainingPage = new TrainingPage(appModel.getTrainingTableModel());
+        trainingPage = new TrainingPage(appModel.getTrainingTableModel(), this);
         appView.addPage(trainingPage, "Training", KeyEvent.VK_R);
 
         // NOTE:
@@ -70,6 +77,7 @@ public class AppController {
     }
 
     public void setPage(String pageName) {
+        if(pageName.equals("Home")){appModel.setUser(User.UNASSIGNED);}
         appView.setPage(pageName);
     }
 
@@ -87,4 +95,47 @@ public class AppController {
         System.exit(0);
     }
 
+    public void setUser(User user){
+        appModel.setUser(user);
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener l) {
+        appModel.getPropertyChangeSupport().addPropertyChangeListener(l);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener l) {
+        appModel.getPropertyChangeSupport().removePropertyChangeListener(l);
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+
+        if (!appModel.getUser().equals(User.UNASSIGNED)){
+            appView.getMenu().setEnabled(true);
+            appView.getMenu().repaint();
+        } else
+            {
+            appView.getMenu().setEnabled(false);
+            appView.getMenu().repaint();
+        }
+
+        switch(appModel.getUser()){
+            case DIRECTOR:
+                coursePage.setTableModel(appModel.getPttCourseTableModel());
+                break;
+
+            case ADMINISTRATOR:
+                coursePage.setTableModel(appModel.getAdminCourseTableModel());
+                break;
+
+            case CLASS_DIRECTOR:
+                coursePage.setTableModel(appModel.getCdCourseTableModel());
+                break;
+        }
+
+
+
+    }
 }
+
+

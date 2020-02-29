@@ -2,6 +2,7 @@ package se.uog.training;
 
 import javax.swing.JPanel;
 
+import se.uog.application.AppController;
 import se.uog.application.TablePageView;
 import se.uog.table.JObjectTable;
 import se.uog.table.ObjectTableModel;
@@ -11,8 +12,9 @@ import se.uog.table.ObjectTableModel;
 public class TrainingPage extends JPanel implements TablePageView<Training> {
     private JObjectTable<Training> table;
 
-    public TrainingPage(ObjectTableModel<Training> tableModel) {
+    public TrainingPage(ObjectTableModel<Training> tableModel, AppController appController) {
         table = new JObjectTable<>(tableModel);
+        appController.addPropertyChangeListener(appController);
         add(table);
     }
 

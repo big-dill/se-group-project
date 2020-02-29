@@ -2,6 +2,7 @@ package se.uog.qualification;
 
 import javax.swing.JPanel;
 
+import se.uog.application.AppController;
 import se.uog.application.TablePageView;
 import se.uog.table.JObjectTable;
 import se.uog.table.ObjectTableModel;
@@ -11,8 +12,9 @@ public class QualificationPage extends JPanel implements TablePageView<Qualifica
 
     private JObjectTable<Qualification> table;
 
-    public QualificationPage(ObjectTableModel<Qualification> tableModel) {
+    public QualificationPage(ObjectTableModel<Qualification> tableModel, AppController appController) {
         table = new JObjectTable<>(tableModel);
+        appController.addPropertyChangeListener(appController);
         add(table);
     }
 

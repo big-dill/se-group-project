@@ -13,6 +13,11 @@ import se.uog.teacher.Teacher;
 import se.uog.teacher.TeacherTableModel;
 import se.uog.training.Training;
 import se.uog.training.TrainingTableModel;
+import se.uog.user.User;
+
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 
 /**
  * The AppModel class, a wrapper containing the Core Object lists consumed by
@@ -33,7 +38,10 @@ public class AppModel {
     private CourseTableModel adminCourseTableModel;
     private CourseTableModel cdCourseTableModel;
     private CourseTableModel pttCourseTableModel;
-    
+
+    private User user;
+    private PropertyChangeSupport propertyChangeSupport;
+
 
     /**
      * Creates an empty AppModel.
@@ -56,6 +64,10 @@ public class AppModel {
         cdCourseTableModel = new CDCourseTableModel(courseList, qualificationList);
         adminCourseTableModel = new AdminCourseTableModel(courseList, teacherList);
         trainingTableModel = new TrainingTableModel(trainingList, qualificationList);
+
+        user = User.UNASSIGNED;
+        propertyChangeSupport = new PropertyChangeSupport(user);
+
     }
 
     // These methods return the table models required by the pages
@@ -140,9 +152,24 @@ public class AppModel {
     public CourseTableModel getCdCourseTableModel() {
         return cdCourseTableModel;
     }
-  
+
     public CourseTableModel getPttCourseTableModel() {
         return pttCourseTableModel;
     }
+
+    public PropertyChangeSupport getPropertyChangeSupport() {
+        return propertyChangeSupport;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User newUser) {
+        User oldUser =  user;
+        user = newUser;
+        propertyChangeSupport.firePropertyChange("currentUser", oldUser, user);
+    }
+
 
 }

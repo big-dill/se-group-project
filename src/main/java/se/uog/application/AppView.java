@@ -4,8 +4,7 @@ import java.awt.CardLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 @SuppressWarnings("serial")
 public class AppView extends JFrame {
@@ -42,6 +41,10 @@ public class AppView extends JFrame {
 
     public void setPage(String pageName) {
         cardLayout.show(mainPanel, pageName);
+    }
+
+    public JMenu getMenu(){
+        return menuBar.getMenu();
     }
 
     // setPageEnabled()

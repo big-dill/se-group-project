@@ -16,6 +16,7 @@ public class AppMenu extends JMenuBar {
         this.menu = new JMenu(MENU_NAME);
 
         menu.setMnemonic(KeyEvent.VK_M); // Uses a to open the menu. Press Alt + M.
+        menu.setEnabled(false);
         add(menu);
     }
 
@@ -24,14 +25,13 @@ public class AppMenu extends JMenuBar {
         pageViewItem.setMnemonic(mneumonic);
 
         // Set action listener here, so appController is clean
-        pageViewItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                appController.setPage(pageName);
-            }
-        });
+        pageViewItem.addActionListener(e -> appController.setPage(pageName));
 
         menu.add(pageViewItem);
+    }
+
+    public JMenu getMenu() {
+        return menu;
     }
 
     // public void disablePage()
