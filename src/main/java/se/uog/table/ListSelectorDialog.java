@@ -6,9 +6,9 @@ import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -23,8 +23,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
 /**
- * A singleton class which displays a pop-up dialog for selecting elements from
- * a DefaultListModel.
+ * A singleton class which displays a pop-up dialog for selecting elements from a DefaultListModel.
  *
  * This class is adapted from the Swing tutorial for ListDialog:
  * https://docs.oracle.com/javase/tutorial/uiswing/examples/components/ListDialogRunnerProject/src/components/ListDialog.java
@@ -80,12 +79,11 @@ public class ListSelectorDialog extends JDialog {
         // Create and initialize the buttons.
 
         // Clear selection button
-        JButton clearButton = new JButton("Clear");
+        JButton clearButton = new JButton("Clear Selection");
         clearButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Destroys the selection and close.
-                ListSelectorDialog.dialog.setVisible(false);
+                setSelection(new ArrayList<>());
             }
         });
 
