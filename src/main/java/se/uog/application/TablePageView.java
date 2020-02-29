@@ -1,4 +1,4 @@
-package se.uog.appview.pages;
+package se.uog.application;
 
 import se.uog.table.ObjectTableModel;
 

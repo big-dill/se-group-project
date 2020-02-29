@@ -1,11 +1,11 @@
-package se.uog.appview.pages;
-
-import se.uog.table.JObjectTable;
-import se.uog.table.ObjectTableModel;
+package se.uog.training;
 
 import javax.swing.JPanel;
 
-import se.uog.model.Training;
+import se.uog.application.TablePageView;
+import se.uog.table.JObjectTable;
+import se.uog.table.ObjectTableModel;
+
 
 @SuppressWarnings("serial")
 public class TrainingPage extends JPanel implements TablePageView<Training> {

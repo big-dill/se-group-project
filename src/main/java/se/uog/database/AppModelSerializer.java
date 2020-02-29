@@ -10,11 +10,11 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
-import se.uog.model.AppModel;
-import se.uog.model.IDReferenced;
-import se.uog.model.Qualification;
-import se.uog.model.Teacher;
-import se.uog.model.Training;
+import se.uog.IDReferenced;
+import se.uog.application.AppModel;
+import se.uog.qualification.Qualification;
+import se.uog.teacher.Teacher;
+import se.uog.training.Training;
 
 /**
  * A custom serializer for the AppModel wrapper.

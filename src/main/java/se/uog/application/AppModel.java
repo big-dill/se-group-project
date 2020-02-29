@@ -1,6 +1,15 @@
-package se.uog.model;
+package se.uog.application;
 
 import javax.swing.DefaultListModel;
+
+import se.uog.course.Course;
+import se.uog.course.CourseTableModel;
+import se.uog.qualification.Qualification;
+import se.uog.qualification.QualificationTableModel;
+import se.uog.teacher.Teacher;
+import se.uog.teacher.TeacherTableModel;
+import se.uog.training.Training;
+import se.uog.training.TrainingTableModel;
 
 /**
  * The AppModel class, a wrapper containing the Core Object lists consumed by

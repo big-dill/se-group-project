@@ -1,19 +1,16 @@
-package se.uog.controller;
+package se.uog.application;
 
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 
 import javax.swing.JPanel;
 
-import se.uog.appview.AppView;
-import se.uog.appview.pages.CoursePage;
-import se.uog.appview.pages.HomePage;
-import se.uog.appview.pages.QualificationPage;
-import se.uog.appview.pages.TeacherPage;
-import se.uog.appview.pages.TrainingPage;
+import se.uog.course.CoursePage;
 import se.uog.database.FileStorage;
 import se.uog.database.JSONConverterUtil;
-import se.uog.model.AppModel;
+import se.uog.qualification.QualificationPage;
+import se.uog.teacher.TeacherPage;
+import se.uog.training.TrainingPage;
 
 public class AppController {
 

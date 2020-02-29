@@ -3,7 +3,7 @@ package se.uog.database;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import se.uog.model.AppModel;
+import se.uog.application.AppModel;
 
 /**
  * Converts parts of our App (in this case, the AppModel) to and from JSON for

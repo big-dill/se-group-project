@@ -1,4 +1,7 @@
-package se.uog.model;
+package se.uog.training;
+
+import se.uog.IDReferenced;
+import se.uog.qualification.Qualification;
 
 public class Training extends IDReferenced {
     private String name;

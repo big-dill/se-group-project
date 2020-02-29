@@ -1,4 +1,6 @@
-package se.uog.model;
+package se.uog.qualification;
+
+import se.uog.IDReferenced;
 
 // qualification has a name
 public class Qualification extends IDReferenced {

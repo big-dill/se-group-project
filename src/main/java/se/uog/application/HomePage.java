@@ -1,4 +1,4 @@
-package se.uog.appview.pages;
+package se.uog.application;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;

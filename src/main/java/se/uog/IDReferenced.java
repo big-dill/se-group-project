@@ -1,4 +1,4 @@
-package se.uog.model;
+package se.uog;
 
 import java.util.UUID;
 

@@ -1,7 +1,10 @@
-package se.uog.model;
+package se.uog.course;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import se.uog.qualification.Qualification;
+import se.uog.teacher.Teacher;
 
 public class Course {
     private String name;

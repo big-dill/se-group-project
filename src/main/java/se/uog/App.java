@@ -1,6 +1,6 @@
 package se.uog;
 
-import se.uog.controller.AppController;
+import se.uog.application.AppController;
 import se.uog.logger.Logger;
 
 public class App {
