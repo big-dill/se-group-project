@@ -26,7 +26,7 @@ public class Teacher extends IDReferenced {
     }
 
     public void setTraining(Training t){
-        pendingTraining = t;
+        this.pendingTraining = t;
     }
 
     public Training getTraining(){

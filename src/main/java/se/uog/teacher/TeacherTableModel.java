@@ -10,17 +10,20 @@ import se.uog.table.ObjectTableColumn;
 import se.uog.table.ObjectTableColumnBuilder;
 import se.uog.table.ObjectTableListSelector;
 import se.uog.table.ObjectTableModel;
+import se.uog.training.Training;
 
 public class TeacherTableModel implements ObjectTableModel<Teacher> {
 
     private DefaultListModel<Teacher> teacherList;
     private DefaultListModel<Qualification> qualificationList;
+    private DefaultListModel<Training> trainingList;
 
     public TeacherTableModel(DefaultListModel<Teacher> teacherList,
-            DefaultListModel<Qualification> qualificationList) {
+            DefaultListModel<Qualification> qualificationList, DefaultListModel<Training> trainingList) {
 
         this.teacherList = teacherList;
         this.qualificationList = qualificationList;
+        this.trainingList = trainingList;
     }
 
     @Override
@@ -57,9 +60,22 @@ public class TeacherTableModel implements ObjectTableModel<Teacher> {
                 .setCellEditor(new ObjectTableListSelector<Teacher, Qualification>(
                         qualificationList, "Select Qualifications"))
                 .build();
+        
+        ObjectTableColumn<Teacher> addTrainingColumn = new ObjectTableColumnBuilder<Teacher>()
+        .setTitle("Add Training")
+        .setClass(Training.class)
+        .setRowElementGetter(teacher -> teacher.getTraining())
+        .setRowElementSetter((teacher, val) -> {
+            List<Training> trainingList = (List<Training>) val;
+            teacher.setTraining(trainingList.get(0));
+        })
+        .setCellEditor(new ObjectTableListSelector<Teacher, Training>(
+                        trainingList, "Select Training"))
+                .build();
 
         columns.add(nameColumn);
         columns.add(qualificationsColumn);
+        columns.add(addTrainingColumn);
         return columns;
     }
 }

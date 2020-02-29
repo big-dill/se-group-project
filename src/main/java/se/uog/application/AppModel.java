@@ -45,7 +45,7 @@ public class AppModel {
 
         // Create Object Table Models for our pages
         qualificationTableModel = new QualificationTableModel(qualificationList);
-        teacherTableModel = new TeacherTableModel(teacherList, qualificationList);
+        teacherTableModel = new TeacherTableModel(teacherList, qualificationList, trainingList);
         courseTableModel = new CourseTableModel(courseList, teacherList, qualificationList);
         trainingTableModel = new TrainingTableModel(trainingList, qualificationList);
     }

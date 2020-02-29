@@ -30,4 +30,10 @@ public class Training extends IDReferenced {
     public void setTrainingQualification(Qualification trainingQualification) {
         this.trainingQualification = trainingQualification;
     }
+
+    @Override
+    public String toString() {
+        // TODO Auto-generated method stub
+        return name;
+    }
 }
