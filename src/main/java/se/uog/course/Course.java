@@ -7,9 +7,11 @@ import se.uog.qualification.Qualification;
 import se.uog.teacher.Teacher;
 
 public class Course {
+    private String courseDirectorName;
     private String name;
     private List<Qualification> requirements = new ArrayList<Qualification>();
     private List<Teacher> assignedTeachers;
+    private boolean isApproved = false;
 
     public Course(String n) {
         name = n;
@@ -53,5 +55,22 @@ public class Course {
         // TODO Auto-generated method stub
         return name;
     }
+
+    public boolean isApproved() {
+        return isApproved;
+    }
+
+    public void setApproved(boolean isApproved) {
+        this.isApproved = isApproved;
+    }
+
+    public String getCourseDirectorName() {
+        return courseDirectorName;
+    }
+
+    public void setCourseDirectorName(String courseDirectorName) {
+        this.courseDirectorName = courseDirectorName;
+    }
+
 
 }

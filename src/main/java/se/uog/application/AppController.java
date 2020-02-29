@@ -53,7 +53,7 @@ public class AppController {
         JPanel teacherPage = new TeacherPage(appModel.getTeacherTableModel());
         appView.addPage(teacherPage, "Teachers", KeyEvent.VK_T);
 
-        JPanel coursePage = new CoursePage(appModel.getCourseTableModel());
+        JPanel coursePage = new CoursePage(appModel.getAdminCourseTableModel());
         appView.addPage(coursePage, "Courses", KeyEvent.VK_C);
 
         JPanel trainingPage = new TrainingPage(appModel.getTrainingTableModel());

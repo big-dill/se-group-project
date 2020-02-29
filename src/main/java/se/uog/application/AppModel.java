@@ -2,8 +2,11 @@ package se.uog.application;
 
 import javax.swing.DefaultListModel;
 
+import se.uog.course.AdminCourseTableModel;
+import se.uog.course.CDCourseTableModel;
 import se.uog.course.Course;
 import se.uog.course.CourseTableModel;
+import se.uog.course.PTTCourseTableModel;
 import se.uog.qualification.Qualification;
 import se.uog.qualification.QualificationTableModel;
 import se.uog.teacher.Teacher;
@@ -27,7 +30,10 @@ public class AppModel {
     private TrainingTableModel trainingTableModel;
 
     private DefaultListModel<Course> courseList;
-    private CourseTableModel courseTableModel;
+    private CourseTableModel adminCourseTableModel;
+    private CourseTableModel cdCourseTableModel;
+    private CourseTableModel pttCourseTableModel;
+    
 
     /**
      * Creates an empty AppModel.
@@ -46,7 +52,9 @@ public class AppModel {
         // Create Object Table Models for our pages
         qualificationTableModel = new QualificationTableModel(qualificationList);
         teacherTableModel = new TeacherTableModel(teacherList, qualificationList, trainingList);
-        courseTableModel = new CourseTableModel(courseList, teacherList, qualificationList);
+        pttCourseTableModel = new PTTCourseTableModel(courseList);
+        cdCourseTableModel = new CDCourseTableModel(courseList, qualificationList);
+        adminCourseTableModel = new AdminCourseTableModel(courseList, teacherList);
         trainingTableModel = new TrainingTableModel(trainingList, qualificationList);
     }
 
@@ -64,9 +72,6 @@ public class AppModel {
         return teacherTableModel;
     }
 
-    public CourseTableModel getCourseTableModel() {
-        return courseTableModel;
-    }
 
     // These methods set / get the arrays from the DefaultListModels
     // for serialization / deserialization into a file format / for databases.
@@ -126,6 +131,18 @@ public class AppModel {
             list.addElement(elem);
         }
         return list;
+    }
+
+    public CourseTableModel getAdminCourseTableModel() {
+        return adminCourseTableModel;
+    }
+
+    public CourseTableModel getCdCourseTableModel() {
+        return cdCourseTableModel;
+    }
+  
+    public CourseTableModel getPttCourseTableModel() {
+        return pttCourseTableModel;
     }
 
 }

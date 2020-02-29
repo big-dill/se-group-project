@@ -62,16 +62,15 @@ public class TeacherTableModel implements ObjectTableModel<Teacher> {
                 .build();
         
         ObjectTableColumn<Teacher> addTrainingColumn = new ObjectTableColumnBuilder<Teacher>()
-        .setTitle("Add Training")
-        .setClass(Training.class)
-        .setRowElementGetter(teacher -> teacher.getTraining())
-        .setRowElementSetter((teacher, val) -> {
-            List<Training> trainingList = (List<Training>) val;
-            teacher.setTraining(trainingList.get(0));
-        })
-        .setCellEditor(new ObjectTableListSelector<Teacher, Training>(
+            .setTitle("Add Training")
+            .setClass(List.class)
+            .setRowElementGetter(teacher -> teacher.getTraining())
+            .setRowElementSetter((teacher, val) -> {
+                teacher.setTraining((List<Training>) val);
+            })
+            .setCellEditor(new ObjectTableListSelector<Teacher, Training>(
                         trainingList, "Select Training"))
-                .build();
+            .build();
 
         columns.add(nameColumn);
         columns.add(qualificationsColumn);

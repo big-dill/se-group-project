@@ -11,7 +11,7 @@ import se.uog.training.Training;
 public class Teacher extends IDReferenced {
     private String name;
     private List<Qualification> teacherQualifications = new ArrayList<Qualification>();
-    private Training pendingTraining;
+    private List<Training> pendingTraining = new ArrayList<Training>();
 
     public Teacher(String n) {
         name = n;
@@ -25,12 +25,24 @@ public class Teacher extends IDReferenced {
         this.name = name;
     }
 
-    public void setTraining(Training t){
+    /**
+     * Adds a training to the Teacher's list of training to be completed 
+     * @param t
+     */
+    public void addTraining(Training t){
+        pendingTraining.add(t);
+    }
+
+    public void setTraining(List<Training> t) {
         this.pendingTraining = t;
     }
 
-    public Training getTraining(){
+    public List<Training> getTraining(){
         return pendingTraining;
+    }
+
+    public void clearTraining() {
+        pendingTraining.clear();
     }
 
     public List<Qualification> getQualifications() {
@@ -51,7 +63,6 @@ public class Teacher extends IDReferenced {
 
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
         return name;
     }
 }

@@ -1,11 +1,13 @@
 package se.uog.training;
 
+import java.util.List;
+
 import se.uog.IDReferenced;
 import se.uog.qualification.Qualification;
 
 public class Training extends IDReferenced {
     private String name;
-    private Qualification trainingQualification;
+    private List<Qualification> trainingQualificationList;
 
     public Training(String n) {
         name = n;
@@ -19,21 +21,20 @@ public class Training extends IDReferenced {
         this.name = name;
     }
 
-    public Qualification getTrainingQualification() {
-        return trainingQualification;
+    public List<Qualification> getTrainingQualificationList() {
+        return trainingQualificationList;
     }
 
     /**
      * Takes the Qualification input and sets that as the qualification to be gained through the training.
      * @param trainingQualification
      */
-    public void setTrainingQualification(Qualification trainingQualification) {
-        this.trainingQualification = trainingQualification;
+    public void setTrainingQualificationList(List<Qualification> trainingQualification) {
+        this.trainingQualificationList = trainingQualification;
     }
 
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
         return name;
     }
 }
