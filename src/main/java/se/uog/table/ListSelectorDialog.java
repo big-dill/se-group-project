@@ -6,9 +6,9 @@ import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -76,6 +76,16 @@ public class ListSelectorDialog extends JDialog {
     }
 
     private void setupButtons() {
+        // Create and initialize the buttons.
+
+        // Clear selection button
+        JButton clearButton = new JButton("Clear Selection");
+        clearButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setSelection(new ArrayList<>());
+            }
+        });
 
         // Set selection button
         final JButton setButton = new JButton("Set");
