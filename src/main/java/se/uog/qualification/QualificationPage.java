@@ -14,7 +14,6 @@ public class QualificationPage extends JPanel implements TablePageView<Qualifica
     public QualificationPage(ObjectTableModel<Qualification> tableModel) {
         table = new JObjectTable<>(tableModel);
         add(table);
-        table.setEditable(false);
     }
 
     @Override
