@@ -1,9 +1,7 @@
 package se.uog.course;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.function.BiFunction;
 
 import javax.swing.DefaultListModel;
 
@@ -11,8 +9,6 @@ import se.uog.qualification.Qualification;
 import se.uog.table.ObjectTableColumn;
 import se.uog.table.ObjectTableColumnBuilder;
 import se.uog.table.ObjectTableListSelector;
-import se.uog.table.ObjectTableModel;
-import se.uog.teacher.Teacher;
 
 public class CDCourseTableModel extends CourseTableModel {
 
