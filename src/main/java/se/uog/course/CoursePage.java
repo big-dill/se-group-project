@@ -21,4 +21,16 @@ public class CoursePage extends JPanel implements TablePageView<Course> {
         table.setModel(model);
     }
 
+    @Override
+    public void setTableEnabled(boolean isEnabled) {
+        table.setEditable(isEnabled);
+
+    }
+
+    @Override
+    public void setTableButtonsEnabled(boolean isEnabled) {
+        table.setAddRemoveButtons(isEnabled);
+
+    }
+
 }

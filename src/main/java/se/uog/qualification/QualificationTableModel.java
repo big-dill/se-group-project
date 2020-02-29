@@ -11,10 +11,23 @@ import se.uog.table.ObjectTableModel;
 
 public class QualificationTableModel implements ObjectTableModel<Qualification> {
 
+    private List<ObjectTableColumn<Qualification>> columns = new ArrayList<>();
     private DefaultListModel<Qualification> qualificationList;
 
     public QualificationTableModel(DefaultListModel<Qualification> qualificationList) {
         this.qualificationList = qualificationList;
+
+        // Setup Columns
+
+        ObjectTableColumn<Qualification> nameColumn = new ObjectTableColumnBuilder<Qualification>()
+            .setTitle("Name")
+            .setClass(String.class)
+            .setRowElementGetter(qualification -> qualification.getQualificationName())
+            .setRowElementSetter((qualification, val) -> qualification.setQualificationName((String)val))
+            .setEditable(true)
+            .build();
+
+        columns.add(nameColumn);
     }
 
     @Override
@@ -29,20 +42,6 @@ public class QualificationTableModel implements ObjectTableModel<Qualification> 
 
     @Override
     public List<ObjectTableColumn<Qualification>> getObjectColumnMap() {
-        List<ObjectTableColumn<Qualification>> columns = new ArrayList<>();
-
-        ObjectTableColumn<Qualification> nameColumn = new ObjectTableColumnBuilder<Qualification>()
-            .setTitle("Name")
-            .setClass(String.class)
-            .setRowElementGetter(qualification -> qualification.getQualificationName())
-            .setRowElementSetter((qualification, val) -> qualification.setQualificationName((String)val))
-            .setEditable(true)
-            .build();
-
-            
-
-        columns.add(nameColumn);
-
         return columns;
     }
 

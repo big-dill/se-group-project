@@ -14,12 +14,36 @@ import se.uog.teacher.Teacher;
 
 public class TrainingTableModel implements ObjectTableModel<Training> {
 
+    private List<ObjectTableColumn<Training>> columns = new ArrayList<>();
     private DefaultListModel<Training> trainingList;
     private DefaultListModel<Qualification> qualificationList;
 
     public TrainingTableModel(DefaultListModel<Training> t, DefaultListModel<Qualification> q) {
         trainingList = t;
         qualificationList = q;
+
+        // Setup Columns
+        ObjectTableColumn<Training> nameColumn = new ObjectTableColumnBuilder<Training>()
+        .setTitle("Name")
+        .setClass(String.class)
+        .setRowElementGetter(training -> training.getName())
+        .setRowElementSetter((training, val) -> training.setName((String)val))
+        .setEditable(true)
+        .build();
+
+        ObjectTableColumn<Training> qualificationColumn = new ObjectTableColumnBuilder<Training>()
+        .setTitle("Qualification")
+        .setClass(List.class)
+        .setRowElementGetter(training -> training.getTrainingQualificationList())
+        .setRowElementSetter((training, val) -> {
+            training.setTrainingQualificationList((List<Qualification>) val);
+        })
+        .setCellEditor(new ObjectTableListSelector<Teacher, Qualification>(
+            qualificationList, "Select Qualification"))
+        .build();
+
+        columns.add(nameColumn);
+        columns.add(qualificationColumn);
     }
 
     @Override
@@ -34,32 +58,6 @@ public class TrainingTableModel implements ObjectTableModel<Training> {
 
     @Override
     public List<ObjectTableColumn<Training>> getObjectColumnMap() {
-        List<ObjectTableColumn<Training>> columns = new ArrayList<>();
-
-        ObjectTableColumn<Training> nameColumn = new ObjectTableColumnBuilder<Training>()
-            .setTitle("Name")
-            .setClass(String.class)
-            .setRowElementGetter(training -> training.getName())
-            .setRowElementSetter((training, val) -> training.setName((String)val))
-            .setEditable(true)
-            .build();
-
-        
-            
-        ObjectTableColumn<Training> qualificationColumn = new ObjectTableColumnBuilder<Training>()
-        .setTitle("Qualification")
-        .setClass(List.class)
-        .setRowElementGetter(training -> training.getTrainingQualificationList())
-        .setRowElementSetter((training, val) -> {
-            training.setTrainingQualificationList((List<Qualification>) val);
-        })
-        .setCellEditor(new ObjectTableListSelector<Teacher, Qualification>(
-             qualificationList, "Select Qualification"))
-        .build();
-
-        columns.add(nameColumn);
-        columns.add(qualificationColumn);
-
         return columns;
     }
 
