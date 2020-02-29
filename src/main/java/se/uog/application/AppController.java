@@ -2,15 +2,14 @@ package se.uog.application;
 
 import java.awt.event.KeyEvent;
 import java.io.IOException;
-
 import javax.swing.JPanel;
-
-import se.uog.course.CoursePage;
+import se.uog.TablePageView;
+import se.uog.course.Course;
 import se.uog.database.FileStorage;
 import se.uog.database.JSONConverterUtil;
-import se.uog.qualification.QualificationPage;
-import se.uog.teacher.TeacherPage;
-import se.uog.training.TrainingPage;
+import se.uog.qualification.Qualification;
+import se.uog.teacher.Teacher;
+import se.uog.training.Training;
 
 public class AppController {
 
@@ -47,16 +46,17 @@ public class AppController {
         JPanel homePage = new HomePage();
         appView.addPage(homePage, "Home", KeyEvent.VK_H);
 
-        JPanel qualificationPage = new QualificationPage(appModel.getQualificationTableModel());
+        JPanel qualificationPage =
+                new TablePageView<Qualification>(appModel.getQualificationTableModel());
         appView.addPage(qualificationPage, "Qualifications", KeyEvent.VK_Q);
 
-        JPanel teacherPage = new TeacherPage(appModel.getTeacherTableModel());
+        JPanel teacherPage = new TablePageView<Teacher>(appModel.getTeacherTableModel());
         appView.addPage(teacherPage, "Teachers", KeyEvent.VK_T);
 
-        JPanel coursePage = new CoursePage(appModel.getAdminCourseTableModel());
+        JPanel coursePage = new TablePageView<Course>(appModel.getAdminCourseTableModel());
         appView.addPage(coursePage, "Courses", KeyEvent.VK_C);
 
-        JPanel trainingPage = new TrainingPage(appModel.getTrainingTableModel());
+        JPanel trainingPage = new TablePageView<Training>(appModel.getTrainingTableModel());
         appView.addPage(trainingPage, "Training", KeyEvent.VK_R);
 
         // NOTE:
