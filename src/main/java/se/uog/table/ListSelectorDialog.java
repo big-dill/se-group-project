@@ -23,7 +23,8 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
 /**
- * A singleton class which displays a pop-up dialog for selecting elements from a DefaultListModel.
+ * A singleton class which displays a pop-up dialog for selecting elements from
+ * a DefaultListModel.
  *
  * This class is adapted from the Swing tutorial for ListDialog:
  * https://docs.oracle.com/javase/tutorial/uiswing/examples/components/ListDialogRunnerProject/src/components/ListDialog.java
@@ -76,6 +77,17 @@ public class ListSelectorDialog extends JDialog {
     }
 
     private void setupButtons() {
+        // Create and initialize the buttons.
+
+        // Clear selection button
+        JButton clearButton = new JButton("Clear");
+        clearButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Destroys the selection and close.
+                ListSelectorDialog.dialog.setVisible(false);
+            }
+        });
 
         // Set selection button
         final JButton setButton = new JButton("Set");
@@ -96,6 +108,7 @@ public class ListSelectorDialog extends JDialog {
         buttonPane.setLayout(new BoxLayout(buttonPane, BoxLayout.LINE_AXIS));
         buttonPane.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
         buttonPane.add(Box.createHorizontalGlue());
+        buttonPane.add(clearButton);
         buttonPane.add(Box.createRigidArea(new Dimension(10, 0)));
         buttonPane.add(setButton);
         getContentPane().add(buttonPane, BorderLayout.SOUTH);
