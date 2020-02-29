@@ -1,4 +1,4 @@
-package se.uog.model;
+package se.uog.user;
 
 public enum User {
 

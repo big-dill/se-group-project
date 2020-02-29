@@ -1,8 +1,8 @@
-package se.uog.appview.pages;
+package se.uog.teacher;
 
 import javax.swing.JPanel;
 
-import se.uog.model.Teacher;
+import se.uog.application.TablePageView;
 import se.uog.table.JObjectTable;
 import se.uog.table.ObjectTableModel;
 

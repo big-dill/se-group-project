@@ -1,6 +1,4 @@
-package se.uog.appview;
-
-import se.uog.controller.AppController;
+package se.uog.application;
 
 import javax.swing.*;
 import java.awt.event.*;

@@ -1,13 +1,16 @@
-package se.uog.model;
+package se.uog.training;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
+
+import se.uog.qualification.Qualification;
 import se.uog.table.ObjectTableColumn;
 import se.uog.table.ObjectTableColumnBuilder;
 import se.uog.table.ObjectTableListSelector;
 import se.uog.table.ObjectTableModel;
+import se.uog.teacher.Teacher;
 
 public class TrainingTableModel implements ObjectTableModel<Training> {
 
@@ -45,11 +48,10 @@ public class TrainingTableModel implements ObjectTableModel<Training> {
             
         ObjectTableColumn<Training> qualificationColumn = new ObjectTableColumnBuilder<Training>()
         .setTitle("Qualification")
-        .setClass(Qualification.class)
-        .setRowElementGetter(training -> training.getTrainingQualification())
+        .setClass(List.class)
+        .setRowElementGetter(training -> training.getTrainingQualificationList())
         .setRowElementSetter((training, val) -> {
-            List<Qualification> qualificationList = (List<Qualification>) val;
-            training.setTrainingQualification(qualificationList.get(0));
+            training.setTrainingQualificationList((List<Qualification>) val);
         })
         .setCellEditor(new ObjectTableListSelector<Teacher, Qualification>(
              qualificationList, "Select Qualification"))
