@@ -113,6 +113,7 @@ public class JObjectTable<E> extends JPanel {
      */
     public void setAddRemoveButtons(boolean enabled) {
         buttonPanel.setVisible(enabled);
+        table.setRowSelectionAllowed(enabled);
     }
 
     /**
