@@ -1,11 +1,10 @@
 package se.uog.controller;
 
 import java.awt.event.KeyEvent;
-import java.io.FileWriter;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.IOException;
-
 import javax.swing.JPanel;
-
 import se.uog.appview.AppView;
 import se.uog.appview.pages.CoursePage;
 import se.uog.appview.pages.LoginPage;
@@ -16,17 +15,22 @@ import se.uog.database.FileStorage;
 import se.uog.database.JSONConverterUtil;
 import se.uog.model.AppModel;
 import se.uog.model.UserEnum;
-import se.uog.model.UserType;
 
-public class AppController {
+public class AppController implements PropertyChangeListener {
 
     private static final String JSON_MODEL_FILENAME = "model.json";
 
     private final FileStorage appStorage;
     private final AppView appView;
     private AppModel appModel;
+    private JPanel homePage;
+    private QualificationPage qualificationPage;
+    private TeacherPage teacherPage;
+    private CoursePage coursePage;
+    private TrainingPage trainingPage;
 
     public AppController() {
+
 
         // Load the model from the storage...
         this.appStorage = new FileStorage(JSON_MODEL_FILENAME);
@@ -40,6 +44,7 @@ public class AppController {
             appModel = new AppModel();
         }
 
+
         this.appView = new AppView(this);
 
         setupView();
@@ -48,21 +53,23 @@ public class AppController {
         appView.setVisible(true);
     }
 
+
     private void setupView() {
 
-        JPanel homePage = new LoginPage(appView);
+
+        this.homePage = new LoginPage(appView, this);
         appView.addPage(homePage, "Login", KeyEvent.VK_L);
 
-        JPanel qualificationPage = new QualificationPage(appModel.getQualificationTableModel());
+        this.qualificationPage = new QualificationPage(this);
         appView.addPage(qualificationPage, "Qualifications", KeyEvent.VK_Q);
 
-        JPanel teacherPage = new TeacherPage(appModel.getTeacherTableModel());
+        this.teacherPage = new TeacherPage(this);
         appView.addPage(teacherPage, "Teachers", KeyEvent.VK_T);
 
-        JPanel coursePage = new CoursePage(appModel.getCourseTableModel());
+        this.coursePage = new CoursePage(this);
         appView.addPage(coursePage, "Courses", KeyEvent.VK_C);
 
-        JPanel trainingPage = new TrainingPage(appModel.getTrainingTableModel());
+        this.trainingPage = new TrainingPage(this);
         appView.addPage(trainingPage, "Training", KeyEvent.VK_R);
 
         // NOTE:
@@ -80,7 +87,7 @@ public class AppController {
 
         if(pageName.equals("Login")){
             appView.setMenuEnabled(false);
-            UserType.getInstance().setUserEnum(UserEnum.DIRECTOR);
+            appModel.setUserEnum(UserEnum.UNASSIGNED);
         }
     }
 
@@ -98,4 +105,45 @@ public class AppController {
         System.exit(0);
     }
 
+
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        UserEnum e = appModel.getCurrentUser();
+
+        switch (e){
+            case DIRECTOR:
+                System.out.print("Yo!");
+                getQualificationPage().getTable().setEditable(false);
+        }
+
+    }
+
+
+    public void setUserEnum(UserEnum userEnum) {
+        appModel.setUserEnum(userEnum);
+    }
+
+    public JPanel getHomePage() {
+        return homePage;
+    }
+
+    public QualificationPage getQualificationPage() {
+        return qualificationPage;
+    }
+
+    public TeacherPage getTeacherPage() {
+        return teacherPage;
+    }
+
+    public CoursePage getCoursePage() {
+        return coursePage;
+    }
+
+    public TrainingPage getTrainingPage() {
+        return trainingPage;
+    }
+    public AppModel getAppModel() {
+        return appModel;
+    }
 }

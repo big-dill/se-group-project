@@ -2,11 +2,14 @@ package se.uog.appview.pages;
 
 import javax.swing.JPanel;
 
+import se.uog.controller.AppController;
+import se.uog.model.AppModel;
 import se.uog.model.Qualification;
 import se.uog.model.UserEnum;
-import se.uog.model.UserType;
 import se.uog.table.JObjectTable;
 import se.uog.table.ObjectTableModel;
+
+import java.beans.PropertyChangeSupport;
 
 
 @SuppressWarnings("serial")
@@ -14,19 +17,14 @@ public class QualificationPage extends JPanel implements TablePageView<Qualifica
 
     private JObjectTable<Qualification> table;
 
-    public QualificationPage(ObjectTableModel<Qualification> tableModel) {
-        table = new JObjectTable<>(tableModel);
-        UserType ue = UserType.getInstance();
+    public JObjectTable<Qualification> getTable() {
+        return table;
+    }
 
-        UserType.getInstance().addPropertyChangeListener(propertyChangeEvent -> {
-            System.out.println(ue.getUserEnum());
-            if (propertyChangeEvent.getNewValue().equals(UserEnum.DIRECTOR)
-            || propertyChangeEvent.getNewValue().equals(UserEnum.ADMINISTRATOR)){
-                table.setEditable(false);
-            }
-            else{table.setEditable(true);}
-        });
-
+    public QualificationPage(AppController appController) {
+        table = new JObjectTable<>(appController.getAppModel().getQualificationTableModel());
+        PropertyChangeSupport ue = appController.getAppModel().getPropertyChangeSupport();
+        ue.addPropertyChangeListener(appController);
         add(table);
     }
 

@@ -2,9 +2,8 @@ package se.uog.appview.pages;
 
 import javax.swing.JPanel;
 
+import se.uog.controller.AppController;
 import se.uog.model.Teacher;
-import se.uog.model.UserEnum;
-import se.uog.model.UserType;
 import se.uog.table.JObjectTable;
 import se.uog.table.ObjectTableModel;
 
@@ -12,19 +11,12 @@ import se.uog.table.ObjectTableModel;
 public class TeacherPage extends JPanel implements TablePageView<Teacher> {
     private JObjectTable<Teacher> table;
 
-    public TeacherPage(ObjectTableModel<Teacher> tableModel) {
-        table = new JObjectTable<>(tableModel);
+    public TeacherPage(AppController appController) {
+        table = new JObjectTable<>(appController.getAppModel().getTeacherTableModel());
 
-        UserType ue = UserType.getInstance();
+   //     CurrentUserListener currentUserListener = new CurrentUserListener(appModel, this);
 
-        UserType.getInstance().addPropertyChangeListener(propertyChangeEvent -> {
-            System.out.println(ue.getUserEnum());
-            if (propertyChangeEvent.getNewValue().equals(UserEnum.DIRECTOR)){
-                table.setEditable(false);
-            }
-            else{table.setEditable(true);}
-        });
-
+    //    currentUserListener.addPropertyChangeListener(currentUserListener);
         add(table);
     }
 

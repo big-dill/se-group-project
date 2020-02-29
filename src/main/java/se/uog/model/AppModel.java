@@ -1,6 +1,8 @@
 package se.uog.model;
 
 import javax.swing.DefaultListModel;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 
 /**
  * The AppModel class, a wrapper containing the Core Object lists consumed by
@@ -20,10 +22,18 @@ public class AppModel {
     private DefaultListModel<Course> courseList;
     private CourseTableModel courseTableModel;
 
+    private UserEnum currentUser = UserEnum.UNASSIGNED;
+    private final PropertyChangeSupport propertyChangeSupport;
+
+
     /**
      * Creates an empty AppModel.
      */
     public AppModel() {
+
+        this.propertyChangeSupport = new PropertyChangeSupport(currentUser);
+
+
 
         // DefaultListModels so they can be used in Swing views
         // Don't have to write the observer pattern stuff for them, it's already done
@@ -119,4 +129,26 @@ public class AppModel {
         return list;
     }
 
+    public UserEnum getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setUserEnum(UserEnum userEnum) {
+        System.out.println("ffiring");
+        UserEnum oldNEnum =  this.currentUser;
+        this.currentUser = userEnum;
+        propertyChangeSupport.firePropertyChange("currentUser", oldNEnum, userEnum);
+    }
+
+    public PropertyChangeSupport getPropertyChangeSupport() {
+        return propertyChangeSupport;
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener l) {
+        propertyChangeSupport.addPropertyChangeListener(l);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener l) {
+        propertyChangeSupport.removePropertyChangeListener(l);
+    }
 }

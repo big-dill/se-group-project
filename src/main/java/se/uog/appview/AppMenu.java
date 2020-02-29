@@ -1,9 +1,6 @@
 package se.uog.appview;
 
-import se.uog.appview.pages.LoginPage;
 import se.uog.controller.AppController;
-import se.uog.model.UserEnum;
-import se.uog.model.UserType;
 
 import javax.swing.*;
 import java.awt.event.*;

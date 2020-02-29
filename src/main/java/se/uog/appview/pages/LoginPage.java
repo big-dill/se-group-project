@@ -1,8 +1,9 @@
 package se.uog.appview.pages;
 
 import se.uog.appview.AppView;
+import se.uog.controller.AppController;
+import se.uog.model.AppModel;
 import se.uog.model.UserEnum;
-import se.uog.model.UserType;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -19,7 +20,7 @@ public class LoginPage extends JPanel {
     // extra space necessary to stop it looking strange
     private static final String SUB_TITLE = "<html><i>Please select your role below </i><html>";
 
-    public LoginPage(AppView appView) {
+    public LoginPage(AppView appView, AppController appController) {
 
         appView.setMenuEnabled(false);
 
@@ -41,7 +42,7 @@ public class LoginPage extends JPanel {
         director.addActionListener(e -> {
             appView.setPage("Courses");
             appView.setMenuEnabled(true);
-            UserType.getInstance().setUserEnum(UserEnum.DIRECTOR);
+            appController.setUserEnum(UserEnum.DIRECTOR);
         });
         buttons.add(director, gbc);
 
@@ -49,7 +50,7 @@ public class LoginPage extends JPanel {
         teacher.addActionListener(e -> {
             appView.setPage("Courses");
             appView.setMenuEnabled(true);
-            UserType.getInstance().setUserEnum(UserEnum.CLASS_DIRECTOR);
+            appController.setUserEnum(UserEnum.CLASS_DIRECTOR);
         });
 
         buttons.add(teacher, gbc);
@@ -58,7 +59,7 @@ public class LoginPage extends JPanel {
         admin.addActionListener(e -> {
             appView.setPage("Teachers");
             appView.setMenuEnabled(true);
-            UserType.getInstance().setUserEnum(UserEnum.ADMINISTRATOR);
+            appController.setUserEnum(UserEnum.ADMINISTRATOR);
         });
 
 
