@@ -2,7 +2,6 @@ package se.uog.database;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
 import se.uog.application.AppModel;
 
 /**

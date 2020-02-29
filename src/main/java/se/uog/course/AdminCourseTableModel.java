@@ -1,17 +1,16 @@
 package se.uog.course;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.function.BiFunction;
-
-import javax.swing.DefaultListModel;
-
 import se.uog.qualification.Qualification;
 import se.uog.table.ObjectTableColumn;
 import se.uog.table.ObjectTableColumnBuilder;
 import se.uog.table.ObjectTableListSelector;
 import se.uog.teacher.Teacher;
+
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.function.BiFunction;
 
 public class AdminCourseTableModel extends CourseTableModel {
 
@@ -22,7 +21,7 @@ public class AdminCourseTableModel extends CourseTableModel {
         super(courseList);
         this.teacherList = teacherList;
 
-           // Setup Columns
+        // Setup Columns
         ObjectTableColumn<Course> courseDirectorColumn = new ObjectTableColumnBuilder<Course>()
             .setTitle("Course Director Name")
             .setClass(String.class)
@@ -52,9 +51,9 @@ public class AdminCourseTableModel extends CourseTableModel {
                     course.setAssignedTeachers((List<Teacher>) val);
                 })
                 .setCellEditor(new ObjectTableListSelector<Course, Teacher>(
-                    teacherList, 
-                    courseList, 
-                    "Select Teacher(s):", 
+                    teacherList,
+                    courseList,
+                    "Select Teacher(s):",
                     getTeacherColumnFilterFunction() // This is from the private method below.
                 ))
                 .build();

@@ -1,12 +1,5 @@
 package se.uog.application;
 
-import java.awt.event.KeyEvent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.io.IOException;
-
-import javax.swing.JPanel;
-
 import se.uog.course.CoursePage;
 import se.uog.database.FileStorage;
 import se.uog.database.JSONConverterUtil;
@@ -14,6 +7,12 @@ import se.uog.qualification.QualificationPage;
 import se.uog.teacher.TeacherPage;
 import se.uog.training.TrainingPage;
 import se.uog.user.User;
+
+import javax.swing.*;
+import java.awt.event.KeyEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.io.IOException;
 
 public class AppController implements PropertyChangeListener {
 

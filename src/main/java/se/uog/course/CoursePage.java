@@ -1,14 +1,11 @@
 package se.uog.course;
 
-import javax.swing.JPanel;
-
 import se.uog.application.AppController;
 import se.uog.application.TablePageView;
 import se.uog.table.JObjectTable;
 import se.uog.table.ObjectTableModel;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+import javax.swing.*;
 
 @SuppressWarnings("serial")
 public class CoursePage extends JPanel implements TablePageView<Course> {

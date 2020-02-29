@@ -1,16 +1,15 @@
 package se.uog.training;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.DefaultListModel;
-
 import se.uog.qualification.Qualification;
 import se.uog.table.ObjectTableColumn;
 import se.uog.table.ObjectTableColumnBuilder;
 import se.uog.table.ObjectTableListSelector;
 import se.uog.table.ObjectTableModel;
 import se.uog.teacher.Teacher;
+
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TrainingTableModel implements ObjectTableModel<Training> {
 
@@ -50,7 +49,7 @@ public class TrainingTableModel implements ObjectTableModel<Training> {
     public DefaultListModel<Training> getListModel() {
         return trainingList;
     }
-    
+
     @Override
     public Training createDefaultElement() {
         return new Training("");

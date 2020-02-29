@@ -1,13 +1,13 @@
 package se.uog.teacher;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import se.uog.IDReferenced;
 import se.uog.qualification.Qualification;
 import se.uog.training.Training;
 
-// A teacher object has the following attributes: name, a list of qualifications, and possible training to be done. 
+import java.util.ArrayList;
+import java.util.List;
+
+// A teacher object has the following attributes: name, a list of qualifications, and possible training to be done.
 public class Teacher extends IDReferenced {
     private String name;
     private List<Qualification> teacherQualifications = new ArrayList<Qualification>();
@@ -26,7 +26,8 @@ public class Teacher extends IDReferenced {
     }
 
     /**
-     * Adds a training to the Teacher's list of training to be completed 
+     * Adds a training to the Teacher's list of training to be completed
+     *
      * @param t
      */
     public void addTraining(Training t){
@@ -50,7 +51,7 @@ public class Teacher extends IDReferenced {
     }
 
     /**
-     * Adds a qualification to the Teacher's list of qualifications. 
+     * Adds a qualification to the Teacher's list of qualifications.
      * @param q
      */
     public void addQualification(Qualification q) {

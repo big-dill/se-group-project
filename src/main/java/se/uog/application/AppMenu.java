@@ -1,7 +1,7 @@
 package se.uog.application;
 
 import javax.swing.*;
-import java.awt.event.*;
+import java.awt.event.KeyEvent;
 
 @SuppressWarnings("serial")
 public class AppMenu extends JMenuBar {

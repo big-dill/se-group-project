@@ -1,10 +1,9 @@
 package se.uog.application;
 
-import java.awt.CardLayout;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
-import javax.swing.*;
 
 @SuppressWarnings("serial")
 public class AppView extends JFrame {

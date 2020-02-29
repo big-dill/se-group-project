@@ -1,11 +1,10 @@
 package se.uog.table;
 
-import java.util.List;
-
-import javax.swing.DefaultListModel;
+import javax.swing.*;
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 import javax.swing.table.AbstractTableModel;
+import java.util.List;
 
 /**
  * This class adapts an ObjectTableModel into a TableModel which can be used by

@@ -1,11 +1,10 @@
 package se.uog.course;
 
-import java.util.List;
-
-import javax.swing.DefaultListModel;
-
 import se.uog.table.ObjectTableColumn;
 import se.uog.table.ObjectTableModel;
+
+import javax.swing.*;
+import java.util.List;
 
 public abstract class CourseTableModel implements ObjectTableModel<Course> {
 

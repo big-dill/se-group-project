@@ -1,12 +1,6 @@
 package se.uog.application;
 
-import javax.swing.DefaultListModel;
-
-import se.uog.course.AdminCourseTableModel;
-import se.uog.course.CDCourseTableModel;
-import se.uog.course.Course;
-import se.uog.course.CourseTableModel;
-import se.uog.course.PTTCourseTableModel;
+import se.uog.course.*;
 import se.uog.qualification.Qualification;
 import se.uog.qualification.QualificationTableModel;
 import se.uog.teacher.Teacher;
@@ -15,8 +9,7 @@ import se.uog.training.Training;
 import se.uog.training.TrainingTableModel;
 import se.uog.user.User;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+import javax.swing.*;
 import java.beans.PropertyChangeSupport;
 
 /**

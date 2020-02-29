@@ -1,11 +1,11 @@
 package se.uog.qualification;
 
-import javax.swing.JPanel;
-
 import se.uog.application.AppController;
 import se.uog.application.TablePageView;
 import se.uog.table.JObjectTable;
 import se.uog.table.ObjectTableModel;
+
+import javax.swing.*;
 
 @SuppressWarnings("serial")
 public class QualificationPage extends JPanel implements TablePageView<Qualification> {

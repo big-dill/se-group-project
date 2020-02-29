@@ -2,15 +2,8 @@ package se.uog.application;
 
 import se.uog.user.User;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.*;
 
 @SuppressWarnings("serial")
 public class HomePage extends JPanel {
@@ -40,21 +33,21 @@ public class HomePage extends JPanel {
         JButton director = new JButton("PTT Director");
         director.addActionListener(e -> {
             appController.setUser(User.DIRECTOR);
-            appView.setPage("Courses");
+            appView.setPage(LANDING_PAGE);
         });
         buttons.add(director, gbc);
 
         JButton admin = new JButton("Administrator");
         admin.addActionListener(e -> {
             appController.setUser(User.ADMINISTRATOR);
-            appView.setPage("Courses");
+            appView.setPage(LANDING_PAGE);
         });
         buttons.add(admin, gbc);
 
         JButton courseDirector = new JButton("Course Director");
         courseDirector.addActionListener(e -> {
             appController.setUser(User.CLASS_DIRECTOR);
-            appView.setPage("Courses");
+            appView.setPage(LANDING_PAGE);
         });
         buttons.add(courseDirector, gbc);
 

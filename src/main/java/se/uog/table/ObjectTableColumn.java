@@ -1,8 +1,8 @@
 package se.uog.table;
 
+import javax.swing.table.TableCellEditor;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
-import javax.swing.table.TableCellEditor;
 
 /**
  * This class is consumed by {@link se.uog.table.ObjectTableModelAdaptor} and

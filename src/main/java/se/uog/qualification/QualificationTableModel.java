@@ -1,13 +1,12 @@
 package se.uog.qualification;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.DefaultListModel;
-
 import se.uog.table.ObjectTableColumn;
 import se.uog.table.ObjectTableColumnBuilder;
 import se.uog.table.ObjectTableModel;
+
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class QualificationTableModel implements ObjectTableModel<Qualification> {
 

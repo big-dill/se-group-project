@@ -1,19 +1,18 @@
 package se.uog.course;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.DefaultListModel;
-
 import se.uog.table.ObjectTableColumn;
 import se.uog.table.ObjectTableColumnBuilder;
+
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PTTCourseTableModel extends CourseTableModel {
 
     private List<ObjectTableColumn<Course>> columns = new ArrayList<>();
 
     public PTTCourseTableModel(DefaultListModel<Course> courseList) {
-        super (courseList);
+        super(courseList);
 
         // Generate Columns
         ObjectTableColumn<Course> courseDirectorColumn = new ObjectTableColumnBuilder<Course>()
@@ -73,5 +72,5 @@ public class PTTCourseTableModel extends CourseTableModel {
         return columns;
     }
 
-    
+
 }

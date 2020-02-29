@@ -1,15 +1,6 @@
 package se.uog.database;
 
-import java.lang.reflect.Type;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-
+import com.google.gson.*;
 import se.uog.IDReferenced;
 import se.uog.application.AppModel;
 import se.uog.course.Course;
@@ -17,9 +8,11 @@ import se.uog.qualification.Qualification;
 import se.uog.teacher.Teacher;
 import se.uog.training.Training;
 
+import java.lang.reflect.Type;
+
 /**
  * A custom deserializer for the AppModel wrapper.
- *
+ * <p>
  * This reconstructs the AppModel from JSON by creating the lists in order and
  * resolving any ID references to the original objects.
  */
