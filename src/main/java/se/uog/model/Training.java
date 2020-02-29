@@ -5,12 +5,7 @@ public class Training extends IDReferenced {
     private Qualification trainingQualification;
 
     public Training(String n) {
-
         name = n;
-    }
-
-    public void trainTeacher(Teacher teacher) {
-        teacher.addQualification(trainingQualification);
     }
 
     public String getName() {
@@ -25,6 +20,10 @@ public class Training extends IDReferenced {
         return trainingQualification;
     }
 
+    /**
+     * Takes the Qualification input and sets that as the qualification to be gained through the training.
+     * @param trainingQualification
+     */
     public void setTrainingQualification(Qualification trainingQualification) {
         this.trainingQualification = trainingQualification;
     }

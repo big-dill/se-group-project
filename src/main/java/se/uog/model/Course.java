@@ -12,7 +12,11 @@ public class Course {
         name = n;
     }
 
-    // method to add a qualification to the requirement
+    /**
+     * method to add a qualification to the requirement
+     * @param q
+     */
+
     public void addRequirement(Qualification q) {
         requirements.add(q);
     }

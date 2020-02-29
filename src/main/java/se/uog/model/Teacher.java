@@ -6,6 +6,7 @@ import java.util.List;
 public class Teacher extends IDReferenced {
     private String name;
     private List<Qualification> teacherQualifications = new ArrayList<Qualification>();
+    private Training pendingTraining;
 
     public Teacher(String n) {
         name = n;
@@ -17,6 +18,14 @@ public class Teacher extends IDReferenced {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setTraining(Training t){
+        pendingTraining = t;
+    }
+
+    public Training getTraining(){
+        return pendingTraining;
     }
 
     public List<Qualification> getQualifications() {
