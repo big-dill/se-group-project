@@ -4,7 +4,6 @@ import se.uog.user.User;
 
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
-import java.awt.*;
 import java.awt.event.KeyEvent;
 
 @SuppressWarnings("serial")
@@ -41,8 +40,8 @@ public class AppMenu extends JMenuBar {
         for (ChangeListener cl : model.getChangeListeners()) {
             model.removeChangeListener(cl);
         }
+        currentUserMenu.setEnabled(false);
         currentUserMenu.setFocusable(false);
-        currentUserMenu.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         add(currentUserMenu);
     }
 
