@@ -98,6 +98,7 @@ public class AppController implements PropertyChangeListener {
         appModel.setUser(user);
     }
 
+    // Adds a property change listener to the respective view. 
     public void addPropertyChangeListener(PropertyChangeListener l) {
         appModel.getPropertyChangeSupport().addPropertyChangeListener(l);
     }
@@ -106,6 +107,7 @@ public class AppController implements PropertyChangeListener {
         appModel.getPropertyChangeSupport().removePropertyChangeListener(l);
     }
 
+    // Updates the view on PropertyChangeEvent
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
 

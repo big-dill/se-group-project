@@ -158,11 +158,14 @@ public class AppModel {
         return user;
     }
 
+    // Sets the user and fires a propertyChange event to let the listeners that they need to update.
+
     public void setUser(User newUser) {
         User oldUser =  user;
         user = newUser;
         propertyChangeSupport.firePropertyChange("currentUser", oldUser, user);
     }
+
 
 
 }
