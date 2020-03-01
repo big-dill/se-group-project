@@ -18,6 +18,7 @@ import java.io.IOException;
 public class AppController implements PropertyChangeListener {
 
     private static final String JSON_MODEL_FILENAME = "model.json";
+    private static final String LANDING_PAGE_CONSTRAINT = "Home";
 
     private final FileStorage appStorage;
     private final AppView appView;
@@ -54,7 +55,7 @@ public class AppController implements PropertyChangeListener {
     private void setupView() {
 
         JPanel homePage = new HomePage(this);
-        appView.addPage(homePage, "Home", KeyEvent.VK_H);
+        appView.addPage(homePage, LANDING_PAGE_CONSTRAINT, KeyEvent.VK_H);
 
         qualificationPage = new TablePageView<Qualification>(appModel.getQualificationTableModel());
         appView.addPage(qualificationPage, "Qualifications", KeyEvent.VK_Q);
@@ -81,7 +82,9 @@ public class AppController implements PropertyChangeListener {
     }
 
     public void setPage(String pageName) {
-        if(pageName.equals("Home")){appModel.setUser(User.UNASSIGNED);}
+        if (pageName.equals(LANDING_PAGE_CONSTRAINT)) {
+            appModel.setUser(User.UNASSIGNED);
+        }
         appView.setPage(pageName);
     }
 
@@ -119,21 +122,13 @@ public class AppController implements PropertyChangeListener {
 
 
         appView.editUserMenu(getUser());
-
-        if (!appModel.getUser().equals(User.UNASSIGNED)) {
-            appView.getMenu().setEnabled(true);
-            appView.getMenu().repaint();
-        } else {
-            appView.getMenu().setEnabled(false);
-            appView.getMenu().repaint();
-        }
+        appView.getMenu().setEnabled(true);
 
         switch (getUser()) {
             case DIRECTOR:
                 coursePage.setTableModel(appModel.getPttCourseTableModel());
                 trainingPage.setTableEnabled(false); // Removes the buttons too!
                 teacherPage.setTableEnabled(false);
-
                 break;
             case ADMINISTRATOR:
                 coursePage.setTableModel(appModel.getAdminCourseTableModel());
@@ -144,6 +139,9 @@ public class AppController implements PropertyChangeListener {
                 trainingPage.setTableEnabled(false); // Removes the buttons too!
                 teacherPage.setTableEnabled(false);
                 break;
+            default:
+                appView.getMenu().setEnabled(false);
+                appView.getMenu().repaint();
         }
     }
 }
