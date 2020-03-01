@@ -139,6 +139,8 @@ public class AppController implements PropertyChangeListener {
                 trainingPage.setTableButtonsEnabled(false);
                 trainingPage.setTableButtonsEnabled(false);
                 break;
+            default:
+                System.err.println("Something went wrong.");
         }
 
 
