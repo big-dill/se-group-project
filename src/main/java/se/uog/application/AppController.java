@@ -142,6 +142,7 @@ public class AppController implements PropertyChangeListener {
             default:
                 appView.getMenu().setEnabled(false);
                 appView.getMenu().repaint();
+                break;
         }
     }
 }
