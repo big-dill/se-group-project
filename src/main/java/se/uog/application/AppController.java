@@ -66,6 +66,8 @@ public class AppController implements PropertyChangeListener {
         trainingPage = new TablePageView<Training>(appModel.getTrainingTableModel(), this);
         appView.addPage(trainingPage, "Training", KeyEvent.VK_R);
 
+        appView.addUserMenu(getUser());
+
         // NOTE:
         // You can create other 'tableModels' and dynamically switch them in using:
         // e.g. coursePage.setTableModel(appModel.getAdminCourseTableModel);
@@ -95,8 +97,12 @@ public class AppController implements PropertyChangeListener {
         System.exit(0);
     }
 
-    public void setUser(User user){
+    public void setUser(User user) {
         appModel.setUser(user);
+    }
+
+    public User getUser() {
+        return appModel.getUser();
     }
 
     // Adds a property change listener to the respective view.
@@ -112,11 +118,12 @@ public class AppController implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
 
-        if (!appModel.getUser().equals(User.UNASSIGNED)){
+        appView.editUserMenu(getUser());
+
+        if (!appModel.getUser().equals(User.UNASSIGNED)) {
             appView.getMenu().setEnabled(true);
             appView.getMenu().repaint();
-        } else
-            {
+        } else {
             appView.getMenu().setEnabled(false);
             appView.getMenu().repaint();
         }
@@ -128,19 +135,15 @@ public class AppController implements PropertyChangeListener {
                 trainingPage.setTableButtonsEnabled(false);
                 trainingPage.setTableEnabled(false);
                 break;
-
             case ADMINISTRATOR:
                 coursePage.setTableModel(appModel.getAdminCourseTableModel());
                 coursePage.setTableButtonsEnabled(false);
                 break;
-
             case CLASS_DIRECTOR:
                 coursePage.setTableModel(appModel.getCdCourseTableModel());
                 trainingPage.setTableButtonsEnabled(false);
                 trainingPage.setTableButtonsEnabled(false);
                 break;
-            default:
-                System.err.println("Something went wrong.");
         }
 
 

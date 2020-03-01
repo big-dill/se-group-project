@@ -1,6 +1,9 @@
 package se.uog.application;
 
+import se.uog.user.User;
+
 import javax.swing.*;
+import javax.swing.event.ChangeListener;
 import java.awt.event.KeyEvent;
 
 @SuppressWarnings("serial")
@@ -10,6 +13,7 @@ public class AppMenu extends JMenuBar {
 
     private AppController appController;
     private JMenu menu;
+    private JMenuItem currentUserMenuItem;
 
     public AppMenu(AppController appController) {
         this.appController = appController;
@@ -23,11 +27,26 @@ public class AppMenu extends JMenuBar {
     public void addPage(String pageName, int mneumonic) {
         JMenuItem pageViewItem = new JMenuItem(pageName, mneumonic);
         pageViewItem.setMnemonic(mneumonic);
-
         // Set action listener here, so appController is clean
         pageViewItem.addActionListener(e -> appController.setPage(pageName));
 
         menu.add(pageViewItem);
+    }
+
+    public void createUserInMenu(User user) {
+        currentUserMenuItem = new JMenuItem("Current user: " + user.toString());
+        DefaultButtonModel model = (DefaultButtonModel) currentUserMenuItem.getModel();
+        model.setArmed(false);
+        for (ChangeListener cl : model.getChangeListeners()) {
+            model.removeChangeListener(cl);
+        }
+        currentUserMenuItem.setFocusable(false);
+        menu.add(currentUserMenuItem);
+    }
+
+    public void upDateUserInMenu(User user) {
+        menu.remove(currentUserMenuItem);
+        createUserInMenu(user);
     }
 
     public JMenu getMenu() {
