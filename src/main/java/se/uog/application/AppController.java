@@ -124,16 +124,20 @@ public class AppController implements PropertyChangeListener {
         switch(appModel.getUser()){
             case DIRECTOR:
                 coursePage.setTableModel(appModel.getPttCourseTableModel());
+                coursePage.setTableButtonsEnabled(false);
                 trainingPage.setTableButtonsEnabled(false);
                 trainingPage.setTableEnabled(false);
                 break;
 
             case ADMINISTRATOR:
                 coursePage.setTableModel(appModel.getAdminCourseTableModel());
+                coursePage.setTableButtonsEnabled(false);
                 break;
 
             case CLASS_DIRECTOR:
                 coursePage.setTableModel(appModel.getCdCourseTableModel());
+                trainingPage.setTableButtonsEnabled(false);
+                trainingPage.setTableButtonsEnabled(false);
                 break;
         }
 
