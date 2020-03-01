@@ -50,7 +50,7 @@ public class AppController implements PropertyChangeListener {
 
     private void setupView() {
 
-        JPanel homePage = new HomePage(this, appView);
+        JPanel homePage = new HomePage(this);
         appView.addPage(homePage, "Home", KeyEvent.VK_H);
 
         qualificationPage = new QualificationPage(appModel.getQualificationTableModel(), this);
@@ -121,6 +121,8 @@ public class AppController implements PropertyChangeListener {
         switch(appModel.getUser()){
             case DIRECTOR:
                 coursePage.setTableModel(appModel.getPttCourseTableModel());
+                trainingPage.setTableButtonsEnabled(false);
+                trainingPage.setTableEnabled(false);
                 break;
 
             case ADMINISTRATOR:

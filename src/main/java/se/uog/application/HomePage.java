@@ -14,7 +14,7 @@ public class HomePage extends JPanel {
 
     private static final String LANDING_PAGE = "Courses";
 
-    public HomePage(AppController appController, AppView appView) {
+    public HomePage(AppController appController) {
 
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setLayout(new GridBagLayout());
@@ -33,21 +33,22 @@ public class HomePage extends JPanel {
         JButton director = new JButton("PTT Director");
         director.addActionListener(e -> {
             appController.setUser(User.DIRECTOR);
-            appView.setPage(LANDING_PAGE);
+            appController.setPage(LANDING_PAGE);
         });
         buttons.add(director, gbc);
 
         JButton admin = new JButton("Administrator");
         admin.addActionListener(e -> {
             appController.setUser(User.ADMINISTRATOR);
-            appView.setPage(LANDING_PAGE);
+            appController.setPage(LANDING_PAGE);
+
         });
         buttons.add(admin, gbc);
 
         JButton courseDirector = new JButton("Course Director");
         courseDirector.addActionListener(e -> {
             appController.setUser(User.CLASS_DIRECTOR);
-            appView.setPage(LANDING_PAGE);
+            appController.setPage(LANDING_PAGE);
         });
         buttons.add(courseDirector, gbc);
 
