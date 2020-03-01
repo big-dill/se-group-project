@@ -128,7 +128,7 @@ public class AppController implements PropertyChangeListener {
             appView.getMenu().repaint();
         }
 
-        switch(appModel.getUser()) {
+        switch (getUser()) {
             case DIRECTOR:
                 coursePage.setTableModel(appModel.getPttCourseTableModel());
                 trainingPage.setTableEnabled(false); // Removes the buttons too!
@@ -145,9 +145,6 @@ public class AppController implements PropertyChangeListener {
                 teacherPage.setTableEnabled(false);
                 break;
         }
-
-
-
     }
 }
 
