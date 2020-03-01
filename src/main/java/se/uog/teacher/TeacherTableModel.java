@@ -15,15 +15,11 @@ public class TeacherTableModel implements ObjectTableModel<Teacher> {
 
     private List<ObjectTableColumn<Teacher>> columns = new ArrayList<>();
     private DefaultListModel<Teacher> teacherList;
-    private DefaultListModel<Qualification> qualificationList;
-    private DefaultListModel<Training> trainingList;
 
     public TeacherTableModel(DefaultListModel<Teacher> teacherList,
                              DefaultListModel<Qualification> qualificationList, DefaultListModel<Training> trainingList) {
 
         this.teacherList = teacherList;
-        this.qualificationList = qualificationList;
-        this.trainingList = trainingList;
 
         // Setup Columns
 
@@ -33,6 +29,7 @@ public class TeacherTableModel implements ObjectTableModel<Teacher> {
             .setRowElementGetter(teacher -> teacher.getName())
             .setRowElementSetter((teacher, val) -> teacher.setName((String) val)).build();
 
+        @SuppressWarnings("unchecked")
         ObjectTableColumn<Teacher> qualificationsColumn = new ObjectTableColumnBuilder<Teacher>()
             .setTitle("Qualifications")
             .setClass(List.class)

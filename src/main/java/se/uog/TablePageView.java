@@ -1,35 +1,30 @@
-package se.uog.course;
+package se.uog;
 
-import se.uog.application.AppController;
-import se.uog.application.TablePageView;
+import javax.swing.JPanel;
 import se.uog.table.JObjectTable;
 import se.uog.table.ObjectTableModel;
 
-import javax.swing.*;
-
 @SuppressWarnings("serial")
-public class CoursePage extends JPanel implements TablePageView<Course> {
+public class TablePageView<E> extends JPanel {
 
-    private JObjectTable<Course> table;
+    private JObjectTable<E> table;
 
+    public TablePageView(ObjectTableModel<E> tableModel) {
     public CoursePage(ObjectTableModel<Course> tableModel, AppController appController) {
         table = new JObjectTable<>(tableModel);
         appController.addPropertyChangeListener(appController);
         add(table);
     }
 
-    @Override
-    public void setTableModel(ObjectTableModel<Course> model) {
+    public void setTableModel(ObjectTableModel<E> model) {
         table.setModel(model);
     }
 
-    @Override
     public void setTableEnabled(boolean isEnabled) {
         table.setEditable(isEnabled);
 
     }
 
-    @Override
     public void setTableButtonsEnabled(boolean isEnabled) {
         table.setAddRemoveButtons(isEnabled);
 

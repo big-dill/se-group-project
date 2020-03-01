@@ -1,13 +1,16 @@
 package se.uog.application;
 
-import se.uog.course.CoursePage;
+import java.awt.event.KeyEvent;
+import java.io.IOException;
+import javax.swing.JPanel;
+import se.uog.TablePageView;
+import se.uog.course.Course;
 import se.uog.database.FileStorage;
 import se.uog.database.JSONConverterUtil;
-import se.uog.qualification.QualificationPage;
-import se.uog.teacher.TeacherPage;
-import se.uog.training.TrainingPage;
+import se.uog.qualification.Qualification;
+import se.uog.teacher.Teacher;
+import se.uog.training.Training;
 import se.uog.user.User;
-
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeEvent;
@@ -53,16 +56,17 @@ public class AppController implements PropertyChangeListener {
         JPanel homePage = new HomePage(this);
         appView.addPage(homePage, "Home", KeyEvent.VK_H);
 
-        qualificationPage = new QualificationPage(appModel.getQualificationTableModel(), this);
+        qualificationPage =
+                new TablePageView<Qualification>(appModel.getQualificationTableModel(), this);
         appView.addPage(qualificationPage, "Qualifications", KeyEvent.VK_Q);
 
-        teacherPage = new TeacherPage(appModel.getTeacherTableModel(), this);
+        teacherPage = new TablePageView<Teacher>(appModel.getTeacherTableModel(), this);
         appView.addPage(teacherPage, "Teachers", KeyEvent.VK_T);
 
-        coursePage = new CoursePage(appModel.getAdminCourseTableModel(), this);
+        coursePage = new TablePageView<Course>(appModel.getAdminCourseTableModel(), this);
         appView.addPage(coursePage, "Courses", KeyEvent.VK_C);
 
-        trainingPage = new TrainingPage(appModel.getTrainingTableModel(), this);
+        trainingPage = new TablePageView<Training>(appModel.getTrainingTableModel(), this);
         appView.addPage(trainingPage, "Training", KeyEvent.VK_R);
 
         // NOTE:
@@ -98,7 +102,7 @@ public class AppController implements PropertyChangeListener {
         appModel.setUser(user);
     }
 
-    // Adds a property change listener to the respective view. 
+    // Adds a property change listener to the respective view.
     public void addPropertyChangeListener(PropertyChangeListener l) {
         appModel.getPropertyChangeSupport().addPropertyChangeListener(l);
     }

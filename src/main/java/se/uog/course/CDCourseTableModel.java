@@ -1,5 +1,10 @@
 package se.uog.course;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.DefaultListModel;
+
 import se.uog.qualification.Qualification;
 import se.uog.table.ObjectTableColumn;
 import se.uog.table.ObjectTableColumnBuilder;
@@ -12,11 +17,9 @@ import java.util.List;
 public class CDCourseTableModel extends CourseTableModel {
 
     private List<ObjectTableColumn<Course>> columns = new ArrayList<>();
-    private DefaultListModel<Qualification> qualificationList;
 
     public CDCourseTableModel(DefaultListModel<Course> courseList, DefaultListModel<Qualification> qualificationList) {
         super(courseList);
-        this.qualificationList = qualificationList;
 
         // Setup Columns
         ObjectTableColumn<Course> courseDirectorColumn = new ObjectTableColumnBuilder<Course>()
@@ -27,36 +30,37 @@ public class CDCourseTableModel extends CourseTableModel {
             .build();
 
         ObjectTableColumn<Course> nameColumn = new ObjectTableColumnBuilder<Course>()
-                .setTitle("Course Title")
-                .setClass(String.class)
-                .setRowElementGetter(course -> course.getName())
-                .setRowElementSetter((course, val) -> course.setName((String) val))
-                .build();
+            .setTitle("Course Title")
+            .setClass(String.class)
+            .setRowElementGetter(course -> course.getName())
+            .setRowElementSetter((course, val) -> course.setName((String) val))
+            .build();
 
+        @SuppressWarnings("unchecked")
         ObjectTableColumn<Course> qualificationsColumn = new ObjectTableColumnBuilder<Course>()
-                .setTitle("Required Qualifications")
-                .setClass(List.class)
-                .setRowElementGetter(course -> course.getRequirements())
-                .setRowElementSetter((course, val) -> {
-                    // Set the qualifications here
-                    course.setRequirements((List<Qualification>)val);
-                })
-                .setCellEditor(new ObjectTableListSelector<Course, Qualification>(qualificationList, "Select Qualifications"))
-                .build();
+            .setTitle("Required Qualifications")
+            .setClass(List.class)
+            .setRowElementGetter(course -> course.getRequirements())
+            .setRowElementSetter((course, val) -> {
+                // Set the qualifications here
+                course.setRequirements((List<Qualification>)val);
+            })
+            .setCellEditor(new ObjectTableListSelector<Course, Qualification>(qualificationList, "Select Qualifications"))
+            .build();
 
         ObjectTableColumn<Course> teachersColumn = new ObjectTableColumnBuilder<Course>()
-                .setTitle("Designated Teachers")
-                .setClass(List.class)
-                .setRowElementGetter(course -> course.getAssignedTeachers())
-                .setEditable(false)
-                .build();
+            .setTitle("Designated Teachers")
+            .setClass(List.class)
+            .setRowElementGetter(course -> course.getAssignedTeachers())
+            .setEditable(false)
+            .build();
 
         ObjectTableColumn<Course> isApprovedColumn = new ObjectTableColumnBuilder<Course>()
-                .setTitle("Is Approved")
-                .setClass(Boolean.class)
-                .setRowElementGetter(course -> course.isApproved())
-                .setEditable(false)
-                .build();
+            .setTitle("Is Approved")
+            .setClass(Boolean.class)
+            .setRowElementGetter(course -> course.isApproved())
+            .setEditable(false)
+            .build();
 
 
         columns.add(courseDirectorColumn);

@@ -22,7 +22,6 @@ public class Qualification extends IDReferenced {
 
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
         return qualificationName;
     }
 }

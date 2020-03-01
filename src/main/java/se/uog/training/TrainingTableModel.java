@@ -30,6 +30,7 @@ public class TrainingTableModel implements ObjectTableModel<Training> {
         .setEditable(true)
         .build();
 
+        @SuppressWarnings("unchecked")
         ObjectTableColumn<Training> qualificationColumn = new ObjectTableColumnBuilder<Training>()
         .setTitle("Qualification")
         .setClass(List.class)
