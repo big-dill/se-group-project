@@ -45,7 +45,7 @@ public class AppView extends JFrame {
     }
 
     public void editUserMenu(User user) {
-        menuBar.upDateUserInMenu(user);
+        menuBar.updateUserInMenu(user);
     }
 
     public void setPage(String pageName) {
