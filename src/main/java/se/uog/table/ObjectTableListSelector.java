@@ -130,6 +130,7 @@ public class ObjectTableListSelector<T, L> extends AbstractCellEditor implements
         return selectedItems;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
 

@@ -19,6 +19,7 @@ public class Course {
 
     /**
      * method to add a qualification to the requirement
+     *
      * @param q
      */
 
@@ -52,7 +53,6 @@ public class Course {
 
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
         return name;
     }
 
