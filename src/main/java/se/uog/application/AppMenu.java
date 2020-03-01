@@ -4,6 +4,7 @@ import se.uog.user.User;
 
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 
 @SuppressWarnings("serial")
@@ -13,7 +14,7 @@ public class AppMenu extends JMenuBar {
 
     private AppController appController;
     private JMenu menu;
-    private JMenuItem currentUserMenuItem;
+    private JMenu currentUserMenu;
 
     public AppMenu(AppController appController) {
         this.appController = appController;
@@ -34,26 +35,26 @@ public class AppMenu extends JMenuBar {
     }
 
     public void createUserInMenu(User user) {
-        currentUserMenuItem = new JMenuItem("Current user: " + user.toString());
-        DefaultButtonModel model = (DefaultButtonModel) currentUserMenuItem.getModel();
+        currentUserMenu = new JMenu("Current user: " + user.toString());
+        DefaultButtonModel model = (DefaultButtonModel) currentUserMenu.getModel();
         model.setArmed(false);
         for (ChangeListener cl : model.getChangeListeners()) {
             model.removeChangeListener(cl);
         }
-        currentUserMenuItem.setFocusable(false);
-        menu.add(currentUserMenuItem);
+        currentUserMenu.setFocusable(false);
+        currentUserMenu.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+        add(currentUserMenu);
     }
 
-    public void upDateUserInMenu(User user) {
-        menu.remove(currentUserMenuItem);
+    public void updateUserInMenu(User user) {
+        remove(currentUserMenu);
+        revalidate();
+        repaint();
         createUserInMenu(user);
     }
 
     public JMenu getMenu() {
         return menu;
     }
-
-    // public void disablePage()
-    // public void enablePage()
 
 }
