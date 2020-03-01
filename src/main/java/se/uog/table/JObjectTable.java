@@ -15,9 +15,8 @@ import java.util.List;
  * configuration object because of how it 'maps' each table row and column to an object list element
  * and its attributes (respectively).
  *
- * @see se.uog.table.ObjectTableConfiguration
- *
  * @param <E> The class of object which the table represents.
+ * @see se.uog.table.ObjectTableConfiguration
  */
 @SuppressWarnings("serial")
 public class JObjectTable<E> extends JPanel {

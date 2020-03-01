@@ -42,7 +42,7 @@ public class TeacherTableModel implements ObjectTableModel<Teacher> {
                 }
             })
             .setCellEditor(new ObjectTableListSelector<Teacher, Qualification>(
-                    qualificationList, "Select Qualifications"))
+                qualificationList, "Select Qualifications"))
             .build();
 
         ObjectTableColumn<Teacher> addTrainingColumn = new ObjectTableColumnBuilder<Teacher>()
@@ -53,7 +53,7 @@ public class TeacherTableModel implements ObjectTableModel<Teacher> {
                 teacher.setTraining((List<Training>) val);
             })
             .setCellEditor(new ObjectTableListSelector<Teacher, Training>(
-                        trainingList, "Select Training"))
+                trainingList, "Select Training"))
             .build();
 
         columns.add(nameColumn);

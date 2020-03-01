@@ -5,7 +5,7 @@ package se.uog.database;
  * serialized / deserialized model to.
  */
 public interface JSONStorageInterface {
-    public String getJSON() throws Exception;
+    String getJSON() throws Exception;
 
-    public void storeJSON(String json) throws Exception;
+    void storeJSON(String json) throws Exception;
 }

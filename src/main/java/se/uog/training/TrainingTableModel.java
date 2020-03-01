@@ -23,24 +23,24 @@ public class TrainingTableModel implements ObjectTableModel<Training> {
 
         // Setup Columns
         ObjectTableColumn<Training> nameColumn = new ObjectTableColumnBuilder<Training>()
-        .setTitle("Name")
-        .setClass(String.class)
-        .setRowElementGetter(training -> training.getName())
-        .setRowElementSetter((training, val) -> training.setName((String)val))
-        .setEditable(true)
-        .build();
+            .setTitle("Name")
+            .setClass(String.class)
+            .setRowElementGetter(training -> training.getName())
+            .setRowElementSetter((training, val) -> training.setName((String) val))
+            .setEditable(true)
+            .build();
 
         @SuppressWarnings("unchecked")
         ObjectTableColumn<Training> qualificationColumn = new ObjectTableColumnBuilder<Training>()
-        .setTitle("Qualification")
-        .setClass(List.class)
-        .setRowElementGetter(training -> training.getTrainingQualificationList())
-        .setRowElementSetter((training, val) -> {
-            training.setTrainingQualificationList((List<Qualification>) val);
-        })
-        .setCellEditor(new ObjectTableListSelector<Teacher, Qualification>(
-            qualificationList, "Select Qualification"))
-        .build();
+            .setTitle("Qualification")
+            .setClass(List.class)
+            .setRowElementGetter(training -> training.getTrainingQualificationList())
+            .setRowElementSetter((training, val) -> {
+                training.setTrainingQualificationList((List<Qualification>) val);
+            })
+            .setCellEditor(new ObjectTableListSelector<Teacher, Qualification>(
+                qualificationList, "Select Qualification"))
+            .build();
 
         columns.add(nameColumn);
         columns.add(qualificationColumn);
@@ -60,10 +60,6 @@ public class TrainingTableModel implements ObjectTableModel<Training> {
     public List<ObjectTableColumn<Training>> getObjectColumnMap() {
         return columns;
     }
-
-
-
-
 
 
 }

@@ -30,16 +30,16 @@ public class Teacher extends IDReferenced {
      *
      * @param t
      */
-    public void addTraining(Training t){
+    public void addTraining(Training t) {
         pendingTraining.add(t);
+    }
+
+    public List<Training> getTraining() {
+        return pendingTraining;
     }
 
     public void setTraining(List<Training> t) {
         this.pendingTraining = t;
-    }
-
-    public List<Training> getTraining(){
-        return pendingTraining;
     }
 
     public void clearTraining() {
@@ -52,6 +52,7 @@ public class Teacher extends IDReferenced {
 
     /**
      * Adds a qualification to the Teacher's list of qualifications.
+     *
      * @param q
      */
     public void addQualification(Qualification q) {

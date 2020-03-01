@@ -1,12 +1,5 @@
 package se.uog.course;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.function.BiFunction;
-
-import javax.swing.DefaultListModel;
-
 import se.uog.qualification.Qualification;
 import se.uog.table.ObjectTableColumn;
 import se.uog.table.ObjectTableColumnBuilder;
@@ -26,7 +19,7 @@ public class AdminCourseTableModel extends CourseTableModel {
     public AdminCourseTableModel(DefaultListModel<Course> courseList, DefaultListModel<Teacher> teacherList) {
         super(courseList);
 
-           // Setup Columns
+        // Setup Columns
         ObjectTableColumn<Course> courseDirectorColumn = new ObjectTableColumnBuilder<Course>()
             .setTitle("Course Director Name")
             .setClass(String.class)

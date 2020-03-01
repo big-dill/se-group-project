@@ -1,10 +1,5 @@
 package se.uog.course;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.DefaultListModel;
-
 import se.uog.qualification.Qualification;
 import se.uog.table.ObjectTableColumn;
 import se.uog.table.ObjectTableColumnBuilder;
@@ -43,7 +38,7 @@ public class CDCourseTableModel extends CourseTableModel {
             .setRowElementGetter(course -> course.getRequirements())
             .setRowElementSetter((course, val) -> {
                 // Set the qualifications here
-                course.setRequirements((List<Qualification>)val);
+                course.setRequirements((List<Qualification>) val);
             })
             .setCellEditor(new ObjectTableListSelector<Course, Qualification>(qualificationList, "Select Qualifications"))
             .build();

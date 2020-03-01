@@ -22,7 +22,7 @@ public class QualificationTableModel implements ObjectTableModel<Qualification> 
             .setTitle("Name")
             .setClass(String.class)
             .setRowElementGetter(qualification -> qualification.getQualificationName())
-            .setRowElementSetter((qualification, val) -> qualification.setQualificationName((String)val))
+            .setRowElementSetter((qualification, val) -> qualification.setQualificationName((String) val))
             .setEditable(true)
             .build();
 

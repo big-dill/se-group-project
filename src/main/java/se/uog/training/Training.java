@@ -27,6 +27,7 @@ public class Training extends IDReferenced {
 
     /**
      * Takes the Qualification input and sets that as the qualification to be gained through the training.
+     *
      * @param trainingQualification
      */
     public void setTrainingQualificationList(List<Qualification> trainingQualification) {

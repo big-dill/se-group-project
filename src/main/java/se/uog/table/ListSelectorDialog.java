@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * A singleton class which displays a pop-up dialog for selecting elements from a DefaultListModel.
- *
+ * <p>
  * This class is adapted from the Swing tutorial for ListDialog:
  * https://docs.oracle.com/javase/tutorial/uiswing/examples/components/ListDialogRunnerProject/src/components/ListDialog.java
  */
@@ -23,8 +23,20 @@ public class ListSelectorDialog extends JDialog {
     private DefaultListModel<?> listModel;
     private JList<?> listView;
 
+    private ListSelectorDialog(Frame frame, String dialogTitle, DefaultListModel<?> listModel,
+                               List<?> initalSelection) {
+
+        super(frame, dialogTitle, true);
+        this.listModel = listModel;
+
+        setupButtons();
+        setupListView();
+        setSelection(initalSelection);
+        pack();
+    }
+
     public static List<?> showDialog(Component owner, String dialogTitle, DefaultListModel<?> model,
-            List<?> initalSelection) {
+                                     List<?> initalSelection) {
 
         // Get the frame to attach the dialog to.
         Frame frame = JOptionPane.getFrameForComponent(owner);
@@ -47,18 +59,6 @@ public class ListSelectorDialog extends JDialog {
                 listView.addSelectionInterval(index, index);
             }
         }
-    }
-
-    private ListSelectorDialog(Frame frame, String dialogTitle, DefaultListModel<?> listModel,
-            List<?> initalSelection) {
-
-        super(frame, dialogTitle, true);
-        this.listModel = listModel;
-
-        setupButtons();
-        setupListView();
-        setSelection(initalSelection);
-        pack();
     }
 
     private void setupButtons() {

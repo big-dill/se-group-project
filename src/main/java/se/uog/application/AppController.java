@@ -1,8 +1,5 @@
 package se.uog.application;
 
-import java.awt.event.KeyEvent;
-import java.io.IOException;
-import javax.swing.JPanel;
 import se.uog.TablePageView;
 import se.uog.course.Course;
 import se.uog.database.FileStorage;
@@ -11,6 +8,7 @@ import se.uog.qualification.Qualification;
 import se.uog.teacher.Teacher;
 import se.uog.training.Training;
 import se.uog.user.User;
+
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeEvent;
@@ -24,10 +22,10 @@ public class AppController implements PropertyChangeListener {
     private final FileStorage appStorage;
     private final AppView appView;
     private AppModel appModel;
-    private QualificationPage qualificationPage;
-    private TeacherPage teacherPage;
-    private CoursePage coursePage;
-    private TrainingPage trainingPage;
+    private TablePageView qualificationPage;
+    private TablePageView teacherPage;
+    private TablePageView coursePage;
+    private TablePageView trainingPage;
 
     public AppController() {
 
@@ -56,8 +54,7 @@ public class AppController implements PropertyChangeListener {
         JPanel homePage = new HomePage(this);
         appView.addPage(homePage, "Home", KeyEvent.VK_H);
 
-        qualificationPage =
-                new TablePageView<Qualification>(appModel.getQualificationTableModel(), this);
+        qualificationPage = new TablePageView<Qualification>(appModel.getQualificationTableModel(), this);
         appView.addPage(qualificationPage, "Qualifications", KeyEvent.VK_Q);
 
         teacherPage = new TablePageView<Teacher>(appModel.getTeacherTableModel(), this);

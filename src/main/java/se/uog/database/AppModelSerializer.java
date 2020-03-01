@@ -38,20 +38,6 @@ public class AppModelSerializer implements JsonSerializer<AppModel> {
     }
 
     /**
-     * This class is a JsonSerializer which can be 'hooked into' gson, so when it
-     * hits anything with the class 'IDReferenced', it can store it just as its ID,
-     * rather than the whole object..
-     */
-    private class IDReferencedSerializer implements JsonSerializer<IDReferenced> {
-
-        @Override
-        public JsonElement serialize(IDReferenced src, Type typeOfSrc, JsonSerializationContext context) {
-            return new JsonPrimitive(src.getID());
-        }
-
-    }
-
-    /**
      * Serializes the qualifications into a json array
      */
     private void serializeQualifications() {
@@ -62,7 +48,7 @@ public class AppModelSerializer implements JsonSerializer<AppModel> {
 
     /**
      * Serializes the training into a json array.
-     *
+     * <p>
      * Converts the qualifications into just their ID references so that any POJO
      * references are preserved after deserialization.
      */
@@ -76,7 +62,7 @@ public class AppModelSerializer implements JsonSerializer<AppModel> {
 
     /**
      * Serializes the teachers into a json array.
-     *
+     * <p>
      * Converts the qualifications and the training into just their ID references so
      * that any POJO references are preserved after deserialization.
      */
@@ -91,7 +77,7 @@ public class AppModelSerializer implements JsonSerializer<AppModel> {
 
     /**
      * Serialises the courses into a json array.
-     *
+     * <p>
      * Converts the teachers into their ID references so that any POJO references
      * are preserved after deserialization.
      */
@@ -102,6 +88,20 @@ public class AppModelSerializer implements JsonSerializer<AppModel> {
             .create();
 
         jsonObject.addProperty(COURSE_LIST_FIELD, gson.toJson(appModel.getCourseArray()));
+    }
+
+    /**
+     * This class is a JsonSerializer which can be 'hooked into' gson, so when it
+     * hits anything with the class 'IDReferenced', it can store it just as its ID,
+     * rather than the whole object..
+     */
+    private class IDReferencedSerializer implements JsonSerializer<IDReferenced> {
+
+        @Override
+        public JsonElement serialize(IDReferenced src, Type typeOfSrc, JsonSerializationContext context) {
+            return new JsonPrimitive(src.getID());
+        }
+
     }
 
 }
