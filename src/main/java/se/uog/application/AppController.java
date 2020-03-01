@@ -118,6 +118,10 @@ public class AppController implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
 
+        trainingPage.setTableButtonsEnabled(true);
+        trainingPage.setTableEnabled(true);
+        coursePage.setTableButtonsEnabled(true);
+
         appView.editUserMenu(getUser());
 
         if (!appModel.getUser().equals(User.UNASSIGNED)) {
@@ -132,8 +136,7 @@ public class AppController implements PropertyChangeListener {
             case DIRECTOR:
                 coursePage.setTableModel(appModel.getPttCourseTableModel());
                 coursePage.setTableButtonsEnabled(false);
-                trainingPage.setTableButtonsEnabled(false);
-                trainingPage.setTableEnabled(false);
+
                 break;
             case ADMINISTRATOR:
                 coursePage.setTableModel(appModel.getAdminCourseTableModel());
