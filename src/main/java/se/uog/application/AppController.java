@@ -43,6 +43,8 @@ public class AppController implements PropertyChangeListener {
 
         this.appView = new AppView(this);
 
+        appModel.getPropertyChangeSupport().addPropertyChangeListener(this);
+
         setupView();
 
         // Set visible only after setup
@@ -54,16 +56,16 @@ public class AppController implements PropertyChangeListener {
         JPanel homePage = new HomePage(this);
         appView.addPage(homePage, "Home", KeyEvent.VK_H);
 
-        qualificationPage = new TablePageView<Qualification>(appModel.getQualificationTableModel(), this);
+        qualificationPage = new TablePageView<Qualification>(appModel.getQualificationTableModel());
         appView.addPage(qualificationPage, "Qualifications", KeyEvent.VK_Q);
 
-        teacherPage = new TablePageView<Teacher>(appModel.getTeacherTableModel(), this);
+        teacherPage = new TablePageView<Teacher>(appModel.getTeacherTableModel());
         appView.addPage(teacherPage, "Teachers", KeyEvent.VK_T);
 
-        coursePage = new TablePageView<Course>(appModel.getAdminCourseTableModel(), this);
+        coursePage = new TablePageView<Course>(appModel.getAdminCourseTableModel());
         appView.addPage(coursePage, "Courses", KeyEvent.VK_C);
 
-        trainingPage = new TablePageView<Training>(appModel.getTrainingTableModel(), this);
+        trainingPage = new TablePageView<Training>(appModel.getTrainingTableModel());
         appView.addPage(trainingPage, "Training", KeyEvent.VK_R);
 
         appView.addUserMenu(getUser());
@@ -105,22 +107,16 @@ public class AppController implements PropertyChangeListener {
         return appModel.getUser();
     }
 
-    // Adds a property change listener to the respective view.
-    public void addPropertyChangeListener(PropertyChangeListener l) {
-        appModel.getPropertyChangeSupport().addPropertyChangeListener(l);
-    }
-
-    public void removePropertyChangeListener(PropertyChangeListener l) {
-        appModel.getPropertyChangeSupport().removePropertyChangeListener(l);
-    }
-
     // Updates the view on PropertyChangeEvent
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
 
-        trainingPage.setTableButtonsEnabled(true);
+        // Resets the views to default
+        qualificationPage.setTableEnabled(true);
         trainingPage.setTableEnabled(true);
-        coursePage.setTableButtonsEnabled(true);
+        trainingPage.setTableEnabled(true);
+        coursePage.setTableEnabled(true);
+
 
         appView.editUserMenu(getUser());
 
@@ -132,20 +128,21 @@ public class AppController implements PropertyChangeListener {
             appView.getMenu().repaint();
         }
 
-        switch(appModel.getUser()){
+        switch(appModel.getUser()) {
             case DIRECTOR:
                 coursePage.setTableModel(appModel.getPttCourseTableModel());
-                coursePage.setTableButtonsEnabled(false);
+                trainingPage.setTableEnabled(false); // Removes the buttons too!
+                teacherPage.setTableEnabled(false);
 
                 break;
             case ADMINISTRATOR:
                 coursePage.setTableModel(appModel.getAdminCourseTableModel());
                 coursePage.setTableButtonsEnabled(false);
                 break;
-            case CLASS_DIRECTOR:
+            case COURSE_DIRECTOR:
                 coursePage.setTableModel(appModel.getCdCourseTableModel());
-                trainingPage.setTableButtonsEnabled(false);
-                trainingPage.setTableButtonsEnabled(false);
+                trainingPage.setTableEnabled(false); // Removes the buttons too!
+                teacherPage.setTableEnabled(false);
                 break;
         }
 

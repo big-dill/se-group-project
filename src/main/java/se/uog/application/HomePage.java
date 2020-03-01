@@ -47,7 +47,7 @@ public class HomePage extends JPanel {
 
         JButton courseDirector = new JButton("Course Director");
         courseDirector.addActionListener(e -> {
-            appController.setUser(User.CLASS_DIRECTOR);
+            appController.setUser(User.COURSE_DIRECTOR);
             appController.setPage(LANDING_PAGE);
         });
         buttons.add(courseDirector, gbc);
