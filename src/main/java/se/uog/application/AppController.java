@@ -117,7 +117,7 @@ public class AppController implements PropertyChangeListener {
         // Resets the views to default
         qualificationPage.setTableEnabled(true);
         trainingPage.setTableEnabled(true);
-        trainingPage.setTableEnabled(true);
+        teacherPage.setTableEnabled(true);
         coursePage.setTableEnabled(true);
 
 
@@ -127,8 +127,10 @@ public class AppController implements PropertyChangeListener {
         switch (getUser()) {
             case DIRECTOR:
                 coursePage.setTableModel(appModel.getPttCourseTableModel());
+                coursePage.setTableButtonsEnabled(false);
                 trainingPage.setTableEnabled(false); // Removes the buttons too!
                 teacherPage.setTableEnabled(false);
+
                 break;
             case ADMINISTRATOR:
                 coursePage.setTableModel(appModel.getAdminCourseTableModel());
