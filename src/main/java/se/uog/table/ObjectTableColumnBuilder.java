@@ -1,12 +1,12 @@
 package se.uog.table;
 
+import javax.swing.table.TableCellEditor;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
-import javax.swing.table.TableCellEditor;
 
 /**
  * A builder for ObjectTableColumn.
- *
+ * <p>
  * Follows the Builder creation pattern to apply defaults and a more convenient / less error prone
  * way of creating an {@link se.uog.table.ObjectTableColumn}
  *
@@ -81,7 +81,6 @@ public final class ObjectTableColumnBuilder<E> {
      * @param columnCellEditor The TableCellEditor used to edit cells in this column. If this is
      *                         null, swing will set the default TableCellEditor for the provided
      *                         columnClass.
-     *
      * @return this Builder object
      */
     public ObjectTableColumnBuilder<E> setCellEditor(TableCellEditor columnCellEditor) {
@@ -107,6 +106,6 @@ public final class ObjectTableColumnBuilder<E> {
             throw new IllegalStateException("No element setter for editable component");
 
         return new ObjectTableColumn<E>(columnTitle, columnClass, rowElementSetter,
-                rowElementGetter, isColumnEditable, columnCellEditor);
+            rowElementGetter, isColumnEditable, columnCellEditor);
     }
 }

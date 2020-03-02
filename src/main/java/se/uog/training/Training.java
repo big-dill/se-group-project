@@ -1,9 +1,9 @@
 package se.uog.training;
 
-import java.util.List;
-
 import se.uog.IDReferenced;
 import se.uog.qualification.Qualification;
+
+import java.util.List;
 
 public class Training extends IDReferenced {
     private String name;
@@ -27,6 +27,7 @@ public class Training extends IDReferenced {
 
     /**
      * Takes the Qualification input and sets that as the qualification to be gained through the training.
+     *
      * @param trainingQualification
      */
     public void setTrainingQualificationList(List<Qualification> trainingQualification) {

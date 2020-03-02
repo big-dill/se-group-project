@@ -1,19 +1,18 @@
 package se.uog.course;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.DefaultListModel;
-
 import se.uog.table.ObjectTableColumn;
 import se.uog.table.ObjectTableColumnBuilder;
+
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PTTCourseTableModel extends CourseTableModel {
 
     private List<ObjectTableColumn<Course>> columns = new ArrayList<>();
 
     public PTTCourseTableModel(DefaultListModel<Course> courseList) {
-        super (courseList);
+        super(courseList);
 
         // Generate Columns
         ObjectTableColumn<Course> courseDirectorColumn = new ObjectTableColumnBuilder<Course>()
@@ -24,34 +23,34 @@ public class PTTCourseTableModel extends CourseTableModel {
             .build();
 
         ObjectTableColumn<Course> nameColumn = new ObjectTableColumnBuilder<Course>()
-                .setTitle("Course Title")
-                .setClass(String.class)
-                .setRowElementGetter(course -> course.getName())
-                .setEditable(false)
-                .build();
+            .setTitle("Course Title")
+            .setClass(String.class)
+            .setRowElementGetter(course -> course.getName())
+            .setEditable(false)
+            .build();
 
         ObjectTableColumn<Course> qualificationsColumn = new ObjectTableColumnBuilder<Course>()
-                .setTitle("Required Qualifications")
-                .setClass(List.class)
-                .setRowElementGetter(course -> course.getRequirements())
-                .setEditable(false)
-                .build();
+            .setTitle("Required Qualifications")
+            .setClass(List.class)
+            .setRowElementGetter(course -> course.getRequirements())
+            .setEditable(false)
+            .build();
 
         ObjectTableColumn<Course> teachersColumn = new ObjectTableColumnBuilder<Course>()
-                .setTitle("Designated Teachers")
-                .setClass(List.class)
-                .setRowElementGetter(course -> course.getAssignedTeachers())
-                .setEditable(false)
-                .build();
+            .setTitle("Designated Teachers")
+            .setClass(List.class)
+            .setRowElementGetter(course -> course.getAssignedTeachers())
+            .setEditable(false)
+            .build();
 
         ObjectTableColumn<Course> isApprovedColumn = new ObjectTableColumnBuilder<Course>()
-                .setTitle("Is Approved")
-                .setClass(Boolean.class)
-                .setRowElementGetter(course -> course.isApproved())
-                .setRowElementSetter((course, val) -> {
-                    course.setApproved((boolean)val);
-                })
-                .build();
+            .setTitle("Is Approved")
+            .setClass(Boolean.class)
+            .setRowElementGetter(course -> course.isApproved())
+            .setRowElementSetter((course, val) -> {
+                course.setApproved((boolean) val);
+            })
+            .build();
 
 
         columns.add(courseDirectorColumn);
@@ -73,5 +72,5 @@ public class PTTCourseTableModel extends CourseTableModel {
         return columns;
     }
 
-    
+
 }

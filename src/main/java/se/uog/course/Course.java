@@ -1,10 +1,10 @@
 package se.uog.course;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import se.uog.qualification.Qualification;
 import se.uog.teacher.Teacher;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Course {
     private String courseDirectorName;
@@ -19,6 +19,7 @@ public class Course {
 
     /**
      * method to add a qualification to the requirement
+     *
      * @param q
      */
 
@@ -52,7 +53,6 @@ public class Course {
 
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
         return name;
     }
 

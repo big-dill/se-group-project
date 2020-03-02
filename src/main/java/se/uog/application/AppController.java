@@ -1,24 +1,32 @@
 package se.uog.application;
 
-import java.awt.event.KeyEvent;
-import java.io.IOException;
-
-import javax.swing.JPanel;
-
-import se.uog.course.CoursePage;
+import se.uog.TablePageView;
+import se.uog.course.Course;
 import se.uog.database.FileStorage;
 import se.uog.database.JSONConverterUtil;
-import se.uog.qualification.QualificationPage;
-import se.uog.teacher.TeacherPage;
-import se.uog.training.TrainingPage;
+import se.uog.qualification.Qualification;
+import se.uog.teacher.Teacher;
+import se.uog.training.Training;
+import se.uog.user.User;
 
-public class AppController {
+import javax.swing.*;
+import java.awt.event.KeyEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.io.IOException;
+
+public class AppController implements PropertyChangeListener {
 
     private static final String JSON_MODEL_FILENAME = "model.json";
+    private static final String LANDING_PAGE_CONSTRAINT = "Home";
 
     private final FileStorage appStorage;
     private final AppView appView;
     private AppModel appModel;
+    private TablePageView qualificationPage;
+    private TablePageView teacherPage;
+    private TablePageView coursePage;
+    private TablePageView trainingPage;
 
     public AppController() {
 
@@ -36,6 +44,8 @@ public class AppController {
 
         this.appView = new AppView(this);
 
+        appModel.getPropertyChangeSupport().addPropertyChangeListener(this);
+
         setupView();
 
         // Set visible only after setup
@@ -44,20 +54,22 @@ public class AppController {
 
     private void setupView() {
 
-        JPanel homePage = new HomePage();
-        appView.addPage(homePage, "Home", KeyEvent.VK_H);
+        JPanel homePage = new HomePage(this);
+        appView.addPage(homePage, LANDING_PAGE_CONSTRAINT, KeyEvent.VK_H);
 
-        JPanel qualificationPage = new QualificationPage(appModel.getQualificationTableModel());
+        qualificationPage = new TablePageView<Qualification>(appModel.getQualificationTableModel());
         appView.addPage(qualificationPage, "Qualifications", KeyEvent.VK_Q);
 
-        JPanel teacherPage = new TeacherPage(appModel.getTeacherTableModel());
+        teacherPage = new TablePageView<Teacher>(appModel.getTeacherTableModel());
         appView.addPage(teacherPage, "Teachers", KeyEvent.VK_T);
 
-        JPanel coursePage = new CoursePage(appModel.getAdminCourseTableModel());
+        coursePage = new TablePageView<Course>(appModel.getAdminCourseTableModel());
         appView.addPage(coursePage, "Courses", KeyEvent.VK_C);
 
-        JPanel trainingPage = new TrainingPage(appModel.getTrainingTableModel());
+        trainingPage = new TablePageView<Training>(appModel.getTrainingTableModel());
         appView.addPage(trainingPage, "Training", KeyEvent.VK_R);
+
+        appView.addUserMenu(getUser());
 
         // NOTE:
         // You can create other 'tableModels' and dynamically switch them in using:
@@ -70,6 +82,9 @@ public class AppController {
     }
 
     public void setPage(String pageName) {
+        if (pageName.equals(LANDING_PAGE_CONSTRAINT)) {
+            appModel.setUser(User.UNASSIGNED);
+        }
         appView.setPage(pageName);
     }
 
@@ -87,4 +102,49 @@ public class AppController {
         System.exit(0);
     }
 
+    public void setUser(User user) {
+        appModel.setUser(user);
+    }
+
+    public User getUser() {
+        return appModel.getUser();
+    }
+
+    // Updates the view on PropertyChangeEvent
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+
+        // Resets the views to default
+        qualificationPage.setTableEnabled(true);
+        trainingPage.setTableEnabled(true);
+        trainingPage.setTableEnabled(true);
+        coursePage.setTableEnabled(true);
+
+
+        appView.editUserMenu(getUser());
+        appView.getMenu().setEnabled(true);
+
+        switch (getUser()) {
+            case DIRECTOR:
+                coursePage.setTableModel(appModel.getPttCourseTableModel());
+                trainingPage.setTableEnabled(false); // Removes the buttons too!
+                teacherPage.setTableEnabled(false);
+                break;
+            case ADMINISTRATOR:
+                coursePage.setTableModel(appModel.getAdminCourseTableModel());
+                coursePage.setTableButtonsEnabled(false);
+                break;
+            case COURSE_DIRECTOR:
+                coursePage.setTableModel(appModel.getCdCourseTableModel());
+                trainingPage.setTableEnabled(false); // Removes the buttons too!
+                teacherPage.setTableEnabled(false);
+                break;
+            default:
+                appView.getMenu().setEnabled(false);
+                appView.getMenu().repaint();
+                break;
+        }
+    }
 }
+
+

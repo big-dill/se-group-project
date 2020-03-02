@@ -1,25 +1,24 @@
 package se.uog.table;
 
-import java.util.List;
-
-import javax.swing.DefaultListModel;
+import javax.swing.*;
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 import javax.swing.table.AbstractTableModel;
+import java.util.List;
 
 /**
  * This class adapts an ObjectTableModel into a TableModel which can be used by
  * JTable.
- *
+ * <p>
  * It allows a JTable to represent an object, where the rows are the objects
  * inside a list of class<E>, and the columns are different attributes of the
  * class <E>. Thus, a cell represents a particular object and an attribute on
  * that object, whose getters and setters are defined in the ObjectTableModel
  * (using functional programming style lambdas).
- *
+ * <p>
  * This reduces rewriting lots of code for views and controllers for each
  * different base class we have.
- *
+ * <p>
  * It inherits from Swing's AbstractTableModel, and also implements Swing's
  * ListDataListener, so it can listen to the underlying list and ensure the
  * table view is synchronised with it.

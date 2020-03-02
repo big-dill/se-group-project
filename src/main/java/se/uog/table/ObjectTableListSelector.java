@@ -1,15 +1,13 @@
 package se.uog.table;
 
-import java.awt.Component;
-import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.table.TableCellEditor;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiFunction;
-import javax.swing.AbstractCellEditor;
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JTable;
-import javax.swing.table.TableCellEditor;
 
 /**
  * A TableCellEditor which allows users to choose values from a JList displayed
@@ -49,7 +47,7 @@ public class ObjectTableListSelector<T, L> extends AbstractCellEditor implements
     /**
      * A TableCellEditor which displays a list for selection given by the list model
      * provided.
-     *
+     * <p>
      * This list can be filtered by a filter function which receives a copy of the
      * list model and the current row's object.
      *
@@ -63,28 +61,27 @@ public class ObjectTableListSelector<T, L> extends AbstractCellEditor implements
      *                         to the function which can be modified using the
      *                         properties of the element. The returned list is then
      *                         displayed in the popup.
-     *
+     *                         <p>
      *                         For example, in a ObjectTableListSelector&lt;Hobby,
      *                         Person&gt;
      *
      *                         <code>
      *                         (hobbieList, person) -> {
-     *                            Iterator<Hobby> iterator = hobbieList.iterator();
-     *                              while(iterator.hasNext) {
-     *                                  Hobby h = iterator.next();
-     *                                  if(!h.equals(person.favouriteHobby()))
-     *                                      iterator.remove();
-     *                              }
-     *                             return hobbieList;
-     *                          }
-     *                          </code>
-     *
+     *                         Iterator<Hobby> iterator = hobbieList.iterator();
+     *                         while(iterator.hasNext) {
+     *                         Hobby h = iterator.next();
+     *                         if(!h.equals(person.favouriteHobby()))
+     *                         iterator.remove();
+     *                         }
+     *                         return hobbieList;
+     *                         }
+     *                         </code>
+     *                         <p>
      *                         would display a selector list that only contains a
      *                         person's favourite hobby.
-     *
      */
     public ObjectTableListSelector(DefaultListModel<L> listElementList, DefaultListModel<T> tableElementList,
-            String dialogTitle, BiFunction<List<L>, T, List<L>> filterFunction) {
+                                   String dialogTitle, BiFunction<List<L>, T, List<L>> filterFunction) {
 
         this.listElementList = listElementList;
         this.tableElementList = tableElementList;
@@ -130,6 +127,7 @@ public class ObjectTableListSelector<T, L> extends AbstractCellEditor implements
         return selectedItems;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
 
@@ -147,7 +145,7 @@ public class ObjectTableListSelector<T, L> extends AbstractCellEditor implements
 
         // TODO: Refactor to avoid bad conversions.
         filteredList = convertListToDefaultListModel(
-                filterFunction.apply(convertDefaultListModelToList(listElementList), currentTableRowElement));
+            filterFunction.apply(convertDefaultListModelToList(listElementList), currentTableRowElement));
 
         // Show the 'editing...' button in the window while the dialog is open
         // Trigger the popup.

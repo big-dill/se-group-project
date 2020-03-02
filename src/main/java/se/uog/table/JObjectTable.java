@@ -1,17 +1,12 @@
 package se.uog.table;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import javax.swing.*;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableColumnModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.TableCellEditor;
-import javax.swing.table.TableColumnModel;
 
 /**
  * A class that encapsulates an ObjectTable component. It was designed to allow the class to be
@@ -20,9 +15,8 @@ import javax.swing.table.TableColumnModel;
  * configuration object because of how it 'maps' each table row and column to an object list element
  * and its attributes (respectively).
  *
- * @see se.uog.table.ObjectTableConfiguration
- *
  * @param <E> The class of object which the table represents.
+ * @see se.uog.table.ObjectTableConfiguration
  */
 @SuppressWarnings("serial")
 public class JObjectTable<E> extends JPanel {
@@ -113,6 +107,7 @@ public class JObjectTable<E> extends JPanel {
      */
     public void setAddRemoveButtons(boolean enabled) {
         buttonPanel.setVisible(enabled);
+        table.setRowSelectionAllowed(enabled);
     }
 
     /**

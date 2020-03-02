@@ -1,30 +1,16 @@
 package se.uog.table;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Frame;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.DefaultListModel;
-import javax.swing.DefaultListSelectionModel;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.ListSelectionModel;
 
 /**
  * A singleton class which displays a pop-up dialog for selecting elements from a DefaultListModel.
- *
+ * <p>
  * This class is adapted from the Swing tutorial for ListDialog:
  * https://docs.oracle.com/javase/tutorial/uiswing/examples/components/ListDialogRunnerProject/src/components/ListDialog.java
  */
@@ -36,6 +22,18 @@ public class ListSelectorDialog extends JDialog {
     private static List<?> selection;
     private DefaultListModel<?> listModel;
     private JList<?> listView;
+
+    private ListSelectorDialog(Frame frame, String dialogTitle, DefaultListModel<?> listModel,
+            List<?> initalSelection) {
+
+        super(frame, dialogTitle, true);
+        this.listModel = listModel;
+
+        setupButtons();
+        setupListView();
+        setSelection(initalSelection);
+        pack();
+    }
 
     public static List<?> showDialog(Component owner, String dialogTitle, DefaultListModel<?> model,
             List<?> initalSelection) {
@@ -61,18 +59,6 @@ public class ListSelectorDialog extends JDialog {
                 listView.addSelectionInterval(index, index);
             }
         }
-    }
-
-    private ListSelectorDialog(Frame frame, String dialogTitle, DefaultListModel<?> listModel,
-            List<?> initalSelection) {
-
-        super(frame, dialogTitle, true);
-        this.listModel = listModel;
-
-        setupButtons();
-        setupListView();
-        setSelection(initalSelection);
-        pack();
     }
 
     private void setupButtons() {
@@ -105,6 +91,7 @@ public class ListSelectorDialog extends JDialog {
         JPanel buttonPane = new JPanel();
         buttonPane.setLayout(new BoxLayout(buttonPane, BoxLayout.LINE_AXIS));
         buttonPane.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
+        buttonPane.add(clearButton);
         buttonPane.add(Box.createHorizontalGlue());
         buttonPane.add(Box.createRigidArea(new Dimension(10, 0)));
         buttonPane.add(setButton);

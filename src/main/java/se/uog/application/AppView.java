@@ -1,11 +1,11 @@
 package se.uog.application;
 
-import java.awt.CardLayout;
+import se.uog.user.User;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class AppView extends JFrame {
@@ -40,8 +40,20 @@ public class AppView extends JFrame {
         menuBar.addPage(pageName, menuMneumonic);
     }
 
+    public void addUserMenu(User user) {
+        menuBar.createUserInMenu(user);
+    }
+
+    public void editUserMenu(User user) {
+        menuBar.updateUserInMenu(user);
+    }
+
     public void setPage(String pageName) {
         cardLayout.show(mainPanel, pageName);
+    }
+
+    public JMenu getMenu() {
+        return menuBar.getMenu();
     }
 
     // setPageEnabled()
