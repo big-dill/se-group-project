@@ -1,7 +1,7 @@
 package se.uog.table;
 
-import javax.swing.*;
 import java.util.List;
+import javax.swing.DefaultListModel;
 
 /**
  * An interface which ensures that an ObjectTable receives the required information so that it can

@@ -1,13 +1,20 @@
 package se.uog.database;
 
-import com.google.gson.*;
+import java.lang.reflect.Type;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
+
 import se.uog.IDReferenced;
 import se.uog.application.AppModel;
 import se.uog.qualification.Qualification;
 import se.uog.teacher.Teacher;
 import se.uog.training.Training;
-
-import java.lang.reflect.Type;
 
 /**
  * A custom serializer for the AppModel wrapper.

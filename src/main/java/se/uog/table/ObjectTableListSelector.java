@@ -1,13 +1,18 @@
 package se.uog.table;
 
-import javax.swing.*;
-import javax.swing.table.TableCellEditor;
-import java.awt.*;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiFunction;
+
+import javax.swing.AbstractCellEditor;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JTable;
+import javax.swing.table.TableCellEditor;
 
 /**
  * A TableCellEditor which allows users to choose values from a JList displayed

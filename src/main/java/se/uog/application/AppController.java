@@ -1,6 +1,12 @@
 package se.uog.application;
 
-import se.uog.TablePageView;
+import java.awt.event.KeyEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.io.IOException;
+
+import javax.swing.JPanel;
+
 import se.uog.course.Course;
 import se.uog.database.FileStorage;
 import se.uog.database.JSONConverterUtil;
@@ -8,12 +14,6 @@ import se.uog.qualification.Qualification;
 import se.uog.teacher.Teacher;
 import se.uog.training.Training;
 import se.uog.user.User;
-
-import javax.swing.*;
-import java.awt.event.KeyEvent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.io.IOException;
 
 public class AppController implements PropertyChangeListener {
 
@@ -23,10 +23,10 @@ public class AppController implements PropertyChangeListener {
     private final FileStorage appStorage;
     private final AppView appView;
     private AppModel appModel;
-    private TablePageView qualificationPage;
-    private TablePageView teacherPage;
-    private TablePageView coursePage;
-    private TablePageView trainingPage;
+    private TablePageView<Qualification> qualificationPage;
+    private TablePageView<Teacher> teacherPage;
+    private TablePageView<Course> coursePage;
+    private TablePageView<Training> trainingPage;
 
     public AppController() {
 
@@ -71,14 +71,6 @@ public class AppController implements PropertyChangeListener {
 
         appView.addUserMenu(getUser());
 
-        // NOTE:
-        // You can create other 'tableModels' and dynamically switch them in using:
-        // e.g. coursePage.setTableModel(appModel.getAdminCourseTableModel);
-        // This will be useful for changing users!
-
-        // We can probably use inheritance in some way and just override the column part
-        // of the
-        // model!
     }
 
     public void setPage(String pageName) {

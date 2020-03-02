@@ -1,15 +1,17 @@
 package se.uog.teacher;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.DefaultListModel;
+
 import se.uog.qualification.Qualification;
+
 import se.uog.table.ObjectTableColumn;
 import se.uog.table.ObjectTableColumnBuilder;
 import se.uog.table.ObjectTableListSelector;
 import se.uog.table.ObjectTableModel;
 import se.uog.training.Training;
-
-import javax.swing.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class TeacherTableModel implements ObjectTableModel<Teacher> {
 

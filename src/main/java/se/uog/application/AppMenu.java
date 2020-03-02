@@ -1,10 +1,14 @@
 package se.uog.application;
 
-import se.uog.user.User;
-
-import javax.swing.*;
-import javax.swing.event.ChangeListener;
 import java.awt.event.KeyEvent;
+
+import javax.swing.DefaultButtonModel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.event.ChangeListener;
+
+import se.uog.user.User;
 
 @SuppressWarnings("serial")
 public class AppMenu extends JMenuBar {

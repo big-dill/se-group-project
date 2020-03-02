@@ -1,8 +1,8 @@
 package se.uog.table;
 
-import javax.swing.table.TableCellEditor;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
+import javax.swing.table.TableCellEditor;
 
 /**
  * A builder for ObjectTableColumn.
@@ -106,6 +106,6 @@ public final class ObjectTableColumnBuilder<E> {
             throw new IllegalStateException("No element setter for editable component");
 
         return new ObjectTableColumn<E>(columnTitle, columnClass, rowElementSetter,
-            rowElementGetter, isColumnEditable, columnCellEditor);
+                rowElementGetter, isColumnEditable, columnCellEditor);
     }
 }

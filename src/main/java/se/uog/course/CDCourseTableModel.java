@@ -1,13 +1,15 @@
 package se.uog.course;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.DefaultListModel;
+
 import se.uog.qualification.Qualification;
+
 import se.uog.table.ObjectTableColumn;
 import se.uog.table.ObjectTableColumnBuilder;
 import se.uog.table.ObjectTableListSelector;
-
-import javax.swing.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class CDCourseTableModel extends CourseTableModel {
 

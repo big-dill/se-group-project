@@ -1,11 +1,11 @@
 package se.uog.teacher;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import se.uog.IDReferenced;
 import se.uog.qualification.Qualification;
 import se.uog.training.Training;
-
-import java.util.ArrayList;
-import java.util.List;
 
 // A teacher object has the following attributes: name, a list of qualifications, and possible training to be done.
 public class Teacher extends IDReferenced {

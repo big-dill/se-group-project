@@ -1,11 +1,14 @@
 package se.uog.application;
 
-import se.uog.user.User;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.CardLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JPanel;
+
+import se.uog.user.User;
 
 @SuppressWarnings("serial")
 public class AppView extends JFrame {

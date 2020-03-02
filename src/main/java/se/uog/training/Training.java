@@ -1,9 +1,9 @@
 package se.uog.training;
 
+import java.util.List;
+
 import se.uog.IDReferenced;
 import se.uog.qualification.Qualification;
-
-import java.util.List;
 
 public class Training extends IDReferenced {
     private String name;
