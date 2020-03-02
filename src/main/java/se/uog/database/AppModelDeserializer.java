@@ -10,7 +10,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
-import se.uog.IDReferenced;
+import se.uog.database.IDReferenced;
 import se.uog.application.AppModel;
 import se.uog.course.Course;
 import se.uog.qualification.Qualification;

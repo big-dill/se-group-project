@@ -2,7 +2,7 @@ package se.uog.training;
 
 import java.util.List;
 
-import se.uog.IDReferenced;
+import se.uog.database.IDReferenced;
 import se.uog.qualification.Qualification;
 
 public class Training extends IDReferenced {

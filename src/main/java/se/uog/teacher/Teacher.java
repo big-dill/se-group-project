@@ -3,7 +3,7 @@ package se.uog.teacher;
 import java.util.ArrayList;
 import java.util.List;
 
-import se.uog.IDReferenced;
+import se.uog.database.IDReferenced;
 import se.uog.qualification.Qualification;
 import se.uog.training.Training;
 

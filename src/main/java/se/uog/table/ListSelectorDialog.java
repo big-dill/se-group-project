@@ -51,6 +51,15 @@ public class ListSelectorDialog extends JDialog {
         pack();
     }
 
+    /**
+     * Shows the dialog selector box, returning the selected list when it closes.
+     *
+     * @param owner           the component the dialog is attached to
+     * @param dialogTitle     the title of the modal
+     * @param model           the list model which the list is populated by
+     * @param initalSelection the initial selection which will be selected on load
+     * @return
+     */
     public static List<?> showDialog(Component owner, String dialogTitle, DefaultListModel<?> model,
             List<?> initalSelection) {
 

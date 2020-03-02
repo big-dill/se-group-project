@@ -10,7 +10,7 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
-import se.uog.IDReferenced;
+import se.uog.database.IDReferenced;
 import se.uog.application.AppModel;
 import se.uog.qualification.Qualification;
 import se.uog.teacher.Teacher;
