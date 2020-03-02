@@ -21,8 +21,7 @@ import se.uog.training.TrainingTableModel;
 import se.uog.user.User;
 
 /**
- * The AppModel class, a wrapper containing the Core Object lists consumed by
- * our application.
+ * The AppModel class, a wrapper containing the Core Object lists consumed by our application.
  */
 public class AppModel {
 
@@ -71,6 +70,31 @@ public class AppModel {
 
     }
 
+    /**
+     * Returns the PropertyChangeSupport object so listeners can be added.
+     * 
+     * @return
+     */
+    public PropertyChangeSupport getPropertyChangeSupport() {
+        return propertyChangeSupport;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    /**
+     * Sets the user and fires a propertyChange event to let the listeners that they need to update.
+     * 
+     * @param newUser
+     */
+    public void setUser(User newUser) {
+        User oldUser = user;
+        user = newUser;
+        propertyChangeSupport.firePropertyChange("currentUser", oldUser, user);
+    }
+
+
     // These methods return the table models required by the pages
 
     public TrainingTableModel getTrainingTableModel() {
@@ -83,6 +107,18 @@ public class AppModel {
 
     public TeacherTableModel getTeacherTableModel() {
         return teacherTableModel;
+    }
+
+    public CourseTableModel getAdminCourseTableModel() {
+        return adminCourseTableModel;
+    }
+
+    public CourseTableModel getCdCourseTableModel() {
+        return cdCourseTableModel;
+    }
+
+    public CourseTableModel getPttCourseTableModel() {
+        return pttCourseTableModel;
     }
 
 
@@ -138,42 +174,12 @@ public class AppModel {
      * @param array The array to convert to a DefaultListModel
      * @return A DefaultListModel populated by array
      */
-    private <T> DefaultListModel<T> populateDefaultListModelFromArray(DefaultListModel<T> list, T[] array) {
+    private <T> DefaultListModel<T> populateDefaultListModelFromArray(DefaultListModel<T> list,
+            T[] array) {
         list.clear();
         for (T elem : array) {
             list.addElement(elem);
         }
         return list;
     }
-
-    public CourseTableModel getAdminCourseTableModel() {
-        return adminCourseTableModel;
-    }
-
-    public CourseTableModel getCdCourseTableModel() {
-        return cdCourseTableModel;
-    }
-
-    public CourseTableModel getPttCourseTableModel() {
-        return pttCourseTableModel;
-    }
-
-    public PropertyChangeSupport getPropertyChangeSupport() {
-        return propertyChangeSupport;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    // Sets the user and fires a propertyChange event to let the listeners that they need to update.
-
-    public void setUser(User newUser) {
-        User oldUser =  user;
-        user = newUser;
-        propertyChangeSupport.firePropertyChange("currentUser", oldUser, user);
-    }
-
-
-
 }
