@@ -1,10 +1,5 @@
 package se.uog.teacher;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.DefaultListModel;
-
 import se.uog.qualification.Qualification;
 import se.uog.table.ObjectTableColumn;
 import se.uog.table.ObjectTableColumnBuilder;
@@ -12,13 +7,17 @@ import se.uog.table.ObjectTableListSelector;
 import se.uog.table.ObjectTableModel;
 import se.uog.training.Training;
 
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
+
 public class TeacherTableModel implements ObjectTableModel<Teacher> {
 
     private List<ObjectTableColumn<Teacher>> columns = new ArrayList<>();
     private DefaultListModel<Teacher> teacherList;
 
     public TeacherTableModel(DefaultListModel<Teacher> teacherList,
-            DefaultListModel<Qualification> qualificationList, DefaultListModel<Training> trainingList) {
+                             DefaultListModel<Qualification> qualificationList, DefaultListModel<Training> trainingList) {
 
         this.teacherList = teacherList;
 
@@ -43,7 +42,7 @@ public class TeacherTableModel implements ObjectTableModel<Teacher> {
                 }
             })
             .setCellEditor(new ObjectTableListSelector<Teacher, Qualification>(
-                    qualificationList, "Select Qualifications"))
+                qualificationList, "Select Qualifications"))
             .build();
 
         ObjectTableColumn<Teacher> addTrainingColumn = new ObjectTableColumnBuilder<Teacher>()
@@ -54,7 +53,7 @@ public class TeacherTableModel implements ObjectTableModel<Teacher> {
                 teacher.setTraining((List<Training>) val);
             })
             .setCellEditor(new ObjectTableListSelector<Teacher, Training>(
-                        trainingList, "Select Training"))
+                trainingList, "Select Training"))
             .build();
 
         columns.add(nameColumn);

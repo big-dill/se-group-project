@@ -1,8 +1,9 @@
 package se.uog;
 
-import javax.swing.JPanel;
 import se.uog.table.JObjectTable;
 import se.uog.table.ObjectTableModel;
+
+import javax.swing.*;
 
 @SuppressWarnings("serial")
 public class TablePageView<E> extends JPanel {
@@ -27,5 +28,6 @@ public class TablePageView<E> extends JPanel {
         table.setAddRemoveButtons(isEnabled);
 
     }
+
 
 }

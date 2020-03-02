@@ -1,18 +1,16 @@
 package se.uog.application;
 
-import javax.swing.DefaultListModel;
-
-import se.uog.course.AdminCourseTableModel;
-import se.uog.course.CDCourseTableModel;
-import se.uog.course.Course;
-import se.uog.course.CourseTableModel;
-import se.uog.course.PTTCourseTableModel;
+import se.uog.course.*;
 import se.uog.qualification.Qualification;
 import se.uog.qualification.QualificationTableModel;
 import se.uog.teacher.Teacher;
 import se.uog.teacher.TeacherTableModel;
 import se.uog.training.Training;
 import se.uog.training.TrainingTableModel;
+import se.uog.user.User;
+
+import javax.swing.*;
+import java.beans.PropertyChangeSupport;
 
 /**
  * The AppModel class, a wrapper containing the Core Object lists consumed by
@@ -33,7 +31,10 @@ public class AppModel {
     private CourseTableModel adminCourseTableModel;
     private CourseTableModel cdCourseTableModel;
     private CourseTableModel pttCourseTableModel;
-    
+
+    private User user;
+    private PropertyChangeSupport propertyChangeSupport;
+
 
     /**
      * Creates an empty AppModel.
@@ -56,6 +57,10 @@ public class AppModel {
         cdCourseTableModel = new CDCourseTableModel(courseList, qualificationList);
         adminCourseTableModel = new AdminCourseTableModel(courseList, teacherList);
         trainingTableModel = new TrainingTableModel(trainingList, qualificationList);
+
+        user = User.UNASSIGNED;
+        propertyChangeSupport = new PropertyChangeSupport(user);
+
     }
 
     // These methods return the table models required by the pages
@@ -140,9 +145,27 @@ public class AppModel {
     public CourseTableModel getCdCourseTableModel() {
         return cdCourseTableModel;
     }
-  
+
     public CourseTableModel getPttCourseTableModel() {
         return pttCourseTableModel;
     }
+
+    public PropertyChangeSupport getPropertyChangeSupport() {
+        return propertyChangeSupport;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    // Sets the user and fires a propertyChange event to let the listeners that they need to update.
+
+    public void setUser(User newUser) {
+        User oldUser =  user;
+        user = newUser;
+        propertyChangeSupport.firePropertyChange("currentUser", oldUser, user);
+    }
+
+
 
 }

@@ -1,12 +1,9 @@
 package se.uog.application;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import se.uog.user.User;
 
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.*;
 
 @SuppressWarnings("serial")
 public class HomePage extends JPanel {
@@ -15,7 +12,9 @@ public class HomePage extends JPanel {
     // extra space necessary to stop it looking strange
     private static final String SUB_TITLE = "<html><i>Please select your role below </i><html>";
 
-    public HomePage() {
+    private static final String LANDING_PAGE = "Courses";
+
+    public HomePage(AppController appController) {
 
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setLayout(new GridBagLayout());
@@ -32,13 +31,27 @@ public class HomePage extends JPanel {
 
         JPanel buttons = new JPanel(new GridBagLayout());
         JButton director = new JButton("PTT Director");
+        director.addActionListener(e -> {
+            appController.setUser(User.DIRECTOR);
+            appController.setPage(LANDING_PAGE);
+        });
         buttons.add(director, gbc);
 
         JButton admin = new JButton("Administrator");
+        admin.addActionListener(e -> {
+            appController.setUser(User.ADMINISTRATOR);
+            appController.setPage(LANDING_PAGE);
+
+        });
         buttons.add(admin, gbc);
 
-        JButton teacher = new JButton("Teacher");
-        buttons.add(teacher, gbc);
+        JButton courseDirector = new JButton("Course Director");
+        courseDirector.addActionListener(e -> {
+            appController.setUser(User.COURSE_DIRECTOR);
+            appController.setPage(LANDING_PAGE);
+        });
+        buttons.add(courseDirector, gbc);
+
 
         gbc.weighty = 1;
         add(buttons, gbc);

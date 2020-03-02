@@ -1,15 +1,15 @@
 package se.uog.table;
 
+import javax.swing.table.TableCellEditor;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
-import javax.swing.table.TableCellEditor;
 
 /**
  * This class is consumed by {@link se.uog.table.ObjectTableModelAdaptor} and
  * {@link se.uog.table.ObjectTable}. It tells the model and view how to map each
  * table column to the underlying class's attribute, including it's getters and
  * setters.
- *
+ * <p>
  * Getters are protected as they are only consumed by this package's classes.
  *
  * @param <E> The object which the table is mapped to.
@@ -46,7 +46,7 @@ public class ObjectTableColumn<E> {
      *                         TableCellEditor for the provided columnClass.
      */
     public ObjectTableColumn(String columnTitle, Class<?> columnClass, BiConsumer<E, Object> rowElementSetter,
-            Function<E, Object> rowElementGetter, boolean isColumnEditable, TableCellEditor columnCellEditor) {
+                             Function<E, Object> rowElementGetter, boolean isColumnEditable, TableCellEditor columnCellEditor) {
 
         this.columnTitle = columnTitle;
         this.columnClass = columnClass;
@@ -78,8 +78,8 @@ public class ObjectTableColumn<E> {
      * Returns the setter used by the TableColumnEditor for this column.
      *
      * @return The setter function in the format:
-     *
-     *         {@code (element, value) -> {}}
+     * <p>
+     * {@code (element, value) -> {}}
      */
     public BiConsumer<E, Object> getRowElementSetter() {
         return rowElementSetter;
@@ -90,8 +90,8 @@ public class ObjectTableColumn<E> {
      * underlying element's attribute.
      *
      * @return The getter function, in the format:
-     *
-     *         {@code (element) -> {return (Object)value;}}
+     * <p>
+     * {@code (element) -> {return (Object)value;}}
      */
     public Function<E, Object> getRowElementGetter() {
         return rowElementGetter;

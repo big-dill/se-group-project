@@ -1,24 +1,17 @@
 package se.uog.database;
 
-import java.lang.reflect.Type;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.JsonSerializer;
-
+import com.google.gson.*;
 import se.uog.IDReferenced;
 import se.uog.application.AppModel;
 import se.uog.qualification.Qualification;
 import se.uog.teacher.Teacher;
 import se.uog.training.Training;
 
+import java.lang.reflect.Type;
+
 /**
  * A custom serializer for the AppModel wrapper.
- *
+ * <p>
  * This dictates how the model is stored as JSON and also will take care of ID
  * referencing classes which are referred to outside of their respective lists.
  */
@@ -45,20 +38,6 @@ public class AppModelSerializer implements JsonSerializer<AppModel> {
     }
 
     /**
-     * This class is a JsonSerializer which can be 'hooked into' gson, so when it
-     * hits anything with the class 'IDReferenced', it can store it just as its ID,
-     * rather than the whole object..
-     */
-    private class IDReferencedSerializer implements JsonSerializer<IDReferenced> {
-
-        @Override
-        public JsonElement serialize(IDReferenced src, Type typeOfSrc, JsonSerializationContext context) {
-            return new JsonPrimitive(src.getID());
-        }
-
-    }
-
-    /**
      * Serializes the qualifications into a json array
      */
     private void serializeQualifications() {
@@ -69,7 +48,7 @@ public class AppModelSerializer implements JsonSerializer<AppModel> {
 
     /**
      * Serializes the training into a json array.
-     *
+     * <p>
      * Converts the qualifications into just their ID references so that any POJO
      * references are preserved after deserialization.
      */
@@ -83,7 +62,7 @@ public class AppModelSerializer implements JsonSerializer<AppModel> {
 
     /**
      * Serializes the teachers into a json array.
-     *
+     * <p>
      * Converts the qualifications and the training into just their ID references so
      * that any POJO references are preserved after deserialization.
      */
@@ -98,7 +77,7 @@ public class AppModelSerializer implements JsonSerializer<AppModel> {
 
     /**
      * Serialises the courses into a json array.
-     *
+     * <p>
      * Converts the teachers into their ID references so that any POJO references
      * are preserved after deserialization.
      */
@@ -109,6 +88,20 @@ public class AppModelSerializer implements JsonSerializer<AppModel> {
             .create();
 
         jsonObject.addProperty(COURSE_LIST_FIELD, gson.toJson(appModel.getCourseArray()));
+    }
+
+    /**
+     * This class is a JsonSerializer which can be 'hooked into' gson, so when it
+     * hits anything with the class 'IDReferenced', it can store it just as its ID,
+     * rather than the whole object..
+     */
+    private class IDReferencedSerializer implements JsonSerializer<IDReferenced> {
+
+        @Override
+        public JsonElement serialize(IDReferenced src, Type typeOfSrc, JsonSerializationContext context) {
+            return new JsonPrimitive(src.getID());
+        }
+
     }
 
 }
