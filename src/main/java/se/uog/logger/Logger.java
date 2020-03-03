@@ -11,8 +11,8 @@ import static java.util.logging.Level.FINE;
 
 /**
  * This class contains the Logger functionality for the logging of the debug file to
- * debug_logger_PTT in the root directory. The log is only produced if the user requests it.
- * The class is built in the singleton design pattern.
+ * debug_logger_PTT in the root directory. The log is only produced if the user requests it. The
+ * class is built in the singleton design pattern.
  */
 
 public class Logger {
@@ -25,18 +25,17 @@ public class Logger {
     private static Logger instance;
     private java.util.logging.Logger logger;
 
-    private Handler loggerHandler;
     private boolean isEnabled;
 
 
     private Logger() {
-        logger = java.util.logging.Logger.getLogger(LOGGER); //Creates a Logger with the name set to the string in LOGGER
+        logger = java.util.logging.Logger.getLogger(LOGGER); // Creates a Logger with the name set
+                                                             // to the string in LOGGER
         this.isEnabled = false;
     }
 
     /**
-     * Returns whether the LoggerHandler has been initialized and
-     * added to the Logger.
+     * Returns whether the LoggerHandler has been initialized and added to the Logger.
      *
      * @return a boolean value indicating if the logger is enabled
      */
@@ -45,11 +44,12 @@ public class Logger {
     }
 
     /**
-     * Creates a FileHandler to write to a log to a specified file (path held in FILE_PATH).
-     * Also creates a handler to format the message before logging it, and
-     * adds it to the Logger. Sets the logger's output level to FINE.
+     * Creates a FileHandler to write to a log to a specified file (path held in FILE_PATH). Also
+     * creates a handler to format the message before logging it, and adds it to the Logger. Sets
+     * the logger's output level to FINE.
      */
     public void enable() {
+        Handler loggerHandler = null;
         try {
             loggerHandler = new FileHandler(FILE_PATH);
             loggerHandler.setFormatter(new Formatter() {
@@ -69,10 +69,10 @@ public class Logger {
 
 
     /**
-     * The Logger class follows the singleton design pattern:
-     * there can only be a single instance of the Logger. Therefore, the method
-     * checks whether there is an existing instance of Logger, before returning it if it exists;
-     * if it doesn't the method creates a new Logger instance and returns it.
+     * The Logger class follows the singleton design pattern: there can only be a single instance of
+     * the Logger. Therefore, the method checks whether there is an existing instance of Logger,
+     * before returning it if it exists; if it doesn't the method creates a new Logger instance and
+     * returns it.
      *
      * @return Logger
      */
@@ -84,8 +84,8 @@ public class Logger {
     }
 
     /**
-     * Wrapper that verifies if the Logger is enabled, and if true, writes
-     * messages passed to it to the log file.
+     * Wrapper that verifies if the Logger is enabled, and if true, writes messages passed to it to
+     * the log file.
      *
      * @param logEntry entry to be logged if logger is enabled.
      */

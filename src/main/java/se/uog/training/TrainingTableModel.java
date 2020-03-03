@@ -16,11 +16,10 @@ public class TrainingTableModel implements ObjectTableModel<Training> {
 
     private List<ObjectTableColumn<Training>> columns = new ArrayList<>();
     private DefaultListModel<Training> trainingList;
-    private DefaultListModel<Qualification> qualificationList;
 
     public TrainingTableModel(DefaultListModel<Training> t, DefaultListModel<Qualification> q) {
         trainingList = t;
-        qualificationList = q;
+        DefaultListModel<Qualification> qualificationList = q;
 
         // Setup Columns
         ObjectTableColumn<Training> nameColumn = new ObjectTableColumnBuilder<Training>()
