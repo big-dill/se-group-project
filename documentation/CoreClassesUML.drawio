@@ -1,6 +1,6 @@
-<mxfile host="www.draw.io" modified="2020-03-03T15:45:01.766Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36" etag="WvTczDWDGDdW34IbATf6" version="12.7.9" type="github">
+<mxfile host="www.draw.io" modified="2020-03-03T16:01:26.647Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36" etag="tswTbbFneJoDjQW027EK" version="12.7.9" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="2291" dy="813" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="5704" dy="1933" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
@@ -444,18 +444,60 @@
           <mxGeometry y="80" width="270" height="8" as="geometry" />
         </mxCell>
         <mxCell id="7FkWf5w-P-1JTqSmPe_g-136" value="AppView (C)" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="130" y="1420" width="270" height="130" as="geometry">
+          <mxGeometry x="130" y="1390" width="270" height="178" as="geometry">
             <mxRectangle x="230" y="140" width="160" height="26" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="7FkWf5w-P-1JTqSmPe_g-137" value="- table : JObjectTable&lt;E&gt;&#xa;" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="7FkWf5w-P-1JTqSmPe_g-136">
-          <mxGeometry y="26" width="270" height="54" as="geometry" />
+        <mxCell id="7FkWf5w-P-1JTqSmPe_g-137" value="- WINDOW_TITLE : String&#xa;- cardLayout : CardLayout&#xa;- mainPanel : JPanel&#xa;- menuBar : AppMenu&#xa;" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="7FkWf5w-P-1JTqSmPe_g-136">
+          <mxGeometry y="26" width="270" height="74" as="geometry" />
         </mxCell>
         <mxCell id="7FkWf5w-P-1JTqSmPe_g-138" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="7FkWf5w-P-1JTqSmPe_g-136">
-          <mxGeometry y="80" width="270" height="8" as="geometry" />
+          <mxGeometry y="100" width="270" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="7FkWf5w-P-1JTqSmPe_g-139" value="+ setTableEnabled(in boolean)&lt;br&gt;+ setTableButtonsEnabled(in boolean)" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="7FkWf5w-P-1JTqSmPe_g-136">
-          <mxGeometry y="88" width="270" height="30" as="geometry" />
+        <mxCell id="7FkWf5w-P-1JTqSmPe_g-139" value="+ addPage(in JPanel, String, int)&lt;br&gt;+ addUserMenu(in User)&lt;br&gt;+ editUserMenu(in User)&lt;br&gt;+ setPage(in String)&lt;br&gt;+ getMenu(out JMenu)&lt;br&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="7FkWf5w-P-1JTqSmPe_g-136">
+          <mxGeometry y="108" width="270" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="7FkWf5w-P-1JTqSmPe_g-140" value="AppModel (C)" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="420" y="1320" width="350" height="320" as="geometry">
+            <mxRectangle x="230" y="140" width="160" height="26" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7FkWf5w-P-1JTqSmPe_g-141" value="- qualificationList : DefaultListModel&lt;Qualification&gt;&#xa;- qualificationTableModel : QualificationTableModel&#xa;- teacherList : TeacherTableModel&#xa;- trainingList : DefaultListModel&lt;Training&gt;&#xa;- trainingTableModel : TrainingTableModel&#xa;- courseList : DefaultListModel&lt;Course&gt;&#xa;- adminCourseTableModel : CourseTableModel&#xa;- cdCourseTableModel : CourseTableModel&#xa;- pttCourseTableModel : CourseTableModel&#xa;- user : User&#xa;- propertyChangeSupport : PropertyChangeSupport" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="7FkWf5w-P-1JTqSmPe_g-140">
+          <mxGeometry y="26" width="350" height="174" as="geometry" />
+        </mxCell>
+        <mxCell id="7FkWf5w-P-1JTqSmPe_g-142" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="7FkWf5w-P-1JTqSmPe_g-140">
+          <mxGeometry y="200" width="350" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="7FkWf5w-P-1JTqSmPe_g-143" value="+ populateDefaultListModelFromArray(in DefaultListModel, T[])&lt;br&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="7FkWf5w-P-1JTqSmPe_g-140">
+          <mxGeometry y="208" width="350" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="7FkWf5w-P-1JTqSmPe_g-144" value="AppMenu (C)" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="130" y="1600" width="270" height="178" as="geometry">
+            <mxRectangle x="230" y="140" width="160" height="26" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7FkWf5w-P-1JTqSmPe_g-145" value="- appController : AppController&#xa;- menu : JMenu&#xa;- currentUserMenu : JMenu" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="7FkWf5w-P-1JTqSmPe_g-144">
+          <mxGeometry y="26" width="270" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="7FkWf5w-P-1JTqSmPe_g-146" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="7FkWf5w-P-1JTqSmPe_g-144">
+          <mxGeometry y="100" width="270" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="7FkWf5w-P-1JTqSmPe_g-147" value="+ addPage(in String, int)&lt;br&gt;+createUserInMenu(in User)&lt;br&gt;+ updateUserInMenu(in User)&lt;br&gt;+ getMenu(out: JMenu)" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="7FkWf5w-P-1JTqSmPe_g-144">
+          <mxGeometry y="108" width="270" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="7FkWf5w-P-1JTqSmPe_g-148" value="AppController (C)" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="420" y="1660" width="350" height="320" as="geometry">
+            <mxRectangle x="230" y="140" width="160" height="26" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7FkWf5w-P-1JTqSmPe_g-149" value="- JSON_MODEL_FILENAME : String&#xa;- LANDING_PAGE_CONSTRAINT : String&#xa;- appStorage : FileStorage&#xa;- appView : AppView&#xa;- appModel : AppModel&#xa;- qualificationPage : TablePageView&lt;Qualification&gt;&#xa;- teacherPage : TablePageView&lt;Teacher&gt;&#xa;- coursePage : TablePageView&lt;Course&gt;&#xa;- trainingPage : TablePageView&lt;Training&gt;" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="7FkWf5w-P-1JTqSmPe_g-148">
+          <mxGeometry y="26" width="350" height="174" as="geometry" />
+        </mxCell>
+        <mxCell id="7FkWf5w-P-1JTqSmPe_g-150" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="7FkWf5w-P-1JTqSmPe_g-148">
+          <mxGeometry y="200" width="350" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="7FkWf5w-P-1JTqSmPe_g-151" value="- setupView()&lt;br&gt;- setPage (String)&lt;br&gt;- close()&lt;br&gt;- setUser(in User)&lt;br&gt;- getUser(out User)&lt;br&gt;- propertyChange(in PropertyChangeEvent)&lt;br&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="7FkWf5w-P-1JTqSmPe_g-148">
+          <mxGeometry y="208" width="350" height="90" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
