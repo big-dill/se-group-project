@@ -1,6 +1,6 @@
-<mxfile host="www.draw.io" modified="2020-03-03T11:44:59.661Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36" etag="DKw8ilen-ntxGAU5Pt2J" version="12.7.9" type="github">
+<mxfile host="www.draw.io" modified="2020-03-03T12:17:55.643Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36" etag="xUVDgXlE0wGoUiXF-Dm9" version="12.7.9" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="2891" dy="1609" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="5704" dy="1933" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
@@ -233,6 +233,31 @@
         </mxCell>
         <mxCell id="7FkWf5w-P-1JTqSmPe_g-61" value="+ showSelector()&#xa;+ changeSelection(in List&lt;L&gt;)&#xa;+ getCellEditorValue(out Object)&#xa;+ getTableCellEditorComponent&#xa; (in JTable, Object, boolean, int, int : out Component)&#xa;+ convertListToDefaultListModel(in List&lt;L&gt; : out DefaultListModel&lt;L&gt;)&#xa;+ convertDefaultListModelToList(in DefaultListModel&lt;L&gt; : out List&lt;L&gt;)&#xa;" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="7FkWf5w-P-1JTqSmPe_g-58">
           <mxGeometry y="128" width="390" height="132" as="geometry" />
+        </mxCell>
+        <mxCell id="7FkWf5w-P-1JTqSmPe_g-62" value="ObjectTableColumn (C)" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="-790" y="340" width="290" height="160" as="geometry">
+            <mxRectangle x="550" y="140" width="160" height="26" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7FkWf5w-P-1JTqSmPe_g-63" value="- columnTitle : String&#xa;- columnClass : Class&lt;?&gt;&#xa;- rowElementSetter : BiConsumer&lt;E, Object&gt;&#xa;- isColumnEditable : boolean&#xa;- columnCellEditor : TableCellEditor" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="7FkWf5w-P-1JTqSmPe_g-62">
+          <mxGeometry y="26" width="290" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="7FkWf5w-P-1JTqSmPe_g-64" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="7FkWf5w-P-1JTqSmPe_g-62">
+          <mxGeometry y="110" width="290" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="7FkWf5w-P-1JTqSmPe_g-66" value="ObjectTableColumnBuilder (C)" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="-470" y="120" width="390" height="170" as="geometry">
+            <mxRectangle x="550" y="140" width="160" height="26" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7FkWf5w-P-1JTqSmPe_g-67" value="- columnTitle : String&#xa;- columnClass : Class&lt;?&gt;&#xa;- rowElementGetter : Function&lt;E, Object&gt;&#xa;- isColumnEditable : boolean&#xa;- columnCellEditor : TableCellEditor&#xa;- rowElementSetter : BiConsumer&lt;E, Object&gt;" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="7FkWf5w-P-1JTqSmPe_g-66">
+          <mxGeometry y="26" width="390" height="94" as="geometry" />
+        </mxCell>
+        <mxCell id="7FkWf5w-P-1JTqSmPe_g-68" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="7FkWf5w-P-1JTqSmPe_g-66">
+          <mxGeometry y="120" width="390" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="7FkWf5w-P-1JTqSmPe_g-69" value="+ build (out ObjectTableColumn&lt;E&gt;)" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="7FkWf5w-P-1JTqSmPe_g-66">
+          <mxGeometry y="128" width="390" height="32" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
