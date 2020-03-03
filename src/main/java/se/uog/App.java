@@ -1,17 +1,21 @@
 package se.uog;
 
-/**
- * Hello world!
- */
-public final class App {
-    private App() {
-    }
+import se.uog.application.AppController;
+import se.uog.logger.Logger;
 
-    /**
-     * Says hello to the world.
-     * @param args The arguments of the program.
-     */
+public class App {
+
+    private static final String LOGGER_FLAG = "-t";
+
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+
+        // Logger, for debugging if needed.
+        if (args.length > 0 && args[0].equals(LOGGER_FLAG)) {
+            System.out.println("Logger enabled");
+            Logger.getInstance().enable();
+            Logger.getInstance().logToFileIfEnabled("Logger enabled.");
+        }
+
+        new AppController();
     }
 }
