@@ -1,7 +1,8 @@
 # se-group-project
   
-
 This project was created for the University of Glasgow Software Development MSc Course.  
+
+Please find the report in `report.pdf`. A UML diagram is in `ProjectUML.png`. All conversations pertaining to user stories can be found in `Conversations/`
 
 To run, you must have Java installed on your system.  
 
